@@ -19,4 +19,7 @@ public class Frase {
 	public void SetFrase (ArrayList<Palabra> frase) {
 		this.frase = frase;
 	}
+	
+	//añadir y quitar objetos de la coleccion
+	public void 
 }
