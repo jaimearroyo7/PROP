@@ -16,7 +16,7 @@ public class Frase {
 	public ArrayList<Palabra> GetFrase () {
 		return frase;
 	}
-	public ArrayList<Palabra> SetFrase (ArrayList<Palabra> frase) {
+	public void SetFrase (ArrayList<Palabra> frase) {
 		this.frase = frase;
 	}
 }
