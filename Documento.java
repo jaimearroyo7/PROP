@@ -5,9 +5,14 @@ public class Documento {
 	private String autor;
 	private String categoria;
 	private Texto texto;
+	//private ArrayList<Pair<String, Integer>> palabras = new ArrayList<>();
+	private ArrayList<Pair<String, Integer>> Palabras = new ArrayList<>();
 	
-	public Documento(){		
+	public Documento(){
+		
 	}
+	
+	
 	
 	public void setTitulo(String valortitulo){
 		titulo = valortitulo;
@@ -23,6 +28,16 @@ public class Documento {
 	
 	public void setTexto(Texto valorTexto){
 		texto = valorTexto;
+		ArrayList<String> frases = texto.getListaFrases();
+		for(int i = 0; i < frases.size(); ++i){
+			ArrayList<String> listapalabras = frases.get(i).getListaPalabras();
+			for(int j = 0; j < listapalabras.size(); ++j){
+				Pair<String, Integer> pair;
+				pair.setFirst(listapalabras.get(i));
+				pair.setSecond(1);
+				Palabras.add(pair);
+			}
+		}
 	}
 	
 	public String getTitulo() { return titulo; }

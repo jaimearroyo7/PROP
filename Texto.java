@@ -4,29 +4,35 @@ import java.util.Arrays;
 public class Texto {
 	
 	private String texto;
-	private ArrayList<String> listafrases;
+	private ArrayList<String> listafrases = new ArrayList<>();
 	
 	public Texto(){
 		
 	}
 	
 	public Texto(String valortexto){
-		texto = valortexto;
+		
 		setTexto(valortexto);
+		//listafrases.add("hola");
 	}
 	
 	public void setTexto(String valortexto){
 		texto = valortexto;
-		char[] separador = {'.', '!', '?'};
-		String frase;
+		String separador = ".!?";
+		//char[] separador = new char[] {'.', '!', '?'};
 		int iniciofrase=0;
 		for(int i = 0; i < texto.length(); ++i){
 			String fraseactual;
-			if(Arrays.asList(separador).contains(texto.charAt(i))){
-				fraseactual = texto.substring(iniciofrase,i);
-				iniciofrase = i+1;
+			if(separador.indexOf(texto.charAt(i)) != -1){
+				fraseactual = texto.substring(iniciofrase,i+1);
+				
+				if(i+1 < texto.length() && texto.charAt(i+1) == '.'){
+					++i;
+					fraseactual = texto.substring(iniciofrase,i+2);
+					iniciofrase = i+3;
+					} 
+				else iniciofrase = i+2;
 				++i;
-				//frase = new Frase(fraseactual);
 				listafrases.add(fraseactual);
 			}
 		}
