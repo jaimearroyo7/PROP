@@ -1,24 +1,22 @@
-import java.utils.List;
+package Domini;
 
 public class Palabra {
-	
+	// atributos
 	private String pal;
-	private int tam;
 	
-	public Palabra(){};
+	//constructores
+	public Palabra() {};
 	
+	public Palabra(String palabra){
+		pal=palabra;
+	};
+	
+	//setPalabra
 	public void setPalabra(String valorpalabra) {
 		pal = valorpalabra;
 	}
-	
+	//getPalabra
 	public String getPalabra() {
 		return pal;
-	}
-	
-	public int mida() {
-		return pal.length();
-	}
-	public bool compare(String pal2) {
-		return pal.equals(pal2)
 	}
 }

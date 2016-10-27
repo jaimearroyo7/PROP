@@ -1,25 +1,35 @@
-package Projecte;
+package Domini;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Frase {
+	//atributos
 	private ArrayList<Palabra> frase;
+	private String[] separador = {" ",".","?", "!", "...",";", ":", "¿","¡"};
 	
 	//constructoras
-	public Frase() {
-	}
+	public Frase() {};
 	
-	public Frase (ArrayList<Palabra> frase) {
-		this.frase = frase;
+	public Frase(String frase) {
+		Palabra pal = new Palabra();
+		int inici = 0, fi = 0;
+		int contador = 0;
+		for (int i=0; i<frase.length(); ++i) {
+			if (Arrays.asList(separador).contains(frase.charAt(i))) {
+				pal.setPalabra(frase.substring(inici, fi));
+				this.frase.add(contador, pal);
+				contador++;
+				inici = fi+1;
+			}
+			else {
+				fi++;
+			}
+		}
 	}
-	
-	//get y set
-	public ArrayList<Palabra> GetFrase () {
-		return frase;
+	public Palabra getPalabra(int arg) {
+		return frase.get(arg);
 	}
-	public void SetFrase (ArrayList<Palabra> frase) {
-		this.frase = frase;
+	public void setPalabra(int arg, Palabra palabra) {
+		frase.set(arg, palabra);
 	}
-	
-	//añadir y quitar objetos de la coleccion
-	public void 
 }
