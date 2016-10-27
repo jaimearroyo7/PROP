@@ -1,33 +1,46 @@
-package Domini;
+package Dominio;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Frase {
 	//atributos
-	private ArrayList<Palabra> frase;
-	private String[] separador = {" ",".","?", "!", "...",";", ":", "¿","¡"};
+	private String f;
+	private ArrayList<Palabra> frase = new ArrayList<Palabra>();
 	
 	//constructoras
 	public Frase() {};
 	
 	public Frase(String frase) {
-		Palabra pal = new Palabra();
-		int inici = 0, fi = 0;
-		int contador = 0;
-		for (int i=0; i<frase.length(); ++i) {
-			if (Arrays.asList(separador).contains(frase.charAt(i))) {
-				pal.setPalabra(frase.substring(inici, fi));
-				this.frase.add(contador, pal);
-				contador++;
-				inici = fi+1;
+		f=frase;
+		separarPalabras();
+	}
+	public void separarPalabras() {
+		String s = new String();
+		for (int i=0; i<f.length(); ++i) {
+			//si no son separadors...
+			if (f.charAt(i) >= 65 && f.charAt(i) <= 122) {
+				s = s + f.charAt(i);
 			}
-			else {
-				fi++;
+			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') {
+				Palabra p = new Palabra(s);
+				frase.add(p);
+				s = "";
 			}
 		}
 	}
+	
+	public int size() {
+		return frase.size();
+	}
+	
+	//get y set
 	public Palabra getPalabra(int arg) {
-		return frase.get(arg);
+		Palabra p = new Palabra();
+		p = frase.get(arg);
+		return p;
+	}
+	
+	public String getFrase() {
+		return f;
 	}
 	public void setPalabra(int arg, Palabra palabra) {
 		frase.set(arg, palabra);
