@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Documento {
 	private String titulo;
@@ -31,6 +32,5 @@ public class Documento {
 	public String getCategoria() { return categoria; }
 	
 	public Texto getTexto() { return texto; }
-	
 	
 }
