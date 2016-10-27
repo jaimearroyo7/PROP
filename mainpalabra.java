@@ -7,12 +7,16 @@ public class mainpalabra {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Palabra p = new Palabra("hola");
+		p.sumcont();
 		Palabra p2 = new Palabra();
+		p2.sumcont();
 		
 		p2.setPalabra("adios");
 		
 		System.out.println(p.getPalabra());
+		System.out.println(p.cont());
 		System.out.println(p2.getPalabra());
+		System.out.println(p2.cont());
 		
 		
 		
