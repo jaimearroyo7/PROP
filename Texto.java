@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Texto {
 	
 	private String texto;
-	private ArrayList<String> listafrases = new ArrayList<>();
+	private ArrayList<Frase> listafrases = new ArrayList<>();
 	
 	public Texto(){
 		
@@ -21,6 +21,7 @@ public class Texto {
 		String separador = ".!?";
 		//char[] separador = new char[] {'.', '!', '?'};
 		int iniciofrase=0;
+		
 		for(int i = 0; i < texto.length(); ++i){
 			String fraseactual;
 			if(separador.indexOf(texto.charAt(i)) != -1){
@@ -33,12 +34,13 @@ public class Texto {
 					} 
 				else iniciofrase = i+2;
 				++i;
-				listafrases.add(fraseactual);
+				Frase frase = new Frase(fraseactual);
+				listafrases.add(frase);
 			}
 		}
 	}
 	
 	public String getTexto() { return texto; }
-	public ArrayList<String> getListaFrases() { return listafrases;}
+	public ArrayList<Frase> getListaFrases() { return listafrases;}
 	
 }

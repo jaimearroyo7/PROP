@@ -1,4 +1,4 @@
-package Dominio;
+
 import java.util.ArrayList;
 
 public class Frase {
@@ -37,6 +37,10 @@ public class Frase {
 		Palabra p = new Palabra();
 		p = frase.get(arg);
 		return p;
+	}
+	
+	public ArrayList<Palabra> getlistaPalabras(){
+		return frase;
 	}
 	
 	public String getFrase() {

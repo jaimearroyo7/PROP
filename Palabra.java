@@ -1,4 +1,4 @@
-package Dominio;
+
 
 public class Palabra {
 	// atributos
