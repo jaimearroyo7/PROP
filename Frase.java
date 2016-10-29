@@ -1,4 +1,4 @@
-
+package Dominio;
 import java.util.ArrayList;
 
 public class Frase {
@@ -17,7 +17,16 @@ public class Frase {
 		String s = new String();
 		for (int i=0; i<f.length(); ++i) {
 			//si no son separadors...
-			if (f.charAt(i) >= 65 && f.charAt(i) <= 122) {
+			if ((f.charAt(i) >= 65 && f.charAt(i) <= 90) || (f.charAt(i) >= 97 && f.charAt(i) <= 122) || 
+				(f.charAt(i) == 129) || (f.charAt(i) == 130) || 
+				(f.charAt(i) == 144) || (f.charAt(i) == 181) || 
+				(f.charAt(i) == 214) || (f.charAt(i) == 224) || 
+				(f.charAt(i) == 233) || (f.charAt(i) == 'á') ||
+				(f.charAt(i) == 'í') || (f.charAt(i) == 'ó') ||
+				(f.charAt(i) == 'ú') || (f.charAt(i) == 'ñ') ||
+				(f.charAt(i) == 'Á') || (f.charAt(i) == 'Í') ||
+				(f.charAt(i) == 'Ó') || (f.charAt(i) == 'Ú') ||
+				(f.charAt(i) == 'Ñ')) {
 				s = s + f.charAt(i);
 			}
 			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') {
@@ -37,10 +46,6 @@ public class Frase {
 		Palabra p = new Palabra();
 		p = frase.get(arg);
 		return p;
-	}
-	
-	public ArrayList<Palabra> getlistaPalabras(){
-		return frase;
 	}
 	
 	public String getFrase() {
