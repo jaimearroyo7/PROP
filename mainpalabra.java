@@ -10,7 +10,10 @@ public class mainpalabra {
 		Palabra p2 = new Palabra();
 		p2.setPalabra("adios");
 		p2.sumfreq();
-		
+		p2.sumfreq();
+		p2.sumfreq();
+		p2.sumfreq();
+		p2.resfreq(1);
 		System.out.println(p.getPalabra());
 		System.out.println(p.freq());
 		System.out.println(p2.getPalabra());
