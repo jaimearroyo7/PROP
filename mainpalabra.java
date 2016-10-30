@@ -7,16 +7,14 @@ public class mainpalabra {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Palabra p = new Palabra("hola");
-		p.sumcont();
 		Palabra p2 = new Palabra();
-		p2.sumcont();
-		
 		p2.setPalabra("adios");
+		p2.sumfreq();
 		
 		System.out.println(p.getPalabra());
-		System.out.println(p.cont());
+		System.out.println(p.freq());
 		System.out.println(p2.getPalabra());
-		System.out.println(p2.cont());
+		System.out.println(p2.freq());
 		
 		
 		
@@ -25,7 +23,7 @@ public class mainpalabra {
 		 prueba de escritura de las palabrasfuncionales importadas de  .txt
 		
 		---------------------------------------------------------------------------------*/
-		
+		/*
 		File archivo = null; // para abrir archivo
 	    FileReader fr = null; // para leer archivos
 	    BufferedReader br = null; // lee texto de una entrada de caracteres
@@ -58,6 +56,6 @@ public class mainpalabra {
 	         catch (Exception e2){ 
 	            e2.printStackTrace();
 	         }
-	    }
+	    }*/
 	}
 }
