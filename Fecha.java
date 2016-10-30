@@ -9,23 +9,26 @@ public class Fecha {
 	
 	
 	//constructores
-	public Fecha() {};
+	public Fecha() {}
 		
 	public Fecha(final String f)throws ParseException {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
-			fecha = sdf.parse(f);
-	};
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+		fecha = sdf.parse(f);
+	}
 	
 	public Date getFecha() {
 		return fecha;
 	}
-	
+	public void setFecha(String s) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+		fecha = sdf.parse(s);
+	}
 	public int comparar(Date d2) {
-	      if(fecha.equals(d2)) return 1;
-	      else {
+	    if(fecha.equals(d2)) return 1;
+	    else {
 	    	  if(fecha.before(d2)) return 2;
 	    	  else return 3;
-	      }
+	    }
 	}
 	public void imprimirfecha() {
 		System.out.println (fecha);
