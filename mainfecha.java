@@ -14,6 +14,9 @@ public class mainfecha {
 		System.out.println("FECHA2: ");
 		d2.imprimirfecha();
 		
+		d2.setFecha("22/11/2016");
+		d2.imprimirfecha();
+		
 		
 		System.out.println("COMPARACION: ");
 		int comp = d1.comparar(d2.getFecha());
@@ -22,12 +25,12 @@ public class mainfecha {
 			d1.imprimirfecha();
 			d2.imprimirfecha();
 		}
-		else if (comp == 2){ // devolvemos la fecha m·s antigua
-			System.out.println("FECHA1 M¡S ANTIGUA QUE FECHA2: ");
+		else if (comp == 2){ // devolvemos la fecha m√°s antigua
+			System.out.println("FECHA1 M√ÅS ANTIGUA QUE FECHA2: ");
 			d1.imprimirfecha();
 		}
 		else {
-			System.out.println("FECHA2 M¡S RECIENTE: ");
+			System.out.println("FECHA2 M√ÅS RECIENTE: ");
 			d2.imprimirfecha();
 		}
 	}
