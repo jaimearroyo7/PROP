@@ -8,7 +8,7 @@ public class Palabra {
 	//constructores
 	public Palabra() {};
 	
-	public Palabra(String palabra) {
+	public Palabra(String palabra){
 		pal=palabra;
 		freq = 1;
 	}
@@ -21,8 +21,8 @@ public class Palabra {
 	public void sumfreq() {
 		++freq;
 	}
-	public void resfreq() {
-		--freq;
+	public void resfreq(int i){
+		freq -=i;
 	}
 	public int freq() {
 		return freq;
