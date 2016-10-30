@@ -7,12 +7,11 @@ public class Fecha {
 	
 	private Date fecha;
 	
-	
 	//constructores
 	public Fecha() {}
 		
 	public Fecha(final String f)throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd MMM yyyy"); 
 		fecha = sdf.parse(f);
 	}
 	
@@ -20,7 +19,7 @@ public class Fecha {
 		return fecha;
 	}
 	public void setFecha(String s) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd MMM yyyy"); 
 		fecha = sdf.parse(s);
 	}
 	public int comparar(Date d2) {
