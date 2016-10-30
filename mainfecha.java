@@ -4,17 +4,17 @@ import java.text.ParseException;
 public class mainfecha {
 	public static void main(String[] args)throws ParseException {
 		
-		String s1 = "21/11/1995";
+		String s1 = "17:45 21 nov 1995";
 		Fecha d1 = new Fecha(s1);
 		System.out.println("FECHA1: ");
 		d1.imprimirfecha();
 		
-		String s2 = "21/11/2016";
+		String s2 = "18:55 23 oct 2016";
 		Fecha d2 = new Fecha(s2);
 		System.out.println("FECHA2: ");
 		d2.imprimirfecha();
 		
-		d2.setFecha("22/11/2016");
+		d2.setFecha("09:14 22 nov 2016");
 		d2.imprimirfecha();
 		
 		
