@@ -1,0 +1,20 @@
+OS DEJO COMO CREO QUE DEBERIAMOS COGER LOS DOCUMENTOS PROPIAMENTE DICHOS JAJAJJA
+PENSE EN COGERLOS POR WIKIPEDIA(LA BIBLIOTECA POR EXCELENCIA) PONGO TODOS LOS PASOS
+
+1 PASO: ENTRAMOS A BUSCAR CUALQUIER COSA EN WIKIPEDIA, POR EJEMPLO: ARTICULO
+2 PASO: APRETAMOS F12
+3 PASO: NOS SALDRA TODO EL HTML DE LA PAGINA A UN LADO
+4 PASO: VAMOS DONDE DICE
+   <head>
+    LUEGO VAMOS A BUSCAR EL CONTENIDO
+    <body class = ".....">
+      DE AHI 
+      <div id="content" class="mw-body" role="main">
+        <h1 id="firstHeading" class="firstHeading" lang="es">Artículo</h1> // DE AQUI COGEMOS EL TITULO
+        <div id="bodyContent" class="mw-body-content">
+				  <div id="mw-content-text" lang="es" dir="ltr" class="mw-content-ltr">
+            <p>
+            Y AQUI ESTA TODO EL TEXTO, HABRA QUE PENSR COMO CAPTURARLO EFICIENTEMENTE ESO SI, DECIR QUE SOLO COJA EL TEXTO.
+
+			
+   
