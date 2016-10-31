@@ -1,35 +1,69 @@
-package Dominio;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
+//package Dominio;
+import java.util.*;
+import java.util.GregorianCalendar;
  
 public class Fecha {
 	
-	private Date fecha;
+	private Integer year;
+	private Integer month;
+	private Integer day;
+	
+	
 	
 	//constructores
-	public Fecha() {}
-		
-	public Fecha(final String f)throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd MMM yyyy"); 
-		fecha = sdf.parse(f);
+	public Fecha() {
+		Calendar fecha = new GregorianCalendar();
+		day = fecha.get(Calendar.DAY_OF_MONTH);
+		month= fecha.get(Calendar.MONTH);
+		++month;
+		year = fecha.get(Calendar.YEAR);
+	};
+	
+	
+	public Integer getDay() {
+		return day;
 	}
 	
-	public Date getFecha() {
-		return fecha;
+	public Integer getMonth() {
+		return month;
 	}
-	public void setFecha(String s) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd MMM yyyy"); 
-		fecha = sdf.parse(s);
+	
+	public Integer getYear() {
+		return year;
 	}
-	public int comparar(Date d2) {
-	    if(fecha.equals(d2)) return 1;
-	    else {
-	    	  if(fecha.before(d2)) return 2;
-	    	  else return 3;
-	    }
+	
+	public void setFecha(){
+		Calendar fecha = new GregorianCalendar();
+		day = fecha.get(Calendar.DAY_OF_MONTH);
+		month= fecha.get(Calendar.MONTH);
+		++month;
+		year = fecha.get(Calendar.YEAR);
 	}
-	public void imprimirfecha() {
-		System.out.println (fecha);
+	public void setFechaManual(int valorday, int valormonth, int valoryear){
+		day = valorday;
+		month = valormonth;
+		year = valoryear;
+	}
+	
+	public boolean greater(Fecha f2){
+		if(year != f2.getYear()){
+			if(year < f2.getYear()){
+				return false;
+			}
+			else return true;
+		}
+		if(month != f2.getMonth()){
+			if(month < f2.getMonth()){
+				return false;
+			}
+			else return true;
+		}
+		if(day != f2.getDay()){
+			if(day < f2.getDay()){
+				return false;
+			}
+			else return true;
+		}
+		return true;
 	}
 }
