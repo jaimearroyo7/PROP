@@ -11,13 +11,14 @@ public class Documentos {
 	
 	private File archivo; 
 	private Documento d;
-    private FileReader fr;
-    private BufferedReader br;
+  	private FileReader fr;
+    	private BufferedReader br;
 	private ArrayList<Documento> docs;
 	/*private ArrayList<String> autores; //??
 	private map<String, vector<*Documento> > autorstitols; //map autors, titols de l'autor
 	private map<Pair<String, String>, *Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
 	private Map<Fecha, ArrayList<Documento> > mapfecha;
+	
 	
 	//metodos
 	public Documentos() {
@@ -44,7 +45,7 @@ public class Documentos {
 		d = new Documento();
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Ingrese el título: ");
+		System.out.print("Ingrese el tÃ­tulo: ");
 		d.setTitulo(sc.nextLine());
 		System.out.print("Ingrese el autor: ");
 		d.setAutor(sc.nextLine());
@@ -55,10 +56,10 @@ public class Documentos {
 		Texto t = new Texto();
 		d.setTexto(t.setTexto(sc.nextLine()));
 		
-		/*nombreMap.put(K clave, V valor); // Añade un elemento al Map
-		nombreMap.get(K clave); // Devuelve el valor de la clave que se le pasa como parámetro o 'null' si la clave no existe
+		/*nombreMap.put(K clave, V valor); // AÃ±ade un elemento al Map
+		nombreMap.get(K clave); // Devuelve el valor de la clave que se le pasa como parÃ¡metro o 'null' si la clave no existe
 		nombreMap.clear(); // Borra todos los componentes del Map
-		nombreMap.remove(K clave); // Borra el par clave/valor de la clave que se le pasa como parámetro
+		nombreMap.remove(K clave); // Borra el par clave/valor de la clave que se le pasa como parÃ¡metro
 		nombreMap.containsKey(K clave); // Devuelve true si en el map hay una clave que coincide con K
 		nombreMap.containsValue(V valor); // Devuelve true si en el map hay un Valor que coincide con V
 		nombreMap.values(); // Devuelve una "Collection" con los valores del Map */
@@ -70,7 +71,7 @@ public class Documentos {
 		ArrayList<Documento> l = new ArrayList<Documento>();
 		l.add(d);
 		mapfecha.put(f, l);
-		System.out.print("Fecha de creación: ");
+		System.out.print("Fecha de creaciÃ³n: ");
 		System.out.print(f.getDay()+"/");
 		System.out.print(f.getMonth()+"/");
 		System.out.println(f.getYear());
@@ -105,7 +106,7 @@ public class Documentos {
 	        			     
 	        			    
 	        			    //System.out.println(linea.substring(i,i+11));
-		    				if(linea.substring(i,i+11).equals("=Categoría:")) {
+		    				if(linea.substring(i,i+11).equals("=CategorÃ­a:")) {
 		    					System.out.println(i);
 		    					h = i;
 		    				}
@@ -156,6 +157,48 @@ public class Documentos {
 
 		System.out.println(docs.get(i).getCategoria());
 	}
+	
+	
+	
+	
+	
+	public List<Documento> consultaDocsParecidos(Documento d1, int n) {
+		TreeSet<Pair<Documento, Double>> cosinesDoc = new TreeSet<>(new Comparator<Pair<Documento, Double>>() {
+			@Override
+			public int compare(Pair<Documento, Double> o1, Pair<Documento, Double> o2) {
+				if (o1.second < o2.second) return -1;
+				if (o1.second > o2.second) return 1;
+				else return 0;
+			}
+		});
+		
+		for (Documento d2: docs) {
+			cosinesDoc.add(new Pair<>(d2, cosineSimilarity(d1, d2)));
+		}
+		
+		ArrayList<Documento> resultado = new ArrayList<>(n);
+		int m = 0;
+		for (Pair<Documento,Double> pairDoc: cosinesDoc) {
+			resultado.add(pairDoc.first);
+			if (++m == n) break;
+		}
+		return resultado;
+	}
+
+	private static double cosineSimilarity(Documento d1, Documento d2) {
+		SparseArray<TermFrequency> tf1 = d1.getPalabras();
+		SparseArray<TermFrequency> tf2 = d2.getPalabras();
+		double dotProduct = 0.0;
+		double normA = 0.0;
+		double normB = 0.0;
+		for (int i = 0; i < tf1.size(); i++) {
+			dotProduct += tf1.get(i).getFrequency() * tf2.get(i).getFrequency();
+			normA += Math.pow(tf1.get(i).getFrequency(), 2);
+			normB += Math.pow(tf2.get(i).getFrequency(), 2);
+		}
+		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+	}
+	
 	
 	//public ArrayList<String> GetTitolsAutor;
 }
