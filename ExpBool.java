@@ -11,6 +11,18 @@ public class ExpBool {
 		this.s = s;
 		buildTree(this.s);
 	}
+	
+	//getters
+	public String getEpresio() {
+		return this.s;
+	}
+	
+	//setters
+	public void setExpresio(String s) {
+		this.s = s;
+		buildTree(this.s);
+	}
+	
 	public void buildTree (String s) {
 		
 	}
