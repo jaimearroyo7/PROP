@@ -57,7 +57,7 @@ public class ConsultaDocumentosParecidos {
         ArrayList<Pair<String, Integer>> palabras = documento.getPalabras();
         for (Pair<String, Integer> palabra: palabras) {
             PalabraPeso palabraPeso = new PalabraPeso(palabra.first(), tfidf(palabra.first(), documento));
-            arrayPesos.put(diccionario.indicePalabra(palabra.first(), palabraPeso);
+            arrayPesos.put(diccionario.indicePalabra(palabra.first()), palabraPeso);
         }
         return arrayPesos;
     }
