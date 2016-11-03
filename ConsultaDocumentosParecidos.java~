@@ -55,9 +55,11 @@ public class ConsultaDocumentosParecidos {
     private SparseArray<PalabraPeso> getArrayPesosDe(Documento documento) {
         SparseArray<PalabraPeso> arrayPesos = new SparseArray<>(documento.getPalabras().size());
         ArrayList<Pair<String, Integer>> palabras = documento.getPalabras();
+        int i = 0;
         for (Pair<String, Integer> palabra: palabras) {
             PalabraPeso palabraPeso = new PalabraPeso(palabra.first(), tfidf(palabra.first(), documento));
-            arrayPesos.put(diccionario.indicePalabra(palabra.first(), palabraPeso);
+            arrayPesos.put(i, palabraPeso);
+            ++i;
         }
         return arrayPesos;
     }
