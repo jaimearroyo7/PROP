@@ -1,10 +1,7 @@
-package Dominio;
+package dominio;
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class Documentos {
@@ -15,8 +12,8 @@ public class Documentos {
     	private BufferedReader br;
 	private ArrayList<Documento> docs;
 	/*private ArrayList<String> autores; //??
-	private map<String, vector<*Documento> > autorstitols; //map autors, titols de l'autor
-	private map<Pair<String, String>, *Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
+	private map<String, vector<*dominio.Documento> > autorstitols; //map autors, titols de l'autor
+	private map<dominio.Pair<String, String>, *dominio.Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
 	private Map<Fecha, ArrayList<Documento> > mapfecha;
 	
 	
@@ -32,8 +29,8 @@ public class Documentos {
 		contenidodoc = new map<>(); */
 	}
 	
-	/*public Documentos(ArrayList<Documento> docs, ArrayList<String> autores, ap<String, 
-			vector<*Documento> > autorstitols, map<Pair<String, String>, *Documento> contenidodoc, map<String, vector<*Documento> > mapfecha) {
+	/*public Documentos(ArrayList<dominio.Documento> docs, ArrayList<String> autores, ap<String,
+			vector<*dominio.Documento> > autorstitols, map<dominio.Pair<String, String>, *dominio.Documento> contenidodoc, map<String, vector<*dominio.Documento> > mapfecha) {
 		this.docs = docs;
 		this.autores = autores;
 		this.autorstitols = autorstitols;
@@ -52,7 +49,7 @@ public class Documentos {
 		System.out.print("Ingrese la categoria: ");
 		d.setCategoria(sc.nextLine());
 		setMapFechaDoc(sc.nextLine(),d);
-		System.out.print("Ingrese Texto: ");
+		System.out.print("Ingrese dominio.Texto: ");
 		Texto t = new Texto();
 		d.setTexto(t.setTexto(sc.nextLine()));
 		
@@ -71,7 +68,7 @@ public class Documentos {
 		ArrayList<Documento> l = new ArrayList<Documento>();
 		l.add(d);
 		mapfecha.put(f, l);
-		System.out.print("Fecha de creación: ");
+		System.out.print("dominio.Fecha de creación: ");
 		System.out.print(f.getDay()+"/");
 		System.out.print(f.getMonth()+"/");
 		System.out.println(f.getYear());
@@ -81,7 +78,7 @@ public class Documentos {
 		archivo = new File (s);
         fr = new FileReader (archivo);
         br = new BufferedReader(fr);
-        d = new Documento();
+        d = new dominio.Documento();
 	    try {
 	    	String linea;
 	    	String subStr = null;
@@ -157,48 +154,5 @@ public class Documentos {
 
 		System.out.println(docs.get(i).getCategoria());
 	}
-	
-	
-	
-	
-	
-	public List<Documento> consultaDocsParecidos(Documento d1, int n) {
-		TreeSet<Pair<Documento, Double>> cosinesDoc = new TreeSet<>(new Comparator<Pair<Documento, Double>>() {
-			@Override
-			public int compare(Pair<Documento, Double> o1, Pair<Documento, Double> o2) {
-				if (o1.second < o2.second) return -1;
-				if (o1.second > o2.second) return 1;
-				else return 0;
-			}
-		});
-		
-		for (Documento d2: docs) {
-			cosinesDoc.add(new Pair<>(d2, cosineSimilarity(d1, d2)));
-		}
-		
-		ArrayList<Documento> resultado = new ArrayList<>(n);
-		int m = 0;
-		for (Pair<Documento,Double> pairDoc: cosinesDoc) {
-			resultado.add(pairDoc.first);
-			if (++m == n) break;
-		}
-		return resultado;
-	}
 
-	private static double cosineSimilarity(Documento d1, Documento d2) {
-		SparseArray<TermFrequency> tf1 = d1.getPalabras();
-		SparseArray<TermFrequency> tf2 = d2.getPalabras();
-		double dotProduct = 0.0;
-		double normA = 0.0;
-		double normB = 0.0;
-		for (int i = 0; i < tf1.size(); i++) {
-			dotProduct += tf1.get(i).getFrequency() * tf2.get(i).getFrequency();
-			normA += Math.pow(tf1.get(i).getFrequency(), 2);
-			normB += Math.pow(tf2.get(i).getFrequency(), 2);
-		}
-		return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-	}
-	
-	
-	//public ArrayList<String> GetTitolsAutor;
 }

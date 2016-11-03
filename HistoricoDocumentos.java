@@ -1,3 +1,5 @@
+package dominio;
+
 import java.util.ArrayList;
 
 
@@ -40,7 +42,7 @@ public class HistoricoDocumentos {
 	}
 	
 	public void setHistorial(ArrayList<Documento> lista){
-		//Arrays.sort(ordenado, Documento.comparador);
+		//Arrays.sort(ordenado, dominio.Documento.comparador);
 		ArrayList<Documento> lista2 = lista;
 		int N = 10;
 		if(lista.size() < 10) { N = lista.size(); }

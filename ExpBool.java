@@ -1,10 +1,10 @@
-package Dominio;
+package dominio;
 import java.util.*;
 
 public class ExpBool {
 	private String s;
 	private ArrayList<String> elements = new ArrayList<String>();
-	private Nodo raiz;	//tree es el nodo raíz del árbol que almacena la expresión booleana.
+	private Nodo raiz;	//tree es el nodo raï¿½z del ï¿½rbol que almacena la expresiï¿½n booleana.
 	
 	//constructoras
 	public ExpBool() {}
@@ -44,12 +44,12 @@ public class ExpBool {
 				(this.s.charAt(i) == 129) || (this.s.charAt(i) == 130) || 
 				(this.s.charAt(i) == 144) || (this.s.charAt(i) == 181) || 
 				(this.s.charAt(i) == 214) || (this.s.charAt(i) == 224) || 
-				(this.s.charAt(i) == 233) || (this.s.charAt(i) == 'á') ||
-				(this.s.charAt(i) == 'í') || (this.s.charAt(i) == 'ó') ||
-				(this.s.charAt(i) == 'ú') || (this.s.charAt(i) == 'ñ') ||
-				(this.s.charAt(i) == 'Á') || (this.s.charAt(i) == 'Í') ||
-				(this.s.charAt(i) == 'Ó') || (this.s.charAt(i) == 'Ú') ||
-				(this.s.charAt(i) == 'Ñ')) {
+				(this.s.charAt(i) == 233) || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½')) {
 				
 				if (i == this.s.length()-1) {
 					s = s + this.s.charAt(i);
@@ -59,7 +59,7 @@ public class ExpBool {
 					s = s + this.s.charAt(i);
 				}
 			}
-			//si em trobo altres caràcters:
+			//si em trobo altres carï¿½cters:
 			if (this.s.charAt(i) == ' ' && !dinsdecomilles) {
 				elements.add(s);
 				s="";

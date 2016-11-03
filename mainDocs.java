@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -43,7 +43,7 @@ public class mainDocs {
 	        			     
 	        			    
 	        			    //System.out.println(linea.substring(i,i+11));
-		    				if(linea.substring(i,i+11).equals("=Categoría:")) {
+		    				if(linea.substring(i,i+11).equals("=Categorï¿½a:")) {
 		    					System.out.println(i);
 		    					h = i;
 		    				}

@@ -1,4 +1,5 @@
-package Dominio;
+package dominio;
+
 import java.util.ArrayList;
 
 public class Frase {
@@ -21,12 +22,12 @@ public class Frase {
 				(f.charAt(i) == 129) || (f.charAt(i) == 130) || 
 				(f.charAt(i) == 144) || (f.charAt(i) == 181) || 
 				(f.charAt(i) == 214) || (f.charAt(i) == 224) || 
-				(f.charAt(i) == 233) || (f.charAt(i) == 'á') ||
-				(f.charAt(i) == 'í') || (f.charAt(i) == 'ó') ||
-				(f.charAt(i) == 'ú') || (f.charAt(i) == 'ñ') ||
-				(f.charAt(i) == 'Á') || (f.charAt(i) == 'Í') ||
-				(f.charAt(i) == 'Ó') || (f.charAt(i) == 'Ú') ||
-				(f.charAt(i) == 'Ñ')) {
+				(f.charAt(i) == 233) || (f.charAt(i) == 'ï¿½') ||
+				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
+				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
+				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
+				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
+				(f.charAt(i) == 'ï¿½')) {
 				s = s + f.charAt(i);
 			}
 			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') {

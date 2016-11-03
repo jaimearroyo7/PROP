@@ -1,3 +1,5 @@
+package dominio;
+
 import java.util.ArrayList;
 
 public class Documento {
@@ -6,13 +8,17 @@ public class Documento {
 	private String categoria;
 	private Texto texto;
 	private Fecha fecha;
-	//private ArrayList<Pair<String, Integer>> palabras = new ArrayList<>();
-	private ArrayList<Pair<String, Integer>> Palabras = new ArrayList<Pair<String, Integer>>();
+	//private ArrayList<dominio.Pair<String, Integer>> palabras = new ArrayList<>();
+	private ArrayList<Pair<String, Integer>> palabras = new ArrayList<Pair<String, Integer>>();
 	
 	public Documento(){
 		
 	}
-	
+
+	public ArrayList<Pair<String, Integer>> getPalabras() {
+		return palabras;
+	}
+
 	public Documento(String valortitulo, String valorautor, String valorcategoria, String valorTexto){
 		setTitulo(valortitulo);
 		setAutor(valorautor);
@@ -52,11 +58,11 @@ public class Documento {
 				String actual = listapalabras.get(j).getPalabra();
 				
 				Integer found = 0;
-				for(int k = 0; k < Palabras.size() && found == 0; ++k){
-					if(actual.equals(Palabras.get(k).first())){
-						Palabras.get(k).setSecond(Palabras.get(k).second() + 1);
+				for(int k = 0; k < palabras.size() && found == 0; ++k){
+					if(actual.equals(palabras.get(k).first())){
+						palabras.get(k).setSecond(palabras.get(k).second() + 1);
 						found = 1;
-						//System.out.println(Palabras.get(k).first());
+						//System.out.println(palabras.get(k).first());
 					}
 				}
 				
@@ -64,13 +70,13 @@ public class Documento {
 				Pair<String, Integer> pair = new Pair<>();
 				pair.setFirst(actual);
 				pair.setSecond(1);
-				Palabras.add(pair);}
+				palabras.add(pair);}
 				
 			}
 		}
 	}
 	
-	public ArrayList<Pair<String, Integer>> getfrecuencia(){ return Palabras; }
+	public ArrayList<Pair<String, Integer>> getfrecuencia(){ return palabras; }
 	
 	public String getTitulo() { return titulo; }
 	
@@ -82,10 +88,10 @@ public class Documento {
 	
 	public Fecha getFecha() { return fecha; }
 	
-	/*public static Comparator<Documento> comparador = new Comparator <Documento>(){
-		public int compare(Documento d1, Documento d2){
-			Fecha f1 = d1.getFecha();
-			Fecha f2 = d2.getFecha();
+	/*public static Comparator<dominio.Documento> comparador = new Comparator <dominio.Documento>(){
+		public int compare(dominio.Documento d1, dominio.Documento d2){
+			dominio.Fecha f1 = d1.getFecha();
+			dominio.Fecha f2 = d2.getFecha();
 			if(f1.getYear() != f2.getYear()){
 				if(f1.getYear() < f2.getYear()){
 					return 1;

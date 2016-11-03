@@ -1,3 +1,7 @@
+package dominio;
+
+import dominio.Frase;
+
 import java.util.ArrayList;
 
 public class Texto {

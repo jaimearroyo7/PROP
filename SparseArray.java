@@ -1,3 +1,5 @@
+package dominio;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -5,8 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 /******************************************************************************
- *  Compilation:  javac SparseArray.java
- *  Execution:    java SparseArray
+ *  Compilation:  javac dominio.SparseArray.java
+ *  Execution:    java dominio.SparseArray
  *
  *  A sparse vector, implementing using a symbol table.
  *

@@ -1,4 +1,4 @@
-//package Dominio;
+package dominio;//package Dominio;
 import java.util.*;
 import java.util.GregorianCalendar;
  

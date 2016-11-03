@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 
 public class Nodo {
 	private Nodo pare = null;
@@ -20,7 +20,7 @@ public class Nodo {
 	
 	//consultoras
 	public char typeOfNode() {
-		if (o == null) return 'E'; 	//E= Expresión Booleana
+		if (o == null) return 'E'; 	//E= Expresiï¿½n Booleana
 		else return 'O';			//O= Operador
 	}
 	
@@ -64,7 +64,7 @@ public class Nodo {
 			this.e = e;
 		}
 		else {
-			System.out.println("Este nodo no es de tipo Expresión Booleana!");
+			System.out.println("Este nodo no es de tipo Expresiï¿½n Booleana!");
 		}
 	}
 }

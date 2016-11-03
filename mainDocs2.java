@@ -1,4 +1,4 @@
-package Dominio;
+package dominio;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
