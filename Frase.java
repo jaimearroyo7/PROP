@@ -22,12 +22,12 @@ public class Frase {
 				(f.charAt(i) == 129) || (f.charAt(i) == 130) || 
 				(f.charAt(i) == 144) || (f.charAt(i) == 181) || 
 				(f.charAt(i) == 214) || (f.charAt(i) == 224) || 
-				(f.charAt(i) == 233) || (f.charAt(i) == 'ï¿½') ||
-				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
-				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
-				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
-				(f.charAt(i) == 'ï¿½') || (f.charAt(i) == 'ï¿½') ||
-				(f.charAt(i) == 'ï¿½')) {
+				(f.charAt(i) == 233) || (f.charAt(i) == 'É') ||
+				(f.charAt(i) == 'á') || (f.charAt(i) == 'Á') ||
+				(f.charAt(i) == 'é') || (f.charAt(i) == 'Ó') ||
+				(f.charAt(i) == 'ó') || (f.charAt(i) == 'Ú') ||
+				(f.charAt(i) == 'ú') || (f.charAt(i) == 'Ñ') ||
+				(f.charAt(i) == 'ñ')) {
 				s = s + f.charAt(i);
 			}
 			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') {
@@ -54,5 +54,8 @@ public class Frase {
 	}
 	public void setPalabra(int arg, Palabra palabra) {
 		frase.set(arg, palabra);
+	}
+	public ArrayList<Palabra> getListaPalabras() {
+		return frase;
 	}
 }
