@@ -15,7 +15,7 @@ public class Documentos {
 	private Map<String, ArrayList<Documento> > autortitulos; //map autors, titols de l'autor
 	//private map<dominio.Pair<String, String>, *dominio.Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
 	private Map<Fecha, ArrayList<Documento> > mapfecha;
-	
+	Diccionario diccionario = new Diccionario();
 	
 	//metodos
 	public Documentos() {
@@ -25,35 +25,19 @@ public class Documentos {
 		br = null;
 		mapfecha = new HashMap<Fecha, ArrayList<Documento> >();
 		autortitulos = new HashMap<String, ArrayList<Documento> >();
+		
 		/*autores = new ArrayList<>();
 		contenidodoc = new map<>(); */
 	}
 	
-	/*public Documentos(ArrayList<dominio.Documento> docs, ArrayList<String> autores, ap<String,
-			vector<*dominio.Documento> > autorstitols, map<dominio.Pair<String, String>, *dominio.Documento> contenidodoc, map<String, vector<*dominio.Documento> > mapfecha) {
-		this.docs = docs;
-		this.autores = autores;
-		this.autorstitols = autorstitols;
-		this.contenidodoc = contenidodoc;
-		this.mapfecha = mapfecha;
-	}*/
 	
-	public void addDocvers1() throws ParseException {
-		d = new Documento();
+	public void addDoc(Documento d) throws ParseException, IOException {
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Ingrese el título: ");
-		String titulo = sc.nextLine();
-		d.setTitulo(titulo);
-		System.out.print("Ingrese el autor: ");
-		d.setAutor(sc.nextLine());
-		System.out.print("Ingrese la categoria: ");
-		d.setCategoria(sc.nextLine());
-		System.out.print("Ingrese Texto: ");
-		Texto t = new Texto(sc.nextLine());
-		d.setTexto(t);
+		
+		docs.add(d);
 		setMapFechaDoc(d);
 		setMapAutorTitulos(d);
+		diccionario.addTextoDocumento(d);
 		
 		
 		/*nombreMap.put(K clave, V valor); // Añade un elemento al Map
@@ -64,28 +48,47 @@ public class Documentos {
 		nombreMap.containsValue(V valor); // Devuelve true si en el map hay un Valor que coincide con V
 		nombreMap.values(); // Devuelve una "Collection" con los valores del Map */
 
-		docs.add(d);
+		
 	}
-	public void borrardoc(string titulo, string autor) {
-		
-		
+	public void borrardoc(Documento d) {
+		docs.remove(d);
+		//actualizar MapFechaDoc
+		//actualizar MapAutorTitulos (Borrar autor si se queda sin titulos
+		diccionario.deleteTextoDocumento(d);
 		
 	}
 	
-	public void modificardoc(string titulo, string autor,string campo, string value) {
-		
-		
-		if(campo == "titulo") {
-			
+	public void modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
+		Documento nuevo = new Documento();
+		for(int i = 0; i < docs.size(); ++i){
+			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
+				nuevo = docs.get(i);
+				i = docs.size();
+			}
 		}
-		autor
-		categoria
-		texto
+		
+		borrardoc(nuevo);
+		
+		if(campo.equals("autor")){
+			nuevo.setAutor(value);
+		}
+		if(campo.equals("titulo")){
+			nuevo.setTitulo(value);
+		}
+		if(campo.equals("categoria")){
+			nuevo.setCategoria(value);
+		}
+		if(campo.equals("texto")){
+			Texto actualizado = new Texto("value");
+			nuevo.setTexto(actualizado);
+		}
+		
+		addDoc(nuevo);
 		
 	}
 	public void setMapFechaDoc(Documento d) {
 		
-		if(!mapfecha.containsKey(d.getFecha())) {
+		if(mapfecha.containsKey(d.getFecha()) == false) {
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
 			mapfecha.put(d.getFecha(), l);  // añadimos para una unica fecha un documento
@@ -96,22 +99,86 @@ public class Documentos {
 			mapfecha.put(d.getFecha(),l );
 		}
 	}
+	
 	public void setMapAutorTitulos(Documento d) {
-		if(!mapfecha.containsKey(d.getAutor())) {
+		if(mapfecha.containsKey(d.getAutor()) == false) {
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
-			autortitulos.put(d.getAutor(), l);  // añadimos para una unica fecha un documento
+			autortitulos.put(d.getAutor(), l);  
 		}
 		else {
 			ArrayList<Documento> l = autortitulos.get(d.getAutor());
 			l.add(d);
-			for(int y = 0; y < l.size();++y) {
+			/*for(int y = 0; y < l.size();++y) {
 	        	System.out.println(l.get(y).getTitulo());
-	        }
-			//autortitulos.put(d.getAutor(),l );
+	        }*/
+			autortitulos.put(d.getAutor(), l);
 		}
 		
 	}
+	
+	public void consultarTextoDadoTituloAutor(String titulo, String autor){
+		
+		for(int i = 0; i < docs.size(); ++i){
+			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
+				System.out.println("Titulo: " + titulo);
+				System.out.println("Autor: " + autor);
+				System.out.println(docs.get(i).getTexto().getTexto());
+				return;
+			}
+		}
+	}
+	
+	
+	public void consultarTitulosAutor(String autor) {
+			String actual;
+		    Iterator<String> autores = autortitulos.keySet().iterator();
+		    System.out.println("Hay los siguientes productos:");
+		    while(autores.hasNext()){
+		        actual = autores.next();
+		        if(actual.equals(autor)){
+		        System.out.println(autor + ": " );
+		        ArrayList<Documento> l = autortitulos.get(autor);
+		        for(int y = 0; y < l.size();++y) {
+		        	System.out.println(l.get(y).getTitulo());
+		        }
+		        break;
+		        }
+		    }        
+	}
+	
+	public void consultarAutoresPrefijo(String prefijo){
+		Set<String> autores = autortitulos.keySet();
+		Iterator<String> it = autores.iterator();
+		String actual;
+		int mida = prefijo.length();
+		while(it.hasNext()){
+			actual = it.next();
+			if(mida == 0){
+				System.out.println(actual);
+			}
+			else{
+				if(actual.length() >= mida){
+					if(prefijo.equals(actual.substring(0, mida))){
+						System.out.println(actual);
+					}
+				}
+			}
+		}
+	}
+	
+	public void consultarDiccionario(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	    	
 	public void consultarTitulo(int i) {
@@ -135,24 +202,15 @@ public class Documentos {
 		System.out.print(f.getMonth()+"/");
 		System.out.println(f.getYear());		
 	}
+	
 	public void consultarTexto(int i) {
 		System.out.print("Texto: ");
 		System.out.println(docs.get(i).getTexto().getTexto());
 	}
-	public void consultarTitulosAutor() {
-		
-		    String clave;
-		    Iterator<String> autores = autortitulos.keySet().iterator();
-		    System.out.println("Hay los siguientes productos:");
-		    while(autores.hasNext()){
-		        clave = autores.next();
-		        System.out.println(clave + ": " );
-		        ArrayList<Documento> l = autortitulos.get(clave);
-		        for(int y = 0; y < l.size();++y) {
-		        	System.out.println(l.get(y).getTitulo());
-		        }
-		    }        
-	}
+	
+	
+	
+	
 	/*public void addDoc(String s) throws FileNotFoundException {
 	
 	archivo = new File (s);

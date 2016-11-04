@@ -33,22 +33,28 @@ public class Documento {
 	
 	public void setTitulo(String valortitulo){
 		titulo = valortitulo;
+		Fecha ahora = new Fecha();
+		fecha = ahora;
 	}
 	
 	public void setFecha(){
 		fecha.setFecha();
 	}
 	
-	/*public void setFechaManual(int day, int month, int year){
+	public void setFechaManual(int day, int month, int year){
 		fecha.setFechaManual(day, month, year);
-	}*/
+	}
 	
 	public void setAutor(String valorautor){
 		autor = valorautor;
+		Fecha ahora = new Fecha();
+		fecha = ahora;
 	}
 	
 	public void setCategoria(String valorcategoria){
 		categoria = valorcategoria;
+		Fecha ahora = new Fecha();
+		fecha = ahora;
 	}
 	
 	boolean esfuncional(String s) throws IOException{
@@ -64,6 +70,7 @@ public class Documento {
 	
 	public void setTexto(Texto valorTexto) throws IOException{
 		texto = valorTexto;
+		palabras.clear();
 		ArrayList<Frase> frases = texto.getListaFrases();
 		for(int i = 0; i < frases.size(); ++i){
 			ArrayList<Palabra> listapalabras = frases.get(i).getListaPalabras();
@@ -89,9 +96,10 @@ public class Documento {
 			}
 			}
 		}
+		Fecha ahora = new Fecha();
+		fecha = ahora;
 	}
 	
-	public ArrayList<Pair<String, Integer>> getfrecuencia(){ return palabras; }
 	
 	public String getTitulo() { return titulo; }
 	
