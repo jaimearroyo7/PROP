@@ -3,6 +3,7 @@ package dominio;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,18 +29,23 @@ public class mainJaime {
 		}
 			}
 		if(comando.equals("funcionales")){
-		String cadena;
-	     FileReader f = new FileReader("/home/jaime/workspace/PROP/src/PalabrasFuncionales.txt");
-	     BufferedReader b = new BufferedReader(f);
-	     try {
-			while((cadena = b.readLine())!=null) {
-			     System.out.println(cadena);
-			 }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		PalabrasNoFuncionales nf = new PalabrasNoFuncionales();
+		ArrayList<String> listanf = nf.getPalabrasNoFuncionales();
+		for(int i = 0; i < listanf.size(); ++i){
+			String result = (listanf.get(i));
+			PrintStream out = new PrintStream(System.out, true, "UTF-8");
+		    out.println(result);
 		}
-	     b.close();}
+		System.out.println(listanf.size());
+			/*String a = "olé";
+			String b = "ole";
+			System.out.println(a);
+			System.out.println(b);
+			if(a.equals(b)){
+				System.out.println("liada");
+			}*/
+		}
+		
 		if(comando.equals("historial")){
 			
 			ArrayList<Documento> lista = new ArrayList<>();
@@ -56,9 +62,9 @@ public class mainJaime {
 			Documento prueba4 = new Documento("4", "Yo", "Futbol", texto);
 			lista.add(prueba4);
 			
-			lista.get(2).setFechaManual(30, 12, 2016);
+			/*lista.get(2).setFechaManual(30, 12, 2016);
 			lista.get(1).setFechaManual(15, 12, 2016);
-			lista.get(0).setFechaManual(20, 12, 2016);
+			lista.get(0).setFechaManual(20, 12, 2016);*/
 			
 			HistoricoDocumentos historial = new HistoricoDocumentos(lista);
 			for(int i = 0; i < 4; ++i){
@@ -68,6 +74,7 @@ public class mainJaime {
 			}
 			
 		}
+		
 		comando = sc.nextLine();
 		}
 	}

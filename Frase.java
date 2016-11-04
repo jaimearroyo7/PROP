@@ -22,12 +22,13 @@ public class Frase {
 				(f.charAt(i) == 129) || (f.charAt(i) == 130) || 
 				(f.charAt(i) == 144) || (f.charAt(i) == 181) || 
 				(f.charAt(i) == 214) || (f.charAt(i) == 224) || 
-				(f.charAt(i) == 233) || (f.charAt(i) == '…') ||
-				(f.charAt(i) == '·') || (f.charAt(i) == '¡') ||
-				(f.charAt(i) == 'È') || (f.charAt(i) == '”') ||
-				(f.charAt(i) == 'Û') || (f.charAt(i) == '⁄') ||
-				(f.charAt(i) == '˙') || (f.charAt(i) == '—') ||
-				(f.charAt(i) == 'Ò')) {
+				(f.charAt(i) == 233) || (f.charAt(i) == '√â') ||
+				(f.charAt(i) == '√°') || (f.charAt(i) == '√Å') ||
+				(f.charAt(i) == '√©') || (f.charAt(i) == '√ì') ||
+				(f.charAt(i) == '√≥') || (f.charAt(i) == '√ö') ||
+				(f.charAt(i) == '√∫') || (f.charAt(i) == '√ë') ||
+				(f.charAt(i) == '√±')) {
+				
 				s = s + f.charAt(i);
 			}
 			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') {

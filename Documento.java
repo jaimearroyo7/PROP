@@ -1,6 +1,8 @@
 package dominio;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class Documento {
 	private String titulo;
@@ -19,7 +21,7 @@ public class Documento {
 		return palabras;
 	}
 
-	public Documento(String valortitulo, String valorautor, String valorcategoria, String valorTexto){
+	public Documento(String valortitulo, String valorautor, String valorcategoria, String valorTexto) throws IOException{
 		setTitulo(valortitulo);
 		setAutor(valorautor);
 		setCategoria(valorcategoria);
@@ -37,9 +39,9 @@ public class Documento {
 		fecha.setFecha();
 	}
 	
-	public void setFechaManual(int day, int month, int year){
+	/*public void setFechaManual(int day, int month, int year){
 		fecha.setFechaManual(day, month, year);
-	}
+	}*/
 	
 	public void setAutor(String valorautor){
 		autor = valorautor;
@@ -49,15 +51,27 @@ public class Documento {
 		categoria = valorcategoria;
 	}
 	
-	public void setTexto(Texto valorTexto){
+	boolean esfuncional(String s) throws IOException{
+		PalabrasNoFuncionales p = new PalabrasNoFuncionales();
+		ArrayList<String> nf = p.getPalabrasNoFuncionales();
+		for(int i = 0; i < nf.size(); ++i){
+			if(s.equals(nf.get(i))){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void setTexto(Texto valorTexto) throws IOException{
 		texto = valorTexto;
 		ArrayList<Frase> frases = texto.getListaFrases();
 		for(int i = 0; i < frases.size(); ++i){
-			ArrayList<Palabra> listapalabras = frases.get(i).getlistaPalabras();
+			ArrayList<Palabra> listapalabras = frases.get(i).getListaPalabras();
 			for(int j = 0; j < listapalabras.size(); ++j){
 				String actual = listapalabras.get(j).getPalabra();
 				
 				Integer found = 0;
+				if(esfuncional(actual)){
 				for(int k = 0; k < palabras.size() && found == 0; ++k){
 					if(actual.equals(palabras.get(k).first())){
 						palabras.get(k).setSecond(palabras.get(k).second() + 1);
@@ -72,6 +86,7 @@ public class Documento {
 				pair.setSecond(1);
 				palabras.add(pair);}
 				
+			}
 			}
 		}
 	}
