@@ -18,16 +18,17 @@ public class Frase {
 		String s = new String();
 		for (int i=0; i<f.length(); ++i) {
 			//si no son separadors...
-			if ((f.charAt(i) >= 65 && f.charAt(i) <= 90) || (f.charAt(i) >= 97 && f.charAt(i) <= 122) || 
-				(f.charAt(i) == 129) || (f.charAt(i) == 130) || 
-				(f.charAt(i) == 144) || (f.charAt(i) == 181) || 
-				(f.charAt(i) == 214) || (f.charAt(i) == 224) || 
-				(f.charAt(i) == 233) || (f.charAt(i) == 'Ã‰') ||
-				(f.charAt(i) == 'Ã¡') || (f.charAt(i) == 'Ã') ||
-				(f.charAt(i) == 'Ã©') || (f.charAt(i) == 'Ã“') ||
-				(f.charAt(i) == 'Ã³') || (f.charAt(i) == 'Ãš') ||
-				(f.charAt(i) == 'Ãº') || (f.charAt(i) == 'Ã‘') ||
-				(f.charAt(i) == 'Ã±')) {
+			if ((this.f.charAt(i) >= 65 && this.f.charAt(i) <= 90) || (this.f.charAt(i) >= 97 && this.f.charAt(i) <= 122) || 
+					(this.f.charAt(i) == 129) || (this.f.charAt(i) == 130) || 
+					(this.f.charAt(i) == 144) || (this.f.charAt(i) == 181) || 
+					(this.f.charAt(i) == 214) || (this.f.charAt(i) == 224) || 
+					(this.f.charAt(i) == 233) || (this.f.charAt(i) == 'á') ||
+					(this.f.charAt(i) == 'Á') || (this.f.charAt(i) == 'é') ||
+					(this.f.charAt(i) == 'É') || (this.f.charAt(i) == 'í') ||
+					(this.f.charAt(i) == 'Í') || (this.f.charAt(i) == 'ó') ||
+					(this.f.charAt(i) == 'Ó') || (this.f.charAt(i) == 'ú') ||
+					(this.f.charAt(i) == 'Ú') || (this.f.charAt(i) == 'ñ') ||
+					(this.f.charAt(i) == 'Ñ')) {
 				
 				s = s + f.charAt(i);
 			}
