@@ -88,7 +88,7 @@ public class Documento {
 				}
 				
 				if(found == 0){
-				Pair<String, Integer> pair = new Pair<>();
+				Pair<String, Integer> pair = new Pair<String, Integer>();
 				pair.setFirst(actual);
 				pair.setSecond(1);
 				palabras.add(pair);}
@@ -111,6 +111,14 @@ public class Documento {
 	
 	public Fecha getFecha() { return fecha; }
 	
+	public String getFechatoString() { 
+		String s;
+		s = Integer.toString(fecha.getDay());
+		s += Integer.toString(fecha.getMonth());
+		s += Integer.toString(fecha.getYear());
+		return s;
+				
+	}
 	/*public static Comparator<dominio.Documento> comparador = new Comparator <dominio.Documento>(){
 		public int compare(dominio.Documento d1, dominio.Documento d2){
 			dominio.Fecha f1 = d1.getFecha();

@@ -11,11 +11,13 @@ public class Documentos {
   	private FileReader fr;
     private BufferedReader br;
 	private ArrayList<Documento> docs;
-	//private ArrayList<String> autores; //??
-	private Map<String, ArrayList<Documento> > autortitulos; //map autors, titols de l'autor
-	//private map<dominio.Pair<String, String>, *dominio.Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
-	private Map<Fecha, ArrayList<Documento> > mapfecha;
-	Diccionario diccionario = new Diccionario();
+	private Map<String, ArrayList<Documento> > autortitulos;
+	//private Map<Pair<String, String>, Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
+	private Map<String, ArrayList<Documento> > mapfecha;
+	
+	private Map<String,Integer > mapfecha1;
+	private Map<Integer,ArrayList<Documento> > mapfecha2;
+	//Diccionario diccionario = new Diccionario();
 	
 	//metodos
 	public Documentos() {
@@ -23,11 +25,9 @@ public class Documentos {
 		archivo = null;
 		fr = null;
 		br = null;
-		mapfecha = new HashMap<Fecha, ArrayList<Documento> >();
+		mapfecha = new HashMap<String, ArrayList<Documento> >();
 		autortitulos = new HashMap<String, ArrayList<Documento> >();
-		
-		/*autores = new ArrayList<>();
-		contenidodoc = new map<>(); */
+		//contenidodoc = new HashMap<Pair<String, String>, Documento> (); si decidimmos poner un map para saber el contenido m�s r�pido
 	}
 	
 	
@@ -37,37 +37,58 @@ public class Documentos {
 		docs.add(d);
 		setMapFechaDoc(d);
 		setMapAutorTitulos(d);
-		diccionario.addTextoDocumento(d);
-		
-		
-		/*nombreMap.put(K clave, V valor); // Añade un elemento al Map
-		nombreMap.get(K clave); // Devuelve el valor de la clave que se le pasa como parámetro o 'null' si la clave no existe
-		nombreMap.clear(); // Borra todos los componentes del Map
-		nombreMap.remove(K clave); // Borra el par clave/valor de la clave que se le pasa como parámetro
-		nombreMap.containsKey(K clave); // Devuelve true si en el map hay una clave que coincide con K
-		nombreMap.containsValue(V valor); // Devuelve true si en el map hay un Valor que coincide con V
-		nombreMap.values(); // Devuelve una "Collection" con los valores del Map */
-
+		//setMapContenido(d); 
+		//diccionario.addTextoDocumento(d);
 		
 	}
-	public void borrardoc(Documento d) {
+	public void borrardoc(String s) {
+		Documento d = docs.get(Integer.parseInt(s));
 		docs.remove(d);
-		//actualizar MapFechaDoc
+		borrarMapFechaDoc(d);
+		borrarMapAutorTitulos(d);
 		//actualizar MapAutorTitulos (Borrar autor si se queda sin titulos
-		diccionario.deleteTextoDocumento(d);
+		//diccionario.deleteTextoDocumento(d);
 		
+	}
+	public void listadocs() {
+		for(int i = 0; i < docs.size(); ++i) {
+			System.out.println(docs.get(i).getTitulo());
+		}
 	}
 	
+	public void borrarMapFechaDoc(Documento d) {
+		String s = d.getFechatoString();
+		ArrayList<Documento> l = mapfecha.get(s);
+		for(int i = 0; i < l.size(); ++i){
+			if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
+				l.remove(i);
+			}
+		}
+	}
+	public void borrarMapAutorTitulos(Documento d) {
+		String s = d.getAutor();
+		ArrayList<Documento> l = autortitulos.get(s);
+		for(int i = 0; i < l.size(); ++i){
+			if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
+				l.remove(i);
+			}
+		}
+	}
+		
 	public void modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
 		Documento nuevo = new Documento();
+		int j = 0;
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
 				nuevo = docs.get(i);
+				j = i;
 				i = docs.size();
 			}
 		}
 		
-		borrardoc(nuevo);
+		//System.out.println(j);
+		//borrardoc(nuevo);
+		borrardoc(Integer.toString(j));
 		
 		if(campo.equals("autor")){
 			nuevo.setAutor(value);
@@ -88,20 +109,21 @@ public class Documentos {
 	}
 	public void setMapFechaDoc(Documento d) {
 		
-		if(mapfecha.containsKey(d.getFecha()) == false) {
+		String s = d.getFechatoString();
+		if(mapfecha.get(s) == null) { 
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
-			mapfecha.put(d.getFecha(), l);  // añadimos para una unica fecha un documento
+			mapfecha.put(s, l);  // añadimos para una unica fecha un documento
 		}
 		else {
-			ArrayList<Documento> l = mapfecha.get(d.getFecha());
+			ArrayList<Documento> l = mapfecha.get(s);
 			l.add(d);
-			mapfecha.put(d.getFecha(),l );
+			mapfecha.put(s,l );
 		}
 	}
 	
 	public void setMapAutorTitulos(Documento d) {
-		if(mapfecha.containsKey(d.getAutor()) == false) {
+		if(autortitulos.containsKey(d.getAutor()) == false) {
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
 			autortitulos.put(d.getAutor(), l);  
@@ -109,9 +131,6 @@ public class Documentos {
 		else {
 			ArrayList<Documento> l = autortitulos.get(d.getAutor());
 			l.add(d);
-			/*for(int y = 0; y < l.size();++y) {
-	        	System.out.println(l.get(y).getTitulo());
-	        }*/
 			autortitulos.put(d.getAutor(), l);
 		}
 		
@@ -170,20 +189,10 @@ public class Documentos {
 	public void consultarDiccionario(){
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	    	
 	public void consultarTitulo(int i) {
 
-		System.out.print("Título: ");
+		System.out.print("T�tulo: ");
 		System.out.println(docs.get(i).getTitulo());
 	}
 	public void consultarAutor(int i) {
@@ -197,7 +206,7 @@ public class Documentos {
 	public void consultarFecha(int i) {
 		Fecha f = new Fecha();
 		f = docs.get(i).getFecha();
-		System.out.print("Fecha de creación: ");
+		System.out.print("Fecha de creaci�n: ");
 		System.out.print(f.getDay()+"/");
 		System.out.print(f.getMonth()+"/");
 		System.out.println(f.getYear());		
@@ -207,79 +216,12 @@ public class Documentos {
 		System.out.print("Texto: ");
 		System.out.println(docs.get(i).getTexto().getTexto());
 	}
-	
-	
-	
-	
-	/*public void addDoc(String s) throws FileNotFoundException {
-	
-	archivo = new File (s);
-    fr = new FileReader (archivo);
-    br = new BufferedReader(fr);
-    d = new dominio.Documento();
-    try {
-    	String linea;
-    	String subStr = null;
-    	boolean title,categoria;
-    	title = categoria = false;
-    	while((linea=br.readLine())!=null) {	
-             int h = 0;
-             int t = 0;
-        	 for (int i = 0; i <linea.length(); ++i) {
-        		 if (!title) {
-        			 if(linea.substring(i,i+7).equals("<title>") != false) { //obtenemos titulo
-        				 t = i;
-		    			 int pos=linea.indexOf("-");
-			        	 subStr=linea.substring((t+1)+8,pos-1);
-			        	 title = true;
-		        	     //System.out.println(subStr);
-        			 }
-	    		 }
-        			 
-        		 /*
-        		 else if(title & !categoria) {
-        			     
-        			    
-        			    //System.out.println(linea.substring(i,i+11));
-	    				if(linea.substring(i,i+11).equals("=Categoría:")) {
-	    					System.out.println(i);
-	    					h = i;
-	    				}
-	    				if(linea.substring(i,i+4).equals("<")){
-	    						int h2 = i;
-	    						System.out.println(h2);
-		    					subStr2=linea.substring((h+1)+11,h2-2);
-		    					categoria = true;
-		    					System.out.println(subStr2);
-	    					}
-		        			
-		    			
-	    		 }*/	
-	    		
-        	/* }
-    	}
-    	
-    }
-    catch(Exception e){
-         e.printStackTrace();
-    }
-    
-    finally {
-         // En el finally cerramos el fichero, para asegurarnos
-         // que se cierra tanto si todo va bien como si salta 
-         // una excepcion.
-         /*try{                    
-            if( null != fr ){   
-               fr.close();     
-            }                  
-         }
-         catch (Exception e2){ 
-            e2.printStackTrace();
-         }
-    }
-    docs.add(d);
-	//string autor = d.getAutor();
-	
-}*/
-
+	public void consultarTitulos(String s) throws ParseException { //de aquellos documentos que esten dentro de una fecha
+		
+			ArrayList<Documento> l1 = mapfecha.get(s);
+			for(int y = 0; y < l1.size();++y) {
+			   System.out.println(l1.get(y).getTitulo());
+			}  
+		
+	}
 }
