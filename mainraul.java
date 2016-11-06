@@ -74,7 +74,7 @@ public class mainraul {
 					sf = sc.nextLine();
 					if(sf.equals("1")) {
 						System.out.println("CONSULTAR TITULOS DADO UN AUTOR:");
-						System.out.println("Ingrese autor para consulta1:");
+						System.out.println("Ingrese autor para consulta:");
 						sf = sc.nextLine();
 						d.consultarTitulosAutor(sf);
 					}

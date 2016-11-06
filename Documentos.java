@@ -51,26 +51,33 @@ public class Documentos {
 		
 	}
 	public void listadocs() {
-		for(int i = 0; i < docs.size(); ++i) {
+		
+		int i;
+		for(i = 0; i < docs.size(); ++i) {
 			System.out.println(docs.get(i).getTitulo());
 		}
+		if(i == 0) System.out.println("No hay documentos");
 	}
 	
 	public void borrarMapFechaDoc(Documento d) {
 		String s = d.getFechatoString();
 		ArrayList<Documento> l = mapfecha.get(s);
-		for(int i = 0; i < l.size(); ++i){
-			if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
-				l.remove(i);
+		if(l != null){
+			for(int i = 0; i < l.size(); ++i){
+				if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
+					l.remove(i);
+				}
 			}
 		}
 	}
 	public void borrarMapAutorTitulos(Documento d) {
 		String s = d.getAutor();
 		ArrayList<Documento> l = autortitulos.get(s);
-		for(int i = 0; i < l.size(); ++i){
-			if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
-				l.remove(i);
+		if(l != null) {
+			for(int i = 0; i < l.size(); ++i){
+				if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
+					l.remove(i);
+				}
 			}
 		}
 	}
@@ -82,7 +89,7 @@ public class Documentos {
 			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
 				nuevo = docs.get(i);
 				j = i;
-				i = docs.size();
+				i = docs.size(); //return
 			}
 		}
 		
@@ -152,7 +159,7 @@ public class Documentos {
 	public void consultarTitulosAutor(String autor) {
 			String actual;
 		    Iterator<String> autores = autortitulos.keySet().iterator();
-		    System.out.println("Hay los siguientes productos:");
+		    System.out.println("El autor tine los siguientes documento/s:");
 		    while(autores.hasNext()){
 		        actual = autores.next();
 		        if(actual.equals(autor)){
@@ -190,7 +197,7 @@ public class Documentos {
 		
 	}
 	    	
-	public void consultarTitulo(int i) {
+	/*public void consultarTitulo(int i) {
 
 		System.out.print("Título: ");
 		System.out.println(docs.get(i).getTitulo());
@@ -214,14 +221,20 @@ public class Documentos {
 	
 	public void consultarTexto(int i) {
 		System.out.print("Texto: ");
-		System.out.println(docs.get(i).getTexto().getTexto());
-	}
+		String t = docs.get(i).getTexto().getTexto();
+		if (t != null) System.out.println(docs.get(i).getTexto().getTexto());
+	}*/
 	public void consultarTitulos(String s) throws ParseException { //de aquellos documentos que esten dentro de una fecha
 		
 			ArrayList<Documento> l1 = mapfecha.get(s);
-			for(int y = 0; y < l1.size();++y) {
-			   System.out.println(l1.get(y).getTitulo());
-			}  
-		
+			if(l1 != null) {
+				for(int y = 0; y < l1.size();++y) {
+				   System.out.print(l1.get(y).getTitulo());
+				   System.out.println(" - " + l1.get(y).getAutor());
+				}  
+			}
+			else {
+				System.out.print("No se ha encontrado ningun titulo para esta fecha");
+			}
 	}
 }
