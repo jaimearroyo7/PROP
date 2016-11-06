@@ -5,7 +5,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class Documentos {
-	
 	private File archivo; 
 	private Documento d;
   	private FileReader fr;
@@ -14,9 +13,6 @@ public class Documentos {
 	private Map<String, ArrayList<Documento> > autortitulos;
 	//private Map<Pair<String, String>, Documento> contenidodoc; // map contenido documento dado su titulo y su autor*/
 	private Map<String, ArrayList<Documento> > mapfecha;
-	
-	private Map<String,Integer > mapfecha1;
-	private Map<Integer,ArrayList<Documento> > mapfecha2;
 	//Diccionario diccionario = new Diccionario();
 	
 	//metodos
@@ -30,17 +26,15 @@ public class Documentos {
 		//contenidodoc = new HashMap<Pair<String, String>, Documento> (); si decidimmos poner un map para saber el contenido más rápido
 	}
 	
-	
 	public void addDoc(Documento d) throws ParseException, IOException {
-		
 		
 		docs.add(d);
 		setMapFechaDoc(d);
 		setMapAutorTitulos(d);
-		//setMapContenido(d); 
 		//diccionario.addTextoDocumento(d);
 		
 	}
+	
 	public void borrardoc(String s) {
 		Documento d = docs.get(Integer.parseInt(s));
 		docs.remove(d);
@@ -48,8 +42,8 @@ public class Documentos {
 		borrarMapAutorTitulos(d);
 		//actualizar MapAutorTitulos (Borrar autor si se queda sin titulos
 		//diccionario.deleteTextoDocumento(d);
-		
 	}
+	
 	public void listadocs() {
 		
 		int i;
@@ -114,6 +108,7 @@ public class Documentos {
 		addDoc(nuevo);
 		
 	}
+	
 	public void setMapFechaDoc(Documento d) {
 		
 		String s = d.getFechatoString();
@@ -143,18 +138,24 @@ public class Documentos {
 		
 	}
 	
-	public void consultarTextoDadoTituloAutor(String titulo, String autor){
+	public void consultarTextoDadoTituloAutor(String titulo, String autor) {
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
 				System.out.println("Titulo: " + titulo);
 				System.out.println("Autor: " + autor);
+				System.out.println("Categoria: " + docs.get(i).getCategoria());
+				System.out.print("Fecha: ");
+				Fecha f = new Fecha();
+				f = docs.get(i).getFecha();
+				System.out.print(f.getDay()+"/");
+				System.out.print(f.getMonth()+"/");
+				System.out.println(f.getYear());
 				System.out.println(docs.get(i).getTexto().getTexto());
 				return;
 			}
 		}
 	}
-	
 	
 	public void consultarTitulosAutor(String autor) {
 			String actual;
@@ -173,7 +174,7 @@ public class Documentos {
 		    }        
 	}
 	
-	public void consultarAutoresPrefijo(String prefijo){
+	public void consultarAutoresPrefijo(String prefijo) {
 		Set<String> autores = autortitulos.keySet();
 		Iterator<String> it = autores.iterator();
 		String actual;
@@ -193,7 +194,7 @@ public class Documentos {
 		}
 	}
 	
-	public void consultarDiccionario(){
+	public void consultarDiccionario() {
 		
 	}
 	    	
@@ -224,6 +225,7 @@ public class Documentos {
 		String t = docs.get(i).getTexto().getTexto();
 		if (t != null) System.out.println(docs.get(i).getTexto().getTexto());
 	}*/
+	
 	public void consultarTitulos(String s) throws ParseException { //de aquellos documentos que esten dentro de una fecha
 		
 			ArrayList<Documento> l1 = mapfecha.get(s);
@@ -237,4 +239,5 @@ public class Documentos {
 				System.out.print("No se ha encontrado ningun titulo para esta fecha");
 			}
 	}
+	
 }
