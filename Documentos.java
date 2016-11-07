@@ -65,7 +65,7 @@ public class Documentos {
 		ArrayList<Documento> l = mapfecha.get(s);
 		if(l != null){
 			for(int i = 0; i < l.size(); ++i){
-				if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
+				if(l.get(i).getAutor().equals(d.getAutor()) && l.get(i).getTitulo().equals(d.getTitulo())){
 					l.remove(i);
 				}
 			}
@@ -76,7 +76,7 @@ public class Documentos {
 		ArrayList<Documento> l = autortitulos.get(s);
 		if(l != null) {
 			for(int i = 0; i < l.size(); ++i){
-				if(l.get(i).getAutor().equals(d.getAutor()) || l.get(i).getTitulo().equals(d.getTitulo())){
+				if(l.get(i).getAutor().equals(d.getAutor()) && l.get(i).getTitulo().equals(d.getTitulo())){
 					l.remove(i);
 				}
 			}
