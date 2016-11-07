@@ -9,7 +9,7 @@ public class Drivergenerico {
 		// TODO Auto-generated method stub
 		Documentos d = new Documentos();
 		Scanner sc = new Scanner(System.in);
-		Texto t = new Texto();
+		Texto t;
 		int i = 0;
 		String sf,q,h,p;
 		String opcion,opcion2;
@@ -34,6 +34,7 @@ public class Drivergenerico {
 						d1.setCategoria(sc.nextLine());
 						try {
 							System.out.println("Ingrese texto(acabado en punto,excepto si !/?):");
+							t = new Texto();
 							t.setTexto(sc.nextLine());
 						} 
 						catch (Exception e) {
@@ -55,9 +56,11 @@ public class Drivergenerico {
 						switch(opcion2) {
 							case "1":
 									System.out.println("BORRAR DOC:");
-									System.out.println("Indique que i-ésimo documento quiere borrar:");
+									System.out.println("Diga el titulo del documento a borrar:");
+									sf = sc.nextLine();
+									System.out.println("Diga el autor del documento a borrar:");
 									h = sc.nextLine();
-									d.borrardoc(h);
+									d.borrardoc(sf,h);
 									break;
 							case "2":
 									System.out.println("MODIFICAR DOC:");

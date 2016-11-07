@@ -35,11 +35,18 @@ public class Documentos {
 		
 	}
 	
-	public void borrardoc(String s) {
-		Documento d = docs.get(Integer.parseInt(s));
-		docs.remove(d);
-		borrarMapFechaDoc(d);
-		borrarMapAutorTitulos(d);
+	public void borrardoc(String titulo, String autor) {
+		//Documento d = docs.get(Integer.parseInt(s));
+		//docs.remove(d);
+		Documento d;
+		for(int i = 0; i < docs.size(); ++i){
+			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
+				d = docs.get(i);
+				borrarMapFechaDoc(d);
+				borrarMapAutorTitulos(d);
+				docs.remove(i);
+			}
+		}
 		//actualizar MapAutorTitulos (Borrar autor si se queda sin titulos
 		//diccionario.deleteTextoDocumento(d);
 	}
@@ -74,16 +81,13 @@ public class Documentos {
 				}
 			}
 		}
-
-		if(l.isEmpty()) System.out.println("borrado");
-		
 	}
 		
 	public void modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
 		Documento nuevo = new Documento();
 		int j = 0;
 		for(int i = 0; i < docs.size(); ++i){
-			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
+			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				nuevo = docs.get(i);
 				j = i;
 				i = docs.size(); //return
@@ -144,7 +148,7 @@ public class Documentos {
 	public void consultarTextoDadoTituloAutor(String titulo, String autor) {
 		
 		for(int i = 0; i < docs.size(); ++i){
-			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
+			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				/*System.out.println("Titulo: " + titulo);
 				System.out.println("Autor: " + autor);
 				System.out.println("Categoria: " + docs.get(i).getCategoria());
