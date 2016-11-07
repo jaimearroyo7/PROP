@@ -74,6 +74,9 @@ public class Documentos {
 				}
 			}
 		}
+
+		if(l.isEmpty()) System.out.println("borrado");
+		
 	}
 		
 	public void modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
@@ -142,7 +145,7 @@ public class Documentos {
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) || docs.get(i).getTitulo().equals(titulo)){
-				System.out.println("Titulo: " + titulo);
+				/*System.out.println("Titulo: " + titulo);
 				System.out.println("Autor: " + autor);
 				System.out.println("Categoria: " + docs.get(i).getCategoria());
 				System.out.print("Fecha: ");
@@ -150,7 +153,8 @@ public class Documentos {
 				f = docs.get(i).getFecha();
 				System.out.print(f.getDay()+"/");
 				System.out.print(f.getMonth()+"/");
-				System.out.println(f.getYear());
+				System.out.println(f.getYear());*/
+				System.out.println("Contenido:");
 				System.out.println(docs.get(i).getTexto().getTexto());
 				return;
 			}
@@ -187,7 +191,8 @@ public class Documentos {
 			else{
 				if(actual.length() >= mida){
 					if(prefijo.equals(actual.substring(0, mida))){
-						System.out.println(actual);
+						ArrayList<Documento> l = autortitulos.get(actual);
+						if(!l.isEmpty()) System.out.println(actual);
 					}
 				}
 			}
@@ -236,7 +241,7 @@ public class Documentos {
 				}  
 			}
 			else {
-				System.out.print("No se ha encontrado ningun titulo para esta fecha");
+				System.out.println("No se ha encontrado ningun titulo para esta fecha");
 			}
 	}
 	
