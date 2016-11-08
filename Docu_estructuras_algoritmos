@@ -1,0 +1,10 @@
+Documentos:
+	Estructuras de datos usados:
+		El ArrayList<Documento> docs contiene los 'Documentos' añadidos hasta entonces.
+		
+		El Map<String, ArrayList<Documento> > autortitulos contiene por cada key(autor) un valor(ArrayList<Documento>)
+		que representa el/los documento/s que el autor tiene.
+		
+		Map<String, ArrayList<Documento> > mapfecha contiene por cada key(fecha) un valor(ArrayList<Documento>) 
+		que representa el/los documento/s que añadieron dentro de la mmisma fecha.
+		

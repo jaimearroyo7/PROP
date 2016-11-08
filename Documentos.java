@@ -4,28 +4,40 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.Map.Entry;
 
+// Representa un conjunto de Documentos
+
 public class Documentos {
-	private File archivo; 
-	private Documento d;
-  	private FileReader fr;
-    private BufferedReader br;
+	
+	//atributos
+	
+	private Documento d; 
 	private ArrayList<Documento> docs;
 	private Map<String, ArrayList<Documento> > autortitulos;
 	private Map<String, ArrayList<Documento> > mapfecha;
-	private Diccionario diccionario = new Diccionario();
+	private Diccionario diccionario;
+	private ConsultaDocumentosParecidos cd;
 	
-	//metodos
-	public Documentos() {
+	//constructora
+	
+	public Documentos() { //constructora por defecto
 		docs = new ArrayList<Documento>();
-		archivo = null;
-		fr = null;
-		br = null;
 		mapfecha = new HashMap<String, ArrayList<Documento> >();
 		autortitulos = new HashMap<String, ArrayList<Documento> >();
+		diccionario = new Diccionario();
+		d = new Documento();
+		cd = new ConsultaDocumentosParecidos();
 	}
 	
-	public void addDoc(Documento d) throws ParseException, IOException {
+	//modificadoras
+	
+	public void addDoc(Documento d) throws ParseException, IOException { // añade el 'Documento' dentro del conjunto
 		
+		for(int i = 0; i < docs.size(); ++i){
+			if(docs.get(i).getAutor().equals(d.getAutor()) && docs.get(i).getTitulo().equals(d.getTitulo())){
+				System.out.println("Ya existe un documento con el mismo título y autor.");
+				return;
+			}
+		}
 		docs.add(d);
 		setMapFechaDoc(d);
 		setMapAutorTitulos(d);
@@ -33,9 +45,8 @@ public class Documentos {
 		
 	}
 	
-	public void borrardoc(String titulo, String autor) {
+	public void borrardoc(String titulo, String autor) { // borra el 'Documento' dentro del conjunto
 		
-		Documento d;
 		int i;
 		for(i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
@@ -50,7 +61,7 @@ public class Documentos {
 		
 	}
 	
-	public void listadocs() {
+	public void listadocs() { // lista el conjunto de 'Documentos'
 		
 		int i;
 		for(i = 0; i < docs.size(); ++i) {
@@ -59,7 +70,7 @@ public class Documentos {
 		if(i == 0) System.out.println("No hay documentos");
 	}
 	
-	public void borrarMapFechaDoc(Documento d) {
+	public void borrarMapFechaDoc(Documento d) { // actuliza el map mapfecha a la hora de borrar 'Documento'
 		String s = d.getFechatoString();
 		ArrayList<Documento> l = mapfecha.get(s);
 		if(l != null){
@@ -70,7 +81,7 @@ public class Documentos {
 			}
 		}
 	}
-	public void borrarMapAutorTitulos(Documento d) {
+	public void borrarMapAutorTitulos(Documento d) { //actuliza el map autortitulos a la hora de borrar 'Documento'
 		String s = d.getAutor();
 		ArrayList<Documento> l = autortitulos.get(s);
 		if(l != null) {
@@ -83,12 +94,13 @@ public class Documentos {
 	}
 		
 	public void modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
+		// modifca uno de los campos disponibles de un 'Documento'
 		Documento nuevo = new Documento();
 		boolean trobat = false;
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				nuevo = docs.get(i);
-				i = docs.size(); //return
+				i = docs.size(); 
 				trobat = true;
 			}
 		}
@@ -118,13 +130,13 @@ public class Documentos {
 		
 	}
 	
-	public void setMapFechaDoc(Documento d) {
+	public void setMapFechaDoc(Documento d) { // añade el 'Documento' al map mapfecha
 		
 		String s = d.getFechatoString();
 		if(mapfecha.get(s) == null) { 
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
-			mapfecha.put(s, l);  // aña dimos para una unica fecha un documento
+			mapfecha.put(s, l); 
 		}
 		else {
 			ArrayList<Documento> l = mapfecha.get(s);
@@ -133,7 +145,7 @@ public class Documentos {
 		}
 	}
 	
-	public void setMapAutorTitulos(Documento d) {
+	public void setMapAutorTitulos(Documento d) { // añade el 'Documento' al map autortitulos
 		if(autortitulos.containsKey(d.getAutor()) == false) {
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
@@ -147,7 +159,9 @@ public class Documentos {
 		
 	}
 	
-	public void consultarTextoDadoTituloAutor(String titulo, String autor) {
+	//consultoras
+	
+	public void consultarTextoDadoTituloAutor(String titulo, String autor) { // Imprime por pantalla el contenido de un 'Documento' con 'título' y 'autor'
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
@@ -156,9 +170,10 @@ public class Documentos {
 				return;
 			}
 		}
+		System.out.println("No existe documete dado este título y autor");
 	}
 	
-	public void consultarTitulosAutor(String autor) {
+	public void consultarTitulosAutor(String autor) { // Imprime por pantalla los títulos de los 'Documentos' de 'autor'
 			String actual;
 		    Iterator<String> autores = autortitulos.keySet().iterator();
 		    boolean is_primer = true;
@@ -180,7 +195,7 @@ public class Documentos {
 		    if(is_primer) System.out.println("El autor no tiene documentos");
 	}
 	
-	public void consultarAutoresPrefijo(String prefijo) {
+	public void consultarAutoresPrefijo(String prefijo) { // Imprime por pantalla aquellos autores que empiezen o sean el 'prefijo'
 		Set<String> autores = autortitulos.keySet();
 		Iterator<String> it = autores.iterator();
 		String actual;
@@ -201,11 +216,11 @@ public class Documentos {
 		}
 	}
 	
-	public void consultarDiccionario(String s) {
+	public void consultarDiccionario(String s) { // Imprime por pantalla el número de documentos en la que aparece una palabra 's'
 		System.out.println("La palabra esta contenida en " + Integer.toString(diccionario.numeroDeDocumentosCon(s)) + " documentos");
 		//System.out.println(numeroDeDocumentosCon(s));
 	}
-	public void consultarTitulos(String s) throws ParseException { //de aquellos documentos que esten dentro de una fecha
+	public void consultarTitulos(String s) throws ParseException { // Imprime por pantalla los títulos de 'Documentos' que aparecen en una fecha 's'
 		
 			ArrayList<Documento> l1 = mapfecha.get(s);
 			if(l1 != null) {
@@ -218,5 +233,22 @@ public class Documentos {
 				System.out.println("No se ha encontrado ningun titulo para esta fecha");
 			}
 	}
-	
+	public void consultardocumentosparecidos(String titulo, String autor, String k) throws IOException {
+		
+		for(int i = 0; i < docs.size(); ++i){
+			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
+				int n = Integer.parseInt(k);
+				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario);
+				if(l != null) {
+					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario);
+					Iterator<Documento> iter = l.iterator();
+					while (iter.hasNext()) {
+						d = iter.next();
+					    System.out.println(d.getTitulo() + "   -   " + d.getAutor());
+					}
+				}
+				else System.out.println("No existe similitudes con los otros documentos");
+			}
+		}
+	}
 }
