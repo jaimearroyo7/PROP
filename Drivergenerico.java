@@ -1,12 +1,13 @@
 package dominio;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
 public class Drivergenerico {
-
+	
+	@SuppressWarnings("null")
 	public static void main(String[] args) throws IOException, ParseException {
-		// TODO Auto-generated method stub
 		Documentos d = new Documentos();
 		Scanner sc = new Scanner(System.in);
 		Texto t;
@@ -14,6 +15,7 @@ public class Drivergenerico {
 		String sf,q,h,p;
 		String opcion,opcion2;
 		opcion = opcion2 = "0";
+		
 		while(opcion != "4") {
 
 			System.out.println("INDIQUE QUE QUIERE HACER:");
@@ -35,13 +37,19 @@ public class Drivergenerico {
 						try {
 							System.out.println("Ingrese texto(acabado en punto,excepto si !/?):");
 							t = new Texto();
-							t.setTexto(sc.nextLine());
+							KeyEvent e = null;
+							boolean sortir = false;
+							while(sc.hasNext() && !sortir) {
+								t.setTexto(sc.nextLine());
+								if(e.getKeyCode()== KeyEvent.VK_ESCAPE) sortir = true; 
+								else sc.skip("\n");
+							}
 						} 
 						catch (Exception e) {
 						    System.out.println ("El error es: " + e.getMessage());
 						    //e.printStackTrace();
 						    opcion = "1";
-						    System.out.println ("Vuelva ha añadir el documento en su formato requerido");
+						    System.out.println ("Vuelva a añadir el documento en su formato requerido");
 						    break;
 						}
 						d1.setTexto(t);
@@ -69,7 +77,7 @@ public class Drivergenerico {
 									sf = sc.nextLine();
 									System.out.println("Diga el autor del documento a modificar:");
 									h = sc.nextLine();
-									System.out.println("Diga el campo que quiera modificar(titulo/autor/categoria/texto:");
+									System.out.println("Diga el campo que quiera modificar(titulo/autor/categoria/texto):");
 									q = sc.nextLine();
 									System.out.println("Escriba el valor o contenido del campo a modifcar");
 									p = sc.nextLine();
@@ -85,7 +93,8 @@ public class Drivergenerico {
 							+ " (2) CONSULTAR LISTA DE AUTORES DE DOCUMENTOS DADO UN PREFIJO");
 					System.out.println("(3) CONSULTAR LISTA DE TITULOS DE DOCUEMNTOS DADA SU FECHA"
 							+ " (4) CONSULTAR CONTENIDO DE UN DOCUMENTO DADO SU TITULO Y SU AUTOR");
-					System.out.println("(5) CONSULTAR LISTA GENERAL DE DOCUMENTOS");
+					System.out.println("(5) CONSULTAR LISTA GENERAL DE DOCUMENTOS"
+							+ " (6) NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA");
 					opcion2 = sc.nextLine();
 					switch(opcion2) {
 							 case "1":
@@ -123,6 +132,11 @@ public class Drivergenerico {
 									System.out.println("CONSULTAR LISTA GENERAL DE DOCUMENTOS:");
 								    d.listadocs();
 								    break;
+							 case "6":
+								 System.out.println("NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA:");
+								 sf = sc.nextLine();
+								 d.consultarDiccionario(sf);
+								 break;
 							 default: break;
 					}
 					break;
@@ -131,7 +145,7 @@ public class Drivergenerico {
 			}
 			++i;
 	} // CERRAMOS WHILE DEL PROGRAMA EN SI
-		System.out.println("GRÁCIAS POR USAR NUESTRO PROGRAMA");
+		System.out.println("GRACIAS POR USAR NUESTRO PROGRAMA");
   } // MAIN
 } // CODIGO
 

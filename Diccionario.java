@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.TreeMap;
 
 /**
- * Created by mhitz on 3/11/16.
+ * Created by mhitz on 3/11/16. feat rvillalba :)
  */
 public class Diccionario {
     private static class ContenidoDiccionario {
@@ -91,7 +91,8 @@ public class Diccionario {
     }
 
     public int numeroDeDocumentosCon(String palabra) {
-        return diccionario.get(palabra).getDocumentos().size();
+        if(diccionario.get(palabra) == null) return 0;
+    	return diccionario.get(palabra).getDocumentos().size();
     }
 
     public int indicePalabra(String palabra) {
