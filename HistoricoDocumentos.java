@@ -1,4 +1,4 @@
-package dominio;
+//package dominio;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class HistoricoDocumentos {
 	private ArrayList<Documento> historial = new ArrayList<>();
 	
+	//Constructores
 	public HistoricoDocumentos(){
 		
 	}
@@ -15,6 +16,7 @@ public class HistoricoDocumentos {
 		setHistorial(lista);
 	}
 	
+	//devuelve si la fecha de d1 es mas reciente que la de d2
 	boolean greater(Documento d1, Documento d2){
 		Fecha f1 = d1.getFecha();
 		Fecha f2 = d2.getFecha();
@@ -26,6 +28,7 @@ public class HistoricoDocumentos {
 		else return false;
 	}
 	
+	//funcion que devuelve el documento con la fecha mas reciente y su posicion en el array
 	Pair<Documento, Integer> getMax(ArrayList<Documento> lista){
 		Documento max = lista.get(0);
 		Integer pos = 0;
@@ -41,6 +44,7 @@ public class HistoricoDocumentos {
 		return pair;
 	}
 	
+	//A partir de una lista de documentos, coge los 10 mas recientes
 	public void setHistorial(ArrayList<Documento> lista){
 		//Arrays.sort(ordenado, dominio.Documento.comparador);
 		ArrayList<Documento> lista2 = lista;
