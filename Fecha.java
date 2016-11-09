@@ -1,19 +1,17 @@
-package dominio;
 import java.util.*;
-
  // La clase Fecha representa una fecha dd.mm.yy.
 
 public class Fecha {
 	
 	// atributos
 	
-	private Integer year; // año
-	private Integer month; // mes
-	private Integer day; // dia
+	private Integer year; 
+	private Integer month; 
+	private Integer day; 
 	
 	// constructoras
 	
-	public Fecha() { //constructora por defecto, asigna el dia, mes y año proporcionado por la clase interna de Calendar
+	public Fecha() { //constructora por defecto, asigna el day, month y year proporcionado por la clase interna de Calendar
 		Calendar fecha = new GregorianCalendar();
 		day = fecha.get(Calendar.DAY_OF_MONTH);
 		month= fecha.get(Calendar.MONTH);
@@ -31,7 +29,7 @@ public class Fecha {
 		year = fecha.get(Calendar.YEAR);
 	}
 	
-	public void setFechaManual(int valorday, int valormonth, int valoryear){ // modifica la fecha manualmente por los campos pasados por parámetro
+	public void setFechaManual(int valorday, int valormonth, int valoryear){ // modifica la fecha manualmente por los campos pasados por parametro
 		day = valorday;
 		month = valormonth;
 		year = valoryear;
@@ -39,19 +37,19 @@ public class Fecha {
 	
 	//consultoras
 	
-	public Integer getDay() { // devuelve el 'dia' en forma de entero 
+	public Integer getDay() { // devuelve el 'day' en forma de entero 
 		return day;
 	}
 		
-	public Integer getMonth() { // devuelve el 'mes' en forma de entero
+	public Integer getMonth() { // devuelve el 'month' en forma de entero
 		return month;
 	}
 		
-	public Integer getYear() {// devuelve el 'año' en forma de entero
+	public Integer getYear() {// devuelve el 'year' en forma de entero
 		return year;
 	}
 	
-	public boolean greater(Fecha f2){ // devuelve 'true' si el parámetro ímplícito es más grande que el parámetro explícito
+	public boolean greater(Fecha f2){ // devuelve 'true' si el parametro implicito es mas grande que el parametro explicito
 		if(!year.equals(f2.getYear())){
 			if(year < f2.getYear()){
 				return false;

@@ -1,4 +1,4 @@
-package dominio;
+//package dominio;
 import java.io.*;
 
 public class DriverPalabra {

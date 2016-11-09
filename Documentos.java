@@ -1,4 +1,4 @@
-package dominio;
+//package dominio;
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
@@ -30,11 +30,11 @@ public class Documentos {
 	
 	//modificadoras
 	
-	public void addDoc(Documento d) throws ParseException, IOException { // añade el 'Documento' dentro del conjunto
+	public void addDoc(Documento d) throws ParseException, IOException { // anade el 'Documento' dentro del conjunto
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(d.getAutor()) && docs.get(i).getTitulo().equals(d.getTitulo())){
-				System.out.println("Ya existe un documento con el mismo título y autor.");
+				System.out.println("Ya existe un documento con el mismo titulo y autor.");
 				return;
 			}
 		}
@@ -104,7 +104,7 @@ public class Documentos {
 				trobat = true;
 			}
 		}
-		if (!trobat) {
+		if (trobat) {
 			borrardoc(titulo,autor);
 			
 			if(campo.equals("autor")){
@@ -121,7 +121,7 @@ public class Documentos {
 				nuevo.setTexto(actualizado);
 			}
 			else {
-				System.out.println("El campo introducido no es válido");
+				System.out.println("El campo introducido no es valido");
 				return;
 			}
 			
@@ -130,7 +130,7 @@ public class Documentos {
 		
 	}
 	
-	public void setMapFechaDoc(Documento d) { // añade el 'Documento' al map mapfecha
+	public void setMapFechaDoc(Documento d) { // anade el 'Documento' al map mapfecha
 		
 		String s = d.getFechatoString();
 		if(mapfecha.get(s) == null) { 
@@ -145,7 +145,7 @@ public class Documentos {
 		}
 	}
 	
-	public void setMapAutorTitulos(Documento d) { // añade el 'Documento' al map autortitulos
+	public void setMapAutorTitulos(Documento d) { // anade el 'Documento' al map autortitulos
 		if(autortitulos.containsKey(d.getAutor()) == false) {
 			ArrayList<Documento> l = new ArrayList<Documento>();
 			l.add(d);
@@ -161,7 +161,7 @@ public class Documentos {
 	
 	//consultoras
 	
-	public void consultarTextoDadoTituloAutor(String titulo, String autor) { // Imprime por pantalla el contenido de un 'Documento' con 'título' y 'autor'
+	public void consultarTextoDadoTituloAutor(String titulo, String autor) { // Imprime por pantalla el contenido de un 'Documento' con 'titulo' y 'autor'
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
@@ -170,10 +170,10 @@ public class Documentos {
 				return;
 			}
 		}
-		System.out.println("No existe documete dado este título y autor");
+		System.out.println("No existe documete dado este titulo y autor");
 	}
 	
-	public void consultarTitulosAutor(String autor) { // Imprime por pantalla los títulos de los 'Documentos' de 'autor'
+	public void consultarTitulosAutor(String autor) { // Imprime por pantalla los titulos de los 'Documentos' de 'autor'
 			String actual;
 		    Iterator<String> autores = autortitulos.keySet().iterator();
 		    boolean is_primer = true;
@@ -216,11 +216,11 @@ public class Documentos {
 		}
 	}
 	
-	public void consultarDiccionario(String s) { // Imprime por pantalla el número de documentos en la que aparece una palabra 's'
+	public void consultarDiccionario(String s) { // Imprime por pantalla el numero de documentos en la que aparece una palabra 's'
 		System.out.println("La palabra esta contenida en " + Integer.toString(diccionario.numeroDeDocumentosCon(s)) + " documentos");
 		//System.out.println(numeroDeDocumentosCon(s));
 	}
-	public void consultarTitulos(String s) throws ParseException { // Imprime por pantalla los títulos de 'Documentos' que aparecen en una fecha 's'
+	public void consultarTitulos(String s) throws ParseException { // Imprime por pantalla los titulos de 'Documentos' que aparecen en una fecha 's'
 		
 			ArrayList<Documento> l1 = mapfecha.get(s);
 			if(l1 != null) {

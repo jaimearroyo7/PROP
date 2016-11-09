@@ -1,4 +1,4 @@
-package dominio;
+//package dominio;
 
 import java.util.ArrayList;
 
@@ -22,13 +22,13 @@ public class Frase {
 					(this.f.charAt(i) == 129) || (this.f.charAt(i) == 130) || 
 					(this.f.charAt(i) == 144) || (this.f.charAt(i) == 181) || 
 					(this.f.charAt(i) == 214) || (this.f.charAt(i) == 224) || 
-					(this.f.charAt(i) == 233) || (this.f.charAt(i) == 'á') ||
-					(this.f.charAt(i) == 'Á') || (this.f.charAt(i) == 'é') ||
-					(this.f.charAt(i) == 'É') || (this.f.charAt(i) == 'í') ||
-					(this.f.charAt(i) == 'Í') || (this.f.charAt(i) == 'ó') ||
-					(this.f.charAt(i) == 'Ó') || (this.f.charAt(i) == 'ú') ||
-					(this.f.charAt(i) == 'Ú') || (this.f.charAt(i) == 'ñ') ||
-					(this.f.charAt(i) == 'Ñ')) {
+					(this.f.charAt(i) == 233) || (this.f.charAt(i) == 160) || //a cerrada
+					(this.f.charAt(i) == 181) || (this.f.charAt(i) == 233) || // A cerrada, e cerrada
+					(this.f.charAt(i) == 201) || (this.f.charAt(i) == 237) || // E cerrada, i cerrada
+					(this.f.charAt(i) == 205) || (this.f.charAt(i) == 243) || // I cerrada, o cerrada
+					(this.f.charAt(i) == 211) || (this.f.charAt(i) == 250) || // O cerrada, u cerrada
+					(this.f.charAt(i) == 218) || (this.f.charAt(i) == 241) || // U cerrada, enye minuscula
+					(this.f.charAt(i) == 209)) { // enye mayuscula 
 				
 				s = s + f.charAt(i);
 			}

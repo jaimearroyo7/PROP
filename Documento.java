@@ -1,4 +1,4 @@
-package dominio;
+//package dominio;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -74,7 +74,7 @@ public class Documento {
 		ArrayList<Frase> frases = texto.getListaFrases();
 		ArrayList<String> nf = new ArrayList<>();
 		String castellano;
-	     FileReader f2 = new FileReader("src/dominio/lista");
+	     FileReader f2 = new FileReader("lista");
 	     BufferedReader b2 = new BufferedReader(f2);
 	     try {
 			while((castellano = b2.readLine())!=null) {
@@ -159,5 +159,3 @@ public class Documento {
 	};*/
 	
 }
-	
-

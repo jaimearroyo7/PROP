@@ -18,14 +18,14 @@ public class DriverGenerico {
 		while(opcion != "4") {
 
 			System.out.println("INDIQUE QUE QUIERE HACER:");
-			System.out.println("(1) AÑADIR DOCUMENTO"
+			System.out.println("(1) ANADIR DOCUMENTO"
 					+ " (2) MODIFICACION"
 					+ " (3) CONSULTAS"
 					+ " (4) SALIR DEL SISTEMA");
 			opcion = sc.nextLine();
 			switch (opcion) {
             	case "1": 
-			            System.out.println("AÑADIR DOCUMENTO:");
+			            System.out.println("ANADIR DOCUMENTO:");
 						Documento d1 = new Documento();
 						System.out.println("Ingrese titulo:");
 						d1.setTitulo(sc.nextLine());
@@ -52,7 +52,7 @@ public class DriverGenerico {
 						catch (Exception e) {
 						    System.out.println ("El error es: " + e.getMessage());
 						    opcion = "1";
-						    System.out.println ("Vuelva a añadir el documento en su formato requerido");
+						    System.out.println ("Vuelva a anadir el documento en su formato requerido");
 						    break;
 						}
 						d1.setTexto(t);
@@ -98,7 +98,7 @@ public class DriverGenerico {
 							+ " (4) CONSULTAR CONTENIDO DE UN DOCUMENTO DADO SU TITULO Y SU AUTOR");
 					System.out.println("(5) CONSULTAR LISTA GENERAL DE DOCUMENTOS"
 							+ " (6) NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA"
-							+ " (7) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TÍTULO Y AUTOR");
+							+ " (7) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR");
 					opcion2 = sc.nextLine();
 					switch(opcion2) {
 							 case "1":
@@ -116,11 +116,11 @@ public class DriverGenerico {
 							 case "3":
 									System.out.println("CONSULTAR LISTA DE TITULOS DE DOCUEMNTOS DADA SU FECHA:");
 									System.out.println("Ingrese fecha a consultar:");
-									System.out.println("dia:");
+									System.out.println("day:");
 									sf = sc.nextLine();
-									System.out.println("mes:");
+									System.out.println("month:");
 									sf += sc.nextLine();
-									System.out.println("año:");
+									System.out.println("year:");
 									sf += sc.nextLine();
 								    d.consultarTitulos(sf);
 								    break;
@@ -142,7 +142,7 @@ public class DriverGenerico {
 								 d.consultarDiccionario(sf);
 								 break;
 							 case "7":
-								 System.out.println("CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TÍTULO Y AUTOR");
+								 System.out.println("CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR");
 								 System.out.println("Ingrese titulo:");
 								 sf = sc.nextLine();
 								 System.out.println("Ingrese autor:");

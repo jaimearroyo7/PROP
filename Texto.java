@@ -1,6 +1,6 @@
-package dominio;
+//package dominio;
 
-import dominio.Frase;
+//import dominio.Frase;
 
 import java.util.ArrayList;
 
