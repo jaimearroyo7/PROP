@@ -10,8 +10,9 @@ public class ConsultaDocumentosParecidos {
     private ArrayList<Documento> documentos;
     private Diccionario diccionario;
 
-    public List<Documento> consultaDocumentosParecidos(Documento d1, int n, Diccionario diccionario) {
+    public List<Documento> consultaDocumentosParecidos(Documento d1, int n, Diccionario diccionario, ArrayList<Documento> documentos) {
         this.diccionario = diccionario;
+        this.documentos = documentos;
         TreeSet<Pair<Documento, Double>> cosinesDoc = new TreeSet<>(new Comparator<Pair<Documento, Double>>() {
             @Override
             public int compare(Pair<Documento, Double> o1, Pair<Documento, Double> o2) {
