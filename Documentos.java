@@ -1,4 +1,4 @@
-//package dominio;
+package dominio;
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
@@ -16,6 +16,7 @@ public class Documentos {
 	private Map<String, ArrayList<Documento> > mapfecha;
 	private Diccionario diccionario;
 	private ConsultaDocumentosParecidos cd;
+	private HistoricoDocumentos historial;
 	
 	//constructora
 	
@@ -26,6 +27,7 @@ public class Documentos {
 		diccionario = new Diccionario();
 		d = new Documento();
 		cd = new ConsultaDocumentosParecidos();
+		historial = new HistoricoDocumentos();
 	}
 	
 	//modificadoras
@@ -61,13 +63,19 @@ public class Documentos {
 		
 	}
 	
-	public void listadocs() { // lista el conjunto de 'Documentos'
+	public void listadocs(String k) { // lista el conjunto de 'Documentos'
 		
-		int i;
-		for(i = 0; i < docs.size(); ++i) {
-			System.out.println(docs.get(i).getTitulo());
+		System.out.println(docs.size());
+		if(docs.size() > 0) {
+			historial.setHistorial(docs);
+			int n1 = Integer.parseInt(k);
+			for(int i = 0; i < n1; ++i){
+				System.out.print(historial.getHistorial().get(i).getTitulo() + ": ");
+				Fecha fecha = historial.getHistorial().get(i).getFecha();
+				System.out.println(fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear());
+			}
 		}
-		if(i == 0) System.out.println("No hay documentos");
+		else System.out.println("No hay documentos");
 	}
 	
 	public void borrarMapFechaDoc(Documento d) { // actuliza el map mapfecha a la hora de borrar 'Documento'
@@ -110,13 +118,13 @@ public class Documentos {
 			if(campo.equals("autor")){
 				nuevo.setAutor(value);
 			}
-			if(campo.equals("titulo")){
+			else if(campo.equals("titulo")){
 				nuevo.setTitulo(value);
 			}
-			if(campo.equals("categoria")){
+			else if(campo.equals("categoria")){
 				nuevo.setCategoria(value);
 			}
-			if(campo.equals("texto")){
+			else if(campo.equals("texto")){
 				Texto actualizado = new Texto(value);
 				nuevo.setTexto(actualizado);
 			}
@@ -240,7 +248,6 @@ public class Documentos {
 				int n = Integer.parseInt(k);
 				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario, docs);
 				if(l != null) {
-					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario);
 					Iterator<Documento> iter = l.iterator();
 					while (iter.hasNext()) {
 						d = iter.next();

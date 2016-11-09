@@ -1,5 +1,8 @@
+package dominio;
+
 // La clase Palabra representa la palabra y las veces que aparece en el texto
-public class Palabra{ 
+
+public class Palabra { 
 	
 	// atributos
 	

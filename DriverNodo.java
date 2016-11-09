@@ -1,4 +1,4 @@
-package dominio;
+//package dominio;
 
 import java.util.Scanner;
 
@@ -18,4 +18,5 @@ public class DriverNodo {
 		exp.postorden(exp.getTree());
 		capt.close();
 	}
+
 }
