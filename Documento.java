@@ -1,5 +1,7 @@
 package dominio;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -57,9 +59,7 @@ public class Documento {
 		fecha = ahora;
 	}
 	
-	boolean esfuncional(String s) throws IOException{
-		PalabrasNoFuncionales p = new PalabrasNoFuncionales();
-		ArrayList<String> nf = p.getPalabrasNoFuncionales();
+	boolean esfuncional(String s, ArrayList<String> nf) throws IOException{
 		for(int i = 0; i < nf.size(); ++i){
 			if(s.equals(nf.get(i))){
 				return false;
@@ -72,13 +72,25 @@ public class Documento {
 		texto = valorTexto;
 		palabras.clear();
 		ArrayList<Frase> frases = texto.getListaFrases();
+		ArrayList<String> nf = new ArrayList<>();
+		String castellano;
+	     FileReader f2 = new FileReader("src/dominio/lista");
+	     BufferedReader b2 = new BufferedReader(f2);
+	     try {
+			while((castellano = b2.readLine())!=null) {
+			     nf.add(castellano);
+			 }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(int i = 0; i < frases.size(); ++i){
 			ArrayList<Palabra> listapalabras = frases.get(i).getListaPalabras();
 			for(int j = 0; j < listapalabras.size(); ++j){
 				String actual = listapalabras.get(j).getPalabra();
 				
 				Integer found = 0;
-				if(esfuncional(actual)){
+				if(esfuncional(actual, nf)){
 				for(int k = 0; k < palabras.size() && found == 0; ++k){
 					if(actual.equals(palabras.get(k).first())){
 						palabras.get(k).setSecond(palabras.get(k).second() + 1);

@@ -22,7 +22,7 @@ public class mainJaime {
 		
 		
 		ArrayList<Frase> lista = prueba.getTexto().getListaFrases();
-		ArrayList<Pair<String, Integer>> Palabras = prueba.getfrecuencia();
+		ArrayList<Pair<String, Integer>> Palabras = prueba.getPalabras();
 		for(int i = 0; i < Palabras.size(); ++i){
 			String result = (Palabras.get(i)).toString();
 			System.out.println(result);
@@ -62,9 +62,9 @@ public class mainJaime {
 			Documento prueba4 = new Documento("4", "Yo", "Futbol", texto);
 			lista.add(prueba4);
 			
-			/*lista.get(2).setFechaManual(30, 12, 2016);
+			lista.get(2).setFechaManual(30, 12, 2015);
 			lista.get(1).setFechaManual(15, 12, 2016);
-			lista.get(0).setFechaManual(20, 12, 2016);*/
+			lista.get(0).setFechaManual(20, 12, 2016);
 			
 			HistoricoDocumentos historial = new HistoricoDocumentos(lista);
 			for(int i = 0; i < 4; ++i){
