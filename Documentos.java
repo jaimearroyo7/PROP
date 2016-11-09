@@ -238,7 +238,7 @@ public class Documentos {
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				int n = Integer.parseInt(k);
-				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario);
+				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario, docs);
 				if(l != null) {
 					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario);
 					Iterator<Documento> iter = l.iterator();
