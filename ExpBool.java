@@ -9,7 +9,6 @@ public class ExpBool {
 	
 	//constructora
 	public ExpBool(String s) {
-		
 		this.s = s;
 		separaElements();
 		infijaApostfija();
@@ -133,7 +132,7 @@ public class ExpBool {
 	
 	// Construye un arbol binario de expresion booleana a partir de su lista de elementos en notacion postfija
 	public void buildTree() {
-		raiz = new Nodo();
+		raiz = null;
 		Stack<Nodo> pila = new Stack<Nodo>();
 		boolean error = false;
 		int i = 0;
@@ -159,6 +158,7 @@ public class ExpBool {
 				}
 				else error = true;
 			}
+			else {raiz = null;}
 			++i;
 		}
 		if (pila.empty() || pila.size() >= 2) error = true;
