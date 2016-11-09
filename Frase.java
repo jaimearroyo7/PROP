@@ -14,7 +14,10 @@ public class Frase {
 		f=frase;
 		separarPalabras();
 	}
+	
+	// separa el string en palabras y las guarda en un ArrayList de palabras
 	public void separarPalabras() {
+		f = f.toLowerCase();
 		String s = new String();
 		for (int i=0; i<f.length(); ++i) {
 			//si no son separadors...
@@ -29,7 +32,7 @@ public class Frase {
 					(this.f.charAt(i) == 211) || (this.f.charAt(i) == 250) || // O cerrada, u cerrada
 					(this.f.charAt(i) == 218) || (this.f.charAt(i) == 241) || // U cerrada, enye minuscula
 					(this.f.charAt(i) == 209)) { // enye mayuscula 
-				
+
 				s = s + f.charAt(i);
 			}
 			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') {
@@ -40,6 +43,7 @@ public class Frase {
 		}
 	}
 	
+	//retorna la medida de una frase
 	public int size() {
 		return frase.size();
 	}
@@ -50,7 +54,6 @@ public class Frase {
 		p = frase.get(arg);
 		return p;
 	}
-	
 	public String getFrase() {
 		return f;
 	}
