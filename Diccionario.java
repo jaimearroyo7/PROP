@@ -8,6 +8,7 @@ import java.util.TreeMap;
 /**
  * Created by mhitz on 3/11/16. feat rvillalba :)
  */
+
 public class Diccionario {
     private static class ContenidoDiccionario {
         private int indice;
@@ -55,11 +56,14 @@ public class Diccionario {
     private ArrayList<String> arrayPalabras;
     private TreeMap<String, ContenidoDiccionario> diccionario;
 
+	//inicializa diccionario 
     public Diccionario() {
         arrayPalabras = new ArrayList<>();
         diccionario = new TreeMap<>();
     }
 
+	//añade palabras al array palabras y crea entradas en diccionario con todas las palabras del documento.  
+	//si una palabra ya existe en el diccionario, unicamente incrementa la frecuencia de dicha palabra y añade documento al array documentos.
     public void addTextoDocumento(Documento documento) {
         ArrayList<Pair<String, Integer>> palabras = documento.getPalabras();
         for (Pair<String, Integer> palabra: palabras) {
@@ -80,6 +84,7 @@ public class Diccionario {
         }
     }
 
+	//"borra" las palabras de un documento del diccionario: decrementa la frecuencia global de la palabra y borra docuemnto del array documentos.
     public void deleteTextoDocumento(Documento documento) {
         ArrayList<Pair<String, Integer>> palabras = documento.getPalabras();
         for (Pair<String, Integer> palabra: palabras) {
@@ -90,11 +95,13 @@ public class Diccionario {
         }
     }
 
+	//devuelve el numero de documentos que contienen la palabra que se le pasa
     public int numeroDeDocumentosCon(String palabra) {
-        if(diccionario.get(palabra) == null) return 0;
+        if (diccionario.get(palabra) == null) return 0;
     	return diccionario.get(palabra).getDocumentos().size();
     }
 
+	//devuelve el indice de la palabra que se le pasa
     public int indicePalabra(String palabra) {
 	return diccionario.get(palabra).getIndice();
     }
