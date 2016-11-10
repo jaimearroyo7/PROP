@@ -1,4 +1,4 @@
-package PROP;
+package dominio;
 
 /**
  * Created by parallels on 11/9/16.

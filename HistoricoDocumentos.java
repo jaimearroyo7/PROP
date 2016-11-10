@@ -1,5 +1,5 @@
 
-package PROP;
+package dominio;
 
 import java.util.ArrayList;
 

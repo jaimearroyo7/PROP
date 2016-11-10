@@ -1,5 +1,5 @@
-//package dominio;
-package PROP;
+package dominio;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -82,7 +82,7 @@ public class Documento {
 		texto = valorTexto;
 		palabras.clear();
 		ArrayList<Frase> frases = texto.getListaFrases();
-		ArrayList<String> nf = new ArrayList<>();
+		ArrayList<String> nf = new ArrayList<String>();
 		String castellano;
 	     FileReader f2 = new FileReader("lista");
 	     BufferedReader b2 = new BufferedReader(f2);

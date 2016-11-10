@@ -1,4 +1,4 @@
-package PROP;
+package dominio;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
@@ -19,7 +19,7 @@ public class Drivergenerico {
 		while(opcion != "4") {
 
 			System.out.println("INDIQUE QUE QUIERE HACER:");
-			System.out.println("(1) A�ADIR DOCUMENTO"
+			System.out.println("(1) ANADIR DOCUMENTO"
 					+ " (2) MODIFICACION"
 					+ " (3) CONSULTAS"
 					+ " (4) SALIR DEL SISTEMA");
@@ -130,7 +130,7 @@ public class Drivergenerico {
 									break;
 							 case "5":
 									System.out.println("CONSULTAR LISTA GENERAL DE DOCUMENTOS:");
-								    d.listadocs();
+								    //d.listadocs();
 								    break;
 							 case "6":
 								 System.out.println("NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA:");
@@ -146,6 +146,7 @@ public class Drivergenerico {
 			++i;
 	} // CERRAMOS WHILE DEL PROGRAMA EN SI
 		System.out.println("GRACIAS POR USAR NUESTRO PROGRAMA");
+		sc.close();
   } // MAIN
 } // CODIGO
 

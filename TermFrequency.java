@@ -1,7 +1,7 @@
 /**
  * Created by mhitz on 27/10/16.
  */
-package PROP;
+package dominio;
 public class TermFrequency {
     private String text;
     private double frequency;

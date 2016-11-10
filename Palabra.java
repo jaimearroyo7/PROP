@@ -1,5 +1,5 @@
 
-package PROP;
+package dominio;
 public class Palabra{ 
 
 	

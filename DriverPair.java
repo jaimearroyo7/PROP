@@ -1,11 +1,10 @@
-//package dominio;
+package dominio;
 
 import java.util.Scanner;
 
 public class DriverPair {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Pair<String, String> p1 = new Pair<>();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce el primer campo del pair1: ");
@@ -30,6 +29,7 @@ public class DriverPair {
 			System.out.println("Son iguales");
 		}
 		else System.out.println("Son diferentes");
+		sc.close();
 	}
 
 }

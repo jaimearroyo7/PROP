@@ -1,4 +1,4 @@
-//package dominio;
+package dominio;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,5 +37,6 @@ public class DriverHistoricoDocumentos {
 			Fecha fecha = historial.getHistorial().get(i).getFecha();
 			System.out.println(fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear());
 		}
+		sc.close();
 	}
 }

@@ -1,11 +1,10 @@
-package PROP;
+package dominio;
 import java.io.*;
 
 public class DriverPalabra {
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Palabra p = new Palabra("hola");
 		Palabra p2 = new Palabra();
 		Palabra p3 = new Palabra();

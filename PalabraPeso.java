@@ -1,4 +1,4 @@
-package PROP;
+package dominio;
 
 /**
  * Created by mhitz on 27/10/16.
