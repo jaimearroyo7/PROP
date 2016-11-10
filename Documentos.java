@@ -62,23 +62,20 @@ public class Documentos {
 		
 	}
 	
-	public int listadocs() { // lista el conjunto de 'Documentos'
+	public ArrayList<Pair<String,Fecha>> listadocs() { // lista el conjunto de 'Documentos'
 		
-		boolean b = false;
-		System.out.print(docs.size());
+		ArrayList<Pair<String,Fecha>> lp = new ArrayList<Pair<String,Fecha>>();
 		if(docs.size() > 0) {
+			System.out.println(docs.size());
 			historial.setHistorial(docs);
 			for(int i = 0; i < historial.getHistorial().size(); ++i){
-				System.out.print(historial.getHistorial().get(i).getTitulo() + ": ");
-				Fecha fecha = historial.getHistorial().get(i).getFecha();
-				System.out.println(fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear());
-				b = true;
+				String tit = historial.getHistorial().get(i).getTitulo();
+				Fecha fe = historial.getHistorial().get(i).getFecha();
+				Pair<String,Fecha> p = new Pair<String,Fecha>(tit,fe); 
+				lp.add(p);
 			}
 		}
-
-		System.out.println("tam after " + docs.size());
-		if(b) return 1;
-		else return -1; 
+		return lp;
 	}
 	
 	public void borrarMapFechaDoc(Documento d) { // actuliza el map mapfecha a la hora de borrar 'Documento'
@@ -240,24 +237,24 @@ public class Documentos {
 			}
 			return p;
 	}
-	public void consultardocumentosparecidos(String titulo, String autor, String k,
+	public ArrayList<Pair<String,String>> consultardocumentosparecidos(String titulo, String autor, String k,
             ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
-
+		ArrayList<Pair<String,String>> lp = new ArrayList<Pair<String,String>>();
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				int n = Integer.parseInt(k);
 				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario, docs, mode);
 				if(l != null) {
 					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario,docs, mode);
-					Iterator<Documento> iter = l.iterator();
-					System.out.println("NUMERO DE DOCUMENTOS PARECIDOS: " + l.size());
+					Iterator<Documento> iter = l.iterator(); 
 					while (iter.hasNext()) {
 						d = iter.next();
-						System.out.println(d.getTitulo() + "   -   " + d.getAutor());
+						Pair<String,String> p = new Pair<String,String>(d.getTitulo(),d.getAutor());
+						lp.add(p);
 					}
 				}
-				else System.out.println("No existe similitudes con los otros documentos");
 			}
 		}
-}
+		return lp;
+	}
 }

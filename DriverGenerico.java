@@ -1,5 +1,4 @@
 package dominio;
-//import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
@@ -14,6 +13,8 @@ public class DriverGenerico {
 		String opcion,opcion2;
 		opcion = opcion2 = "0";
 		ArrayList<String> l1 = new ArrayList<String>();
+		ArrayList<Pair<String,Fecha>> lp = new ArrayList<Pair<String,Fecha>>();
+		ArrayList<Pair<String,String>> lp2 = new ArrayList<Pair<String,String>>();
 		int v = 0;
 		Fecha f;
 		ConsultaDocumentosParecidos.TFIDF_MODE mode;
@@ -37,6 +38,7 @@ public class DriverGenerico {
 						d1.setCategoria(sc.nextLine());
 						try {
 							System.out.println("Ingrese texto(acabado en punto,excepto si !/?, para acabar escriba: FIN):");
+							System.out.println("Si quiere hacer un salto de linea dar 2 veces al enter");
 							String j = sc.nextLine();
 							String total = "";
 							t = new Texto();
@@ -86,7 +88,8 @@ public class DriverGenerico {
 									q = sc.nextLine();
 									System.out.println("Escriba el valor o contenido del campo a modifcar");
 									if(q.equals("texto")) {
-											
+										System.out.println("Ingrese texto(acabado en punto,excepto si !/?, para acabar escriba: FIN):");
+										System.out.println("Si quiere hacer un salto de linea dar 2 veces al enter");
 										try {
 											p ="";
 											String j = sc.nextLine();
@@ -194,16 +197,23 @@ public class DriverGenerico {
 									System.out.println("Ingrese autor:");
 									q = sc.nextLine();
 									t = d.consultarTextoDadoTituloAutor(sf,q);
-									if(!t.equals("")) {
+									if(t.getTexto() != null) {
 										System.out.println("Contenido:");
 										System.out.println(t.getTexto());
 									}
-									else System.out.println("No contiene texto");
+									else System.out.println("No contiene texto o no existe documento");
 									break;
 							 case "5":
 									System.out.println("CONSULTAR LISTA DE LOS ULTIMOS 10 DOCUMENTOS:");
-									v = d.listadocs();
-									if(v == -1)  System.out.println("No hay documentos");
+									
+									lp = d.listadocs();
+									if(lp != null) {
+										for(int k = 0; k < lp.size(); ++k) {
+											System.out.print(lp.get(k).first() + ":  ");
+											System.out.println(lp.get(k).second().getDay() + "/" + lp.get(k).second().getMonth() + "/" + lp.get(k).second().getYear());
+										}
+									}
+									else  System.out.println("No hay documentos");
 								    break;
 							 case "6":
 								 System.out.println("NUMERO DE DOCUMENTOS DONDE APARECE UNA PALABRA(RELEVANTE):");
@@ -230,7 +240,15 @@ public class DriverGenerico {
                                  }
                                  System.out.println("Ingrese cuantos n documentos parecidos quiere obtener:");
 								 h = sc.nextLine();
-								 d.consultardocumentosparecidos(sf,q,h, mode);
+								 lp2 = d.consultardocumentosparecidos(sf,q,h, mode);
+								 if(lp2 != null) {
+									    System.out.println("NUMERO DE DOCUMENTOS PARECIDOS: " + lp2.size());
+										for(int k = 0; k < lp.size(); ++k) {
+											System.out.print(lp2.get(k).first() + "  -  " + lp2.get(k).second());
+										}
+									}
+							     else System.out.println("No existe similitudes con los otros documentos");
+								 
 								 break;
 							 default: break;
 					}
