@@ -7,6 +7,7 @@ public class Texto {
 	private String texto;
 	private ArrayList<Frase> listafrases = new ArrayList<>();
 	
+	//constructores
 	public Texto(){
 		
 	}
@@ -14,11 +15,12 @@ public class Texto {
 	public Texto(String valortexto){
 		
 		setTexto(valortexto);
-		//listafrases.add("hola");
 	}
 	
+	//se le da valor al string texto y se forma la lista de frases
 	public void setTexto(String valortexto){
 		texto = valortexto;
+		listafrases.clear();
 		String separador = ".!?";
 		//char[] separador = new char[] {'.', '!', '?'};
 		int iniciofrase=0;
@@ -41,6 +43,7 @@ public class Texto {
 		}
 	}
 	
+	//getters
 	public String getTexto() { return texto; }
 	public ArrayList<Frase> getListaFrases() { return listafrases;}
 	

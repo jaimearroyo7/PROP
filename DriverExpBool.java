@@ -1,7 +1,7 @@
-package PROP;
+//package dominio;
 import java.util.*;
 
-public class mainLauraExpBool {
+public class DriverExpBool {
 
 	public static void main(String[] args) {
 		Scanner capt = new Scanner(System.in);

@@ -16,14 +16,12 @@ public class Documento {
 	//private ArrayList<dominio.Pair<String, Integer>> palabras = new ArrayList<>();
 	private ArrayList<Pair<String, Integer>> palabras = new ArrayList<Pair<String, Integer>>();
 	
+	//Constructores, vacio y pasandole los parametros
+	
 	public Documento(){
 		
 	}
-
-	public ArrayList<Pair<String, Integer>> getPalabras() {
-		return palabras;
-	}
-
+	
 	public Documento(String valortitulo, String valorautor, String valorcategoria, String valorTexto) throws IOException{
 		setTitulo(valortitulo);
 		setAutor(valorautor);
@@ -34,6 +32,14 @@ public class Documento {
 		setTexto(texto);
 	}
 	
+	
+	//retorna un arraylist con las palabras del texto y su frecuencia
+	public ArrayList<Pair<String, Integer>> getPalabras() {
+		return palabras;
+	}
+
+	
+	//setters
 	public void setTitulo(String valortitulo){
 		titulo = valortitulo;
 		Fecha ahora = new Fecha();
@@ -60,6 +66,7 @@ public class Documento {
 		fecha = ahora;
 	}
 	
+	//dado un string y un arraylist de palabras no funcionales, dice si lo es o no
 	boolean esfuncional(String s, ArrayList<String> nf) throws IOException{
 		for(int i = 0; i < nf.size(); ++i){
 			if(s.equals(nf.get(i))){
@@ -69,6 +76,8 @@ public class Documento {
 		return true;
 	}
 	
+	//da valor al campo texto y forma el arraylist de palabras con su frecuencia
+	//descartando las no funcionales
 	public void setTexto(Texto valorTexto) throws IOException{
 		texto = valorTexto;
 		palabras.clear();
@@ -113,6 +122,7 @@ public class Documento {
 		fecha = ahora;
 	}
 	
+	//getters
 	
 	public String getTitulo() { return titulo; }
 	
@@ -132,31 +142,6 @@ public class Documento {
 		return s;
 				
 	}
-	/*public static Comparator<dominio.Documento> comparador = new Comparator <dominio.Documento>(){
-		public int compare(dominio.Documento d1, dominio.Documento d2){
-			dominio.Fecha f1 = d1.getFecha();
-			dominio.Fecha f2 = d2.getFecha();
-			if(f1.getYear() != f2.getYear()){
-				if(f1.getYear() < f2.getYear()){
-					return 1;
-				}
-				else return 0;
-			}
-			if(f1.getMonth() != f2.getMonth()){
-				if(f1.getMonth() < f2.getMonth()){
-					return 1;
-				}
-				else return 0;
-			}
-			if(f1.getDay() != f2.getDay()){
-				if(f1.getDay() < f2.getDay()){
-					return 1;
-				}
-				else return 0;
-			}
-			return 0;
-		}
-		
-	};*/
+	
 	
 }

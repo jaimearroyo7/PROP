@@ -1,5 +1,7 @@
+
 package PROP;
 import java.awt.event.KeyEvent;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
@@ -35,7 +37,7 @@ public class DriverGenerico {
 						System.out.println("Ingrese categoria:");
 						d1.setCategoria(sc.nextLine());
 						try {
-							System.out.println("Ingrese texto(acabado en punto,excepto si !/?):");
+							System.out.println("Ingrese texto(acabado en punto,excepto si !/?, para acabar escriba: FIN):");
 							t = new Texto();
 							String j = sc.nextLine();
 							String total = "";
@@ -84,7 +86,30 @@ public class DriverGenerico {
 									System.out.println("Diga el campo que quiera modificar(titulo/autor/categoria/texto):");
 									q = sc.nextLine();
 									System.out.println("Escriba el valor o contenido del campo a modifcar");
-									p = sc.nextLine();
+									if(q.equals("texto")) {
+											
+										try {
+											p ="";
+											String j = sc.nextLine();
+											while(!j.endsWith("FIN")) { 
+													
+												    if(j.isEmpty()) {
+												    	p += System.getProperty("line.separator");
+												    	p += System.getProperty("line.separator");
+												    }
+												    else p += j;
+													j = sc.nextLine();
+											}
+										}
+										 
+										catch (Exception e) {
+										    System.out.println ("El error es: " + e.getMessage());
+										    opcion = "2";
+										    System.out.println ("Vuelva a anadir el documento en su formato requerido");
+										    break;
+										}
+									}
+									else p = sc.nextLine();
 									d.modificardoc(sf,h,q,p);
 									break;
 							default: break;
@@ -97,7 +122,7 @@ public class DriverGenerico {
 							+ " (2) CONSULTAR LISTA DE AUTORES DE DOCUMENTOS DADO UN PREFIJO");
 					System.out.println("(3) CONSULTAR LISTA DE TITULOS DE DOCUEMNTOS DADA SU FECHA"
 							+ " (4) CONSULTAR CONTENIDO DE UN DOCUMENTO DADO SU TITULO Y SU AUTOR");
-					System.out.println("(5) CONSULTAR LISTA GENERAL DE DOCUMENTOS"
+					System.out.println("(5) CONSULTAR LISTA GENERAL DE LOS ULTIMOS DOCUMENTOS"
 							+ " (6) NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA"
 							+ " (7) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR");
 					opcion2 = sc.nextLine();
@@ -134,11 +159,13 @@ public class DriverGenerico {
 									d.consultarTextoDadoTituloAutor(sf,q);
 									break;
 							 case "5":
-									System.out.println("CONSULTAR LISTA GENERAL DE DOCUMENTOS:");
-								    d.listadocs();
+									System.out.println("CONSULTAR LISTA GENERAL DE LOS ULTIMOS DOCUMENTOS:");
+									System.out.println("Ingrese numero de documentos maximos que desea ver:");
+									sf = sc.nextLine();
+								    d.listadocs(sf);
 								    break;
 							 case "6":
-								 System.out.println("NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA:");
+								 System.out.println("NUMERO DE DOCUMENTOS DONDE APARECE DADA UNA PALABRA(RELEVANTE):");
 								 sf = sc.nextLine();
 								 d.consultarDiccionario(sf);
 								 break;
@@ -174,4 +201,3 @@ public class DriverGenerico {
 	System.out.println("GRACIAS POR USAR NUESTRO PROGRAMA");
   }
 } 
-			
