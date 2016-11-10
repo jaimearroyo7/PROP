@@ -1,5 +1,7 @@
 package dominio;
 
+//import dominio.Frase;
+
 import java.util.ArrayList;
 
 public class Texto {
@@ -26,20 +28,24 @@ public class Texto {
 		int iniciofrase=0;
 		
 		for(int i = 0; i < texto.length(); ++i){
-			String fraseactual;
-			if(separador.contains(String.valueOf(texto.charAt(i)))){
+			
+			if(separador.indexOf(texto.charAt(i)) != -1){
+				String fraseactual;
 				fraseactual = texto.substring(iniciofrase,i+1);
-				
-				if(i+1 < texto.length() && texto.charAt(i+1) == '.'){
+				if(i+1 < texto.length() && texto.charAt(i+1) == 32){
 					++i;
-					fraseactual = texto.substring(iniciofrase,i+2);
-					iniciofrase = i+3;
-					} 
-				else iniciofrase = i+2;
-				++i;
+				}
+				iniciofrase = i+1;
+				if((fraseactual.equals(".") == false) && (fraseactual.equals("!") == false) && (fraseactual.equals("?") == false)){
 				Frase frase = new Frase(fraseactual);
 				listafrases.add(frase);
+				}
 			}
+		}
+		if(separador.indexOf(texto.charAt(texto.length()-1)) == -1){
+			String ultima = texto.substring(iniciofrase, texto.length());
+			Frase f = new Frase(ultima);
+			listafrases.add(f);
 		}
 	}
 	
