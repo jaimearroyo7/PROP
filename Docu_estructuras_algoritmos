@@ -26,5 +26,9 @@ ExpBool:
 			Al final obtenemos la misma expresión booleana en notación postfija (sin paréntesis ya que en esta notación no son
 			necesarios para determinar el orden de las operaciones).
 		Paso de notación postfija a árbol:
-			El algoritmo lee los elementos de la notación postfija...
+			El algoritmo lee los elementos de la notación postfija y crea un nodo de árbol con cada uno de ellos.
+			Hace push por orden de los Nodos en una pila: si encontramos un nodo de tipo operador binario, creamos un subárbol
+			con sus dos hijos igual a los dos últimos nodos de la pila y hacemos push del subárbol en la pila. 
+			Seguimos con el mismo sistema hasta que hemos terminado con todos los nodos. El algoritmo devuelve el árbol de la
+			expresión.
 		
