@@ -4,37 +4,54 @@ package dominio;
 import java.util.*;
 
 public class ExpBool {
-	private String s;
+	private String s = null;
 	private ArrayList<Element> elements = new ArrayList<Element>();
 	private ArrayList<Element> post = new ArrayList<Element>();
 	private Nodo raiz = new Nodo();
+	// estos tres vectores guardan los tres recorridos posibles del arbol de expresion:
+	private ArrayList<String> recorrido_pre = new ArrayList<String>();	
+	private ArrayList<String> recorrido_post = new ArrayList<String>();
+	private ArrayList<String> recorrido_in = new ArrayList<String>();
 	
 	//constructora
-	public ExpBool(String s) {
-		this.s = s;
-		separaElements();
-		infijaApostfija();
-		buildTree();
+	public ExpBool() {
 	}
 	
 	//getters
 	public String getExpresio() {
 		return this.s;
 	}
-	
 	public ArrayList<Element> getElements() {
 		return elements;
 	}
 	public Nodo getTree() {
 		return raiz;
 	}
-	public ArrayList<Element> getPostfija() {
-		return post;
+	public ArrayList<String> getPreorden() {
+		return recorrido_pre;
+	}
+	public ArrayList<String> getPostorden() {
+		return recorrido_post;
+	}
+	public ArrayList<String> getInorden() {
+		return recorrido_in;
 	}
 	
-	//setters
-	public void setExpresio(String s) {
+	//setter
+	public int setExpresio(String s) {
 		this.s = s;
+		int error1, error2;
+		separaElements();
+		error1 = infijaApostfija();
+		error2 = buildTree();
+		if (error1==-1 || error2 == -1) return -1;
+		else if (error1 == 0 && error2 == 0) {
+			preorden(raiz);
+			postorden(raiz);
+			inorden(raiz);
+			return 0;
+		}
+		else return -1;
 	}
 	
 	//Crea un arrayList de Elementos a partir de un String expresion booleana
@@ -46,7 +63,6 @@ public class ExpBool {
 		for (int i=0; i<this.s.length(); ++i) {
 			//si em trobo lletres:
 			if ((this.s.charAt(i) >= 65 && this.s.charAt(i) <= 90) || (this.s.charAt(i) >= 97 && this.s.charAt(i) <= 122) || 
-
 					(this.s.charAt(i) == 129) || (this.s.charAt(i) == 130) || 
 					(this.s.charAt(i) == 144) || (this.s.charAt(i) == 181) || 
 					(this.s.charAt(i) == 214) || (this.s.charAt(i) == 224) || 
@@ -56,7 +72,7 @@ public class ExpBool {
 					(this.s.charAt(i) == 205) || (this.s.charAt(i) == 243) || // I cerrada, o cerrada
 					(this.s.charAt(i) == 211) || (this.s.charAt(i) == 250) || // O cerrada, u cerrada
 					(this.s.charAt(i) == 218) || (this.s.charAt(i) == 241) || // U cerrada, enye minuscula
-					(this.s.charAt(i) == 209)) {
+					(this.s.charAt(i) == 209)) { //enye mayuscula
 				
 				if (i == this.s.length()-1) {
 					s = s + this.s.charAt(i);
@@ -134,7 +150,7 @@ public class ExpBool {
 	}
 	
 	// Construye un arbol binario de expresion booleana a partir de su lista de elementos en notacion postfija
-	public void buildTree() {
+	private int buildTree() {
 		raiz = null;
 		Stack<Nodo> pila = new Stack<Nodo>();
 		boolean error = false;
@@ -166,10 +182,13 @@ public class ExpBool {
 		}
 		if (pila.empty() || pila.size() >= 2) error = true;
 		else raiz = pila.pop();
+		if (error) return -1;
+		else return 0;
+		
 	}
 	
 	// transforma un arrayList de Elementos que representa una expresion booleana en notacion infija a notacion postfija
-	public void infijaApostfija() {
+	private int infijaApostfija() {
 		Stack<Element> operatorStack = new Stack<Element>();
 		int i = 0;
 		boolean error = false;
@@ -212,7 +231,8 @@ public class ExpBool {
 			if (operatorStack.peek().isParenthesis()) error = true;
 			post.add(operatorStack.pop());
 		}
-		if (error) System.out.println("La Expresion esta mal escrita");
+		if (error) return -1;
+		else return 0;
 	}
 	
 	//dados dos elementos retorna true si el primero tiene prioridad sobre el segundo
@@ -224,30 +244,30 @@ public class ExpBool {
 		else return false;
 	}
 	
-	//imprime el recorrido en preorden dado un Nodo de un �rbol
-	public void preorden(Nodo a) {
+	//imprime el recorrido en preorden dado un Nodo de un arbol
+	private void preorden(Nodo a) {
 		if (a != null) {
-			System.out.print(a.getInfo().getElement()+ " ");
+			recorrido_pre.add(a.getInfo().getElement());
 			preorden(a.getfe());
 			preorden(a.getfd());
 		}
 	}
 	
-	//imprime el recorrido en inorden dado un Nodo de un �rbol
-	public void inorden(Nodo a) {
+	//devuelve el recorrido en inorden dado un Nodo de un arbol
+	private void inorden(Nodo a) {
 		if (a != null) {
 			inorden(a.getfe());
-			System.out.print(a.getInfo().getElement()+ " ");
+			recorrido_in.add(a.getInfo().getElement());
 			inorden(a.getfd());
 		}
 	}
 	
-	//imprime el recorrido en postorden dado un Nodo de un �rbol
-	public void postorden(Nodo a) {
+	//imprime el recorrido en postorden dado un Nodo de un arbol
+	private void postorden(Nodo a) {
 		if (a != null) {
 			postorden(a.getfe());
 			postorden(a.getfd());
-			System.out.print(a.getInfo().getElement()+ " ");
+			recorrido_post.add(a.getInfo().getElement());
 		}
 	}
 	
@@ -326,7 +346,7 @@ public class ExpBool {
 		public boolean isOperando() {
 			return operando;
 		}
-		//retorna true si el nodo est� vac�o
+		//retorna true si el nodo esta vacio
 		public boolean empty() {
 			return info==null;
 		}
