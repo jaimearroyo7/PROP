@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 import java.util.*;
 
 public class ExpBool {
@@ -44,13 +44,13 @@ public class ExpBool {
 				(this.s.charAt(i) == 129) || (this.s.charAt(i) == 130) || 
 				(this.s.charAt(i) == 144) || (this.s.charAt(i) == 181) || 
 				(this.s.charAt(i) == 214) || (this.s.charAt(i) == 224) || 
-				(this.s.charAt(i) == 233) || (this.s.charAt(i) == 'á') ||
-				(this.s.charAt(i) == 'Á') || (this.s.charAt(i) == 'é') ||
-				(this.s.charAt(i) == 'É') || (this.s.charAt(i) == 'í') ||
-				(this.s.charAt(i) == 'Í') || (this.s.charAt(i) == 'ó') ||
-				(this.s.charAt(i) == 'Ó') || (this.s.charAt(i) == 'ú') ||
-				(this.s.charAt(i) == 'Ú') || (this.s.charAt(i) == 'ñ') ||
-				(this.s.charAt(i) == 'Ñ')) {
+				(this.s.charAt(i) == 233) || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½') || (this.s.charAt(i) == 'ï¿½') ||
+				(this.s.charAt(i) == 'ï¿½')) {
 				
 				if (i == this.s.length()-1) {
 					s = s + this.s.charAt(i);

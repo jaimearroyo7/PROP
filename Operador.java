@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 
 public class Operador {
 	private String op;

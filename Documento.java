@@ -1,4 +1,5 @@
 //package dominio;
+package PROP;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -91,21 +92,21 @@ public class Documento {
 				
 				Integer found = 0;
 				if(esfuncional(actual, nf)){
-				for(int k = 0; k < palabras.size() && found == 0; ++k){
-					if(actual.equals(palabras.get(k).first())){
-						palabras.get(k).setSecond(palabras.get(k).second() + 1);
-						found = 1;
-						//System.out.println(palabras.get(k).first());
-					}
-				}
-				
-				if(found == 0){
-				Pair<String, Integer> pair = new Pair<String, Integer>();
-				pair.setFirst(actual);
-				pair.setSecond(1);
-				palabras.add(pair);}
-				
-			}
+                    for(int k = 0; k < palabras.size() && found == 0; ++k){
+                        if(actual.equals(palabras.get(k).first())){
+                            palabras.get(k).setSecond(palabras.get(k).second() + 1);
+                            found = 1;
+                            //System.out.println(palabras.get(k).first());
+                        }
+                    }
+
+                    if(found == 0){
+                    Pair<String, Integer> pair = new Pair<String, Integer>();
+                    pair.setFirst(actual);
+                    pair.setSecond(1);
+                    palabras.add(pair);
+                    }
+			    }
 			}
 		}
 		Fecha ahora = new Fecha();

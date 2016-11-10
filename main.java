@@ -1,4 +1,5 @@
-package dominio;
+/*
+package PROP;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
@@ -8,7 +9,7 @@ public class main {
 		// TODO Auto-generated method stub
 		Documentos d = new Documentos();
 		d.addDocvers1();
-		/*d.addDoc("C:/Users/JMC/workspace/Gestor de documentos/src/Dominio/prueba");*/
+		/*d.addDoc("C:/Users/JMC/workspace/Gestor de documentos/src/Dominio/prueba");
 		d.consultarTitulo(0);
 		d.consultarAutor(0);
 		d.consultarCategoria(0);
@@ -16,3 +17,4 @@ public class main {
 		d.consultarTexto(0);
 		}
 }
+*/

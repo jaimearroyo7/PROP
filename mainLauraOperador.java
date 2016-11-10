@@ -1,4 +1,5 @@
-package dominio;
+/*
+package PROP;
 import java.util.Scanner;
 
 public class mainLauraOperador {
@@ -17,3 +18,4 @@ public class mainLauraOperador {
 	}
 
 }
+*/

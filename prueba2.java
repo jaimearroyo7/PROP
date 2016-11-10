@@ -1,4 +1,5 @@
-package dominio;
+/*
+package PROP;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -18,3 +19,4 @@ public class prueba2 {
 	}
 
 }
+*/

@@ -1,6 +1,4 @@
-//package dominio;
-
-//import dominio.Frase;
+package PROP;
 
 import java.util.ArrayList;
 
@@ -27,7 +25,7 @@ public class Texto {
 		
 		for(int i = 0; i < texto.length(); ++i){
 			String fraseactual;
-			if(separador.indexOf(texto.charAt(i)) != -1){
+			if(separador.contains(String.valueOf(texto.charAt(i)))){
 				fraseactual = texto.substring(iniciofrase,i+1);
 				
 				if(i+1 < texto.length() && texto.charAt(i+1) == '.'){

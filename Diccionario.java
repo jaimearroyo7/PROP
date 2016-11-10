@@ -1,5 +1,5 @@
 //package dominio;
-
+package PROP;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -60,6 +60,9 @@ public class Diccionario {
         diccionario = new TreeMap<>();
     }
 
+    public int getNumeroDePalabras() {
+        return arrayPalabras.size();
+    }
     public void addTextoDocumento(Documento documento) {
         ArrayList<Pair<String, Integer>> palabras = documento.getPalabras();
         for (Pair<String, Integer> palabra: palabras) {
@@ -99,5 +102,11 @@ public class Diccionario {
 	return diccionario.get(palabra).getIndice();
     }
 
-
+    public ArrayList<Documento> getDocumentosConPalabra(String palabra) {
+        ArrayList<Documento> lista = new ArrayList<>();
+        for (Documento documento: diccionario.get(palabra).documentos) {
+            lista.add(documento);
+        }
+        return lista;
+    }
 }

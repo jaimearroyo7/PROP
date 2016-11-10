@@ -1,4 +1,5 @@
-package dominio;
+/*
+package PROP;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -43,7 +44,7 @@ public class mainJaime {
 			System.out.println(b);
 			if(a.equals(b)){
 				System.out.println("liada");
-			}*/
+			}
 		}
 		
 		if(comando.equals("historial")){
@@ -80,3 +81,5 @@ public class mainJaime {
 	}
 	
 }
+
+*/

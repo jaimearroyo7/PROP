@@ -1,4 +1,5 @@
-package dominio;//package Dominio;
+/*
+package PROP;
 import java.util.*;
 import java.util.GregorianCalendar;
  
@@ -37,7 +38,7 @@ public class Fecha {
 		++month;
 		year = fecha.get(Calendar.YEAR);
 	}
-	
+
 	public Integer greater(Fecha f2){
 		if(year != f2.getYear()){
 			if(year < f2.getYear()){
@@ -60,3 +61,4 @@ public class Fecha {
 		return 3;
 	}
 }
+*/

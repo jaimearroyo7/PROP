@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 
 public class Nodo {
 	private Nodo pare = null;

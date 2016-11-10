@@ -1,4 +1,5 @@
-package dominio;
+/*
+package PROP;
 import java.text.ParseException;
 
 public class mainfecha {
@@ -36,3 +37,4 @@ public class mainfecha {
 	}
 }
 		
+*/

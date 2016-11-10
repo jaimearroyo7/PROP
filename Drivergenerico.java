@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
@@ -19,14 +19,14 @@ public class Drivergenerico {
 		while(opcion != "4") {
 
 			System.out.println("INDIQUE QUE QUIERE HACER:");
-			System.out.println("(1) AÑADIR DOCUMENTO"
+			System.out.println("(1) Aï¿½ADIR DOCUMENTO"
 					+ " (2) MODIFICACION"
 					+ " (3) CONSULTAS"
 					+ " (4) SALIR DEL SISTEMA");
 			opcion = sc.nextLine();
 			switch (opcion) {
             	case "1": 
-			            System.out.println("AÑADIR DOCUMENTO:");
+			            System.out.println("Aï¿½ADIR DOCUMENTO:");
 						Documento d1 = new Documento();
 						System.out.println("Ingrese titulo:");
 						d1.setTitulo(sc.nextLine());
@@ -49,7 +49,7 @@ public class Drivergenerico {
 						    System.out.println ("El error es: " + e.getMessage());
 						    //e.printStackTrace();
 						    opcion = "1";
-						    System.out.println ("Vuelva a añadir el documento en su formato requerido");
+						    System.out.println ("Vuelva a aï¿½adir el documento en su formato requerido");
 						    break;
 						}
 						d1.setTexto(t);
@@ -116,7 +116,7 @@ public class Drivergenerico {
 									sf = sc.nextLine();
 									System.out.println("mes:");
 									sf += sc.nextLine();
-									System.out.println("año:");
+									System.out.println("aï¿½o:");
 									sf += sc.nextLine();
 								    d.consultarTitulos(sf);
 								    break;

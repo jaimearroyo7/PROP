@@ -1,6 +1,7 @@
 /**
  * Created by mhitz on 27/10/16.
  */
+package PROP;
 public class TermFrequency {
     private String text;
     private double frequency;

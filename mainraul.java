@@ -1,4 +1,5 @@
-package dominio;
+/*
+package PROP;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
@@ -15,13 +16,13 @@ public class mainraul {
 		while(true) {
 
 			System.out.println("INDIQUE QUE QUIERE HACER:");
-			System.out.println("(1) AÑADIR DOCUMENTO"
+			System.out.println("(1) Aï¿½ADIR DOCUMENTO"
 					+ " (2) MODIFICACION"
 					+ " (3) CONSULTAS");
 			sf = sc.nextLine();
 			
 			if(sf.equals("1")) {
-				    System.out.println("AÑADIR DOCUMENTO:");
+				    System.out.println("Aï¿½ADIR DOCUMENTO:");
 					Documento d1 = new Documento();
 					System.out.println("Ingrese titulo:");
 					d1.setTitulo(sc.nextLine());
@@ -44,7 +45,7 @@ public class mainraul {
 					sf = sc.nextLine();
 					if(sf.equals("1")) {
 						System.out.println("BORRAR DOC:");
-						System.out.println("Indique que i-ésimo documento quiere borrar:");
+						System.out.println("Indique que i-ï¿½simo documento quiere borrar:");
 						h = sc.nextLine();
 						d.borrardoc(h);
 					}
@@ -91,7 +92,7 @@ public class mainraul {
 						sf = sc.nextLine();
 						System.out.println("mes:");
 						sf += sc.nextLine();
-						System.out.println("año:");
+						System.out.println("aï¿½o:");
 						sf += sc.nextLine();
 					    d.consultarTitulos(sf);
 					}
@@ -112,7 +113,7 @@ public class mainraul {
 	} // CERRAMOS WHILE DEL PROGRAMA EN SI
   } // MAIN
 } // CODIGO
-
+*/
 
 
 			/*d.addDoc("C:/Users/JMC/workspace/Gestor de documentos/src/Dominio/prueba");*/

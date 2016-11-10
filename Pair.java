@@ -1,4 +1,4 @@
-//package dominio;
+package PROP;
 
 public class Pair<A, B> {
 	 private A first;

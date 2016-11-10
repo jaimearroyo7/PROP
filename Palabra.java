@@ -1,4 +1,5 @@
 // La clase Palabra representa la palabra y las veces que aparece en el texto
+package PROP;
 public class Palabra{ 
 	
 	// atributos

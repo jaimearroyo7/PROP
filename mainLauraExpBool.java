@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 import java.util.*;
 
 public class mainLauraExpBool {

@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 import java.io.*;
 
 public class mainpalabra {

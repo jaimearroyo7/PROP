@@ -1,4 +1,5 @@
 //package dominio;
+package PROP;
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
@@ -233,16 +234,18 @@ public class Documentos {
 				System.out.println("No se ha encontrado ningun titulo para esta fecha");
 			}
 	}
-	public void consultardocumentosparecidos(String titulo, String autor, String k) throws IOException {
+	public void consultardocumentosparecidos(String titulo, String autor, String k,
+                                             ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				int n = Integer.parseInt(k);
-				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario, docs);
+				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario, docs, mode);
 				if(l != null) {
-					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario);
+					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario,docs, mode);
 					Iterator<Documento> iter = l.iterator();
-					while (iter.hasNext()) {
+                    System.out.println("NUMERO DE DOCUMENTOS PARECIDOS: " + l.size());
+                    while (iter.hasNext()) {
 						d = iter.next();
 					    System.out.println(d.getTitulo() + "   -   " + d.getAutor());
 					}

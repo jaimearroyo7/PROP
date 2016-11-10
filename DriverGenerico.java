@@ -1,4 +1,4 @@
-package dominio;
+package PROP;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
@@ -11,9 +11,10 @@ public class DriverGenerico {
 		Scanner sc = new Scanner(System.in);
 		Texto t;
 		int i = 0;
-		String sf,q,h,p;
+		String sf,q,h,p, m;
 		String opcion,opcion2;
 		opcion = opcion2 = "0";
+        ConsultaDocumentosParecidos.TFIDF_MODE mode;
 		
 		while(opcion != "4") {
 
@@ -147,9 +148,19 @@ public class DriverGenerico {
 								 sf = sc.nextLine();
 								 System.out.println("Ingrese autor:");
 								 q = sc.nextLine();
-								 System.out.println("Ingrese cuantos n documentos parecidos quiere obtener:");
+                                 System.out.println("Ingrese metodo para calcular tfidf\n"
+                                    + "log\n"
+                                    + "bool");
+                                 m = sc.nextLine();
+                                 if (m.equals("log")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
+                                 else if (m.equals("bool")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.BOOLEAN;
+                                 else  {
+                                     System.out.println("Modo incorrecto (por defecto se ejecutará logarítmico)");
+                                     mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
+                                 }
+                                 System.out.println("Ingrese cuantos n documentos parecidos quiere obtener:");
 								 h = sc.nextLine();
-								 d.consultardocumentosparecidos(sf,q,h);
+								 d.consultardocumentosparecidos(sf,q,h, mode);
 								 break;
 							 default: break;
 					}
