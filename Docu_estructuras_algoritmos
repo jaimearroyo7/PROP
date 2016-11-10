@@ -1,10 +1,30 @@
 Documentos:
 	Estructuras de datos usados:
-		El ArrayList<Documento> docs contiene los 'Documentos' a�adidos hasta entonces.
+		El ArrayList<Documento> docs contiene los 'Documentos' añadidos hasta entonces.
 		
 		El Map<String, ArrayList<Documento> > autortitulos contiene por cada key(autor) un valor(ArrayList<Documento>)
 		que representa el/los documento/s que el autor tiene.
 		
 		Map<String, ArrayList<Documento> > mapfecha contiene por cada key(fecha) un valor(ArrayList<Documento>) 
-		que representa el/los documento/s que a�adieron dentro de la mmisma fecha.
+		que representa el/los documento/s que añadieron dentro de la mmisma fecha.
+
+ExpBool: 
+	Estructuras de datos usadas:
+		Para implementar una expresión booleana hemos utilizado una estructura de tipo árbol binario, construida con Nodos.
+		Decidimos utilizar la estructura tipo árbol porque permite almacenar una expresión eliminando los paréntesis y las llaves
+		de forma que no puede haver dos interpretaciones diferentes de la expresión, es decir, quedan perfectamente definidas sus
+		operaciones y operadores y el orden entre ellos. Además facilita mucho el acceso a cada operador y operando.
+		
+		Utilizamos también dos ArrayList<Element>, uno guarda la lista de elementos que componen la expresión en notación infija 
+		o natural y el otro la guarda en notación postfija.
+	Algoritmos usados:
+		Shunting-yard:
+			Este algoritmo lo utilizamos para pasar la expresión booleana dada en notación infija a notación postfija.
+			Consiste en ir leyendo elemento por elemento la expresión en notación infija y si encontramos un operando 
+			añadirlo al resultado pero si encontramos un operador o un paréntesis añadirlo a una estructura de tipo pila
+			que, según la prioridad de los diferentes operandos, retiene los elementos en la pila o bien los añade al resultado.
+			Al final obtenemos la misma expresión booleana en notación postfija (sin paréntesis ya que en esta notación no son
+			necesarios para determinar el orden de las operaciones).
+		Paso de notación postfija a árbol:
+			El algoritmo lee los elementos de la notación postfija...
 		
