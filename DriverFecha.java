@@ -1,13 +1,11 @@
-
 package dominio;
-
 import java.text.ParseException;
 
 public class DriverFecha {
 	
 	public static void comparar(Fecha f, Fecha f2) {
-		if(f2.greater(f)) System.out.println("La fecha2 es mï¿½s reciente que la fecha1");
-		else if(f.greater(f2)) System.out.println("La fecha1 es mï¿½s reciente que la fecha2");
+		if(f2.greater(f)) System.out.println("La fecha2 es más reciente que la fecha1");
+		else if(f.greater(f2)) System.out.println("La fecha1 es más reciente que la fecha2");
 		else System.out.println("Mismas fechas");
 	}
 	public static void main(String[] args)throws ParseException {
@@ -33,6 +31,26 @@ public class DriverFecha {
 		f2.setFechaManual(2,12,2014);
 		System.out.println(f2.getDay() + "/" + f2.getMonth() + "/" + f2.getYear());
 		comparar(f,f2);
+		
+		System.out.println("fechaaaaa");
+		String day = "29";
+		String month = "2";
+		String year = "2015";
+		Fecha f3 = new Fecha();
+		int b = f3.comprobar(day,month, year);
+		if(b == -1){
+			System.out.println("fecha incorrecta(fecha a consultar mayor que la actual)");
+		}
+		else if(b == -2) {
+			System.out.println("fecha incorrecta(compruebe el month)");
+		}
+		else if(b== -3){
+			System.out.println("fecha incorrecta(compruebe el day)");
+		}
+		else {
+		if(b == 1) System.out.println(f3.getDay() + "/" + f3.getMonth() + "/" + f3.getYear());
+		}
+			
 	}
 }
 		

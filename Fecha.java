@@ -1,4 +1,5 @@
 package dominio;
+
 import java.util.*;
  // La clase Fecha representa una fecha dd.mm.yy.
 
@@ -29,7 +30,11 @@ public class Fecha {
 		++month;
 		year = fecha.get(Calendar.YEAR);
 	}
-	
+	public int bisiesto(int any) { // miramos si el año es de traspaso o no
+		  
+		if ((any%4 == 0) && ((any%400 == 0) || (any%100 != 0)) )return 1;
+		else return -1;
+	}
 	public void setFechaManual(int valorday, int valormonth, int valoryear){ // modifica la fecha manualmente por los campos pasados por parametro
 		day = valorday;
 		month = valormonth;
@@ -38,6 +43,39 @@ public class Fecha {
 	
 	//consultoras
 	
+	public int comprobar(String h,String q,String p) {
+		
+		int da = day; 
+		int mon = month;
+		int ye = year;
+		day = Integer.parseInt(h);
+		month = Integer.parseInt(q);
+		year = Integer.parseInt(p);
+
+			if(year > ye) {
+				return -1;
+			}
+			if(year == ye && month > mon){
+				return  -1;
+			}
+			if(year == ye && month == mon && day > da) {
+				return -1;
+			}
+			if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+				if(day <= 0 || day >= 32) return -3;
+			}
+			else if(month == 4 || month == 6 || month == 9 || month == 11) {
+				if(day <= 0 || day >= 31) return -3;
+			}
+			else if(month == 2) {
+				if(bisiesto(year) == 1) {
+					if(day <= 0 || day >= 30) return -3;
+				}
+				else if (day <= 0 || day >= 29) return -3;
+			}
+			else return -2;
+		return 1;
+	}
 	public Integer getDay() { // devuelve el 'day' en forma de entero 
 		return day;
 	}

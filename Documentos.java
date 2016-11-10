@@ -1,11 +1,7 @@
-
 package dominio;
-
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
-import java.util.Map.Entry;
-
 // Representa un conjunto de Documentos
 
 public class Documentos {
@@ -34,50 +30,55 @@ public class Documentos {
 	
 	//modificadoras
 	
-	public void addDoc(Documento d) throws ParseException, IOException { // anade el 'Documento' dentro del conjunto
+	public int addDoc(Documento d) throws ParseException, IOException { // anade el 'Documento' dentro del conjunto
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(d.getAutor()) && docs.get(i).getTitulo().equals(d.getTitulo())){
-				System.out.println("Ya existe un documento con el mismo titulo y autor.");
-				return;
+				return -1;
 			}
 		}
 		docs.add(d);
 		setMapFechaDoc(d);
 		setMapAutorTitulos(d);
 		diccionario.addTextoDocumento(d);
-		
+		return 0;
 	}
 	
-	public void borrardoc(String titulo, String autor) { // borra el 'Documento' dentro del conjunto
+	public int borrardoc(String titulo, String autor) { // borra el 'Documento' dentro del conjunto
 		
-		int i;
-		for(i = 0; i < docs.size(); ++i){
+		int i = 0;
+		while (i < docs.size()) {
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				d = docs.get(i);
 				diccionario.deleteTextoDocumento(d);
 				borrarMapFechaDoc(d);
 				borrarMapAutorTitulos(d);
 				docs.remove(i);
+				return 1;
 			}
+			++i;
 		}
-		if(i == docs.size()) System.out.println("No existe el documento");
+		return -1;
 		
 	}
 	
-	public void listadocs(String k) { // lista el conjunto de 'Documentos'
+	public int listadocs() { // lista el conjunto de 'Documentos'
 		
-		System.out.println(docs.size());
+		boolean b = false;
+		System.out.print(docs.size());
 		if(docs.size() > 0) {
 			historial.setHistorial(docs);
-			int n1 = Integer.parseInt(k);
-			for(int i = 0; i < n1; ++i){
+			for(int i = 0; i < historial.getHistorial().size(); ++i){
 				System.out.print(historial.getHistorial().get(i).getTitulo() + ": ");
 				Fecha fecha = historial.getHistorial().get(i).getFecha();
 				System.out.println(fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear());
+				b = true;
 			}
 		}
-		else System.out.println("No hay documentos");
+
+		System.out.println("tam after " + docs.size());
+		if(b) return 1;
+		else return -1; 
 	}
 	
 	public void borrarMapFechaDoc(Documento d) { // actuliza el map mapfecha a la hora de borrar 'Documento'
@@ -103,7 +104,7 @@ public class Documentos {
 		}
 	}
 		
-	public void modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
+	public int modificardoc(String titulo, String autor, String campo, String value) throws IOException, ParseException {
 		// modifca uno de los campos disponibles de un 'Documento'
 		Documento nuevo = new Documento();
 		boolean trobat = false;
@@ -115,28 +116,28 @@ public class Documentos {
 			}
 		}
 		if (trobat) {
-			borrardoc(titulo,autor);
 			
-			if(campo.equals("autor")){
-				nuevo.setAutor(value);
-			}
-			else if(campo.equals("titulo")){
-				nuevo.setTitulo(value);
-			}
-			else if(campo.equals("categoria")){
-				nuevo.setCategoria(value);
-			}
-			else if(campo.equals("texto")){
-				Texto actualizado = new Texto(value);
-				nuevo.setTexto(actualizado);
-			}
-			else {
-				System.out.println("El campo introducido no es valido");
-				return;
-			}
-			
-			addDoc(nuevo);
+				if(campo.equals("autor")){
+					nuevo.setAutor(value);
+				}
+				else if(campo.equals("titulo")){
+					nuevo.setTitulo(value);
+				}
+				else if(campo.equals("categoria")){
+					nuevo.setCategoria(value);
+				}
+				else if(campo.equals("texto")){
+					Texto actualizado = new Texto(value);
+					nuevo.setTexto(actualizado);
+				}
+				if(borrardoc(titulo,autor) == 1) {
+					addDoc(nuevo);
+					return 1;
+				}
+				else return -2;	
+				
 		}
+		return -1; 
 		
 	}
 	
@@ -171,81 +172,77 @@ public class Documentos {
 	
 	//consultoras
 	
-	public void consultarTextoDadoTituloAutor(String titulo, String autor) { // Imprime por pantalla el contenido de un 'Documento' con 'titulo' y 'autor'
+	public Texto consultarTextoDadoTituloAutor(String titulo, String autor) { // Imprime por pantalla el contenido de un 'Documento' con 'titulo' y 'autor'
 		
+		Texto t = new Texto();
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
-				System.out.println("Contenido:");
-				System.out.println(docs.get(i).getTexto().getTexto());
-				return;
+				t = docs.get(i).getTexto();
+				return t;
 			}
 		}
-		System.out.println("No existe documete dado este titulo y autor");
+		return t;
 	}
 	
-	public void consultarTitulosAutor(String autor) { // Imprime por pantalla los titulos de los 'Documentos' de 'autor'
-			String actual;
-		    Iterator<String> autores = autortitulos.keySet().iterator();
-		    boolean is_primer = true;
-		    while(autores.hasNext()){
-		        actual = autores.next();
-		        if(actual.equals(autor)){
-		        System.out.println(autor + ": " );
-		        ArrayList<Documento> l = autortitulos.get(autor);
-		        for(int y = 0; y < l.size();++y) {
-		        	if(is_primer) {
-		        		System.out.println("El autor tine los siguientes documento/s:");
-		        		is_primer = false;
-		        	}
-		        	System.out.println(l.get(y).getTitulo());
-		        }
-		        break;
-		        }
-		    }   
-		    if(is_primer) System.out.println("El autor no tiene documentos");
+	public ArrayList<String> consultarTitulosAutor(String autor) { // Imprime por pantalla los titulos de los 'Documentos' de 'autor'
+		String actual;
+	    Iterator<String> autores = autortitulos.keySet().iterator();
+	    ArrayList<String> p = new ArrayList<String>();
+	    while(autores.hasNext()){
+	        actual = autores.next();
+	        if(actual.equals(autor)){
+	        ArrayList<Documento> l = autortitulos.get(autor);
+	        for(int y = 0; y < l.size();++y) {
+	        	p.add(l.get(y).getTitulo());
+	        }
+	        break;
+	        }
+	    }
+		return p;   
 	}
 	
-	public void consultarAutoresPrefijo(String prefijo) { // Imprime por pantalla aquellos autores que empiezen o sean el 'prefijo'
+	public  ArrayList<String> consultarAutoresPrefijo(String prefijo) { // Imprime por pantalla aquellos autores que empiezen o sean el 'prefijo'
+		
 		Set<String> autores = autortitulos.keySet();
 		Iterator<String> it = autores.iterator();
+		ArrayList<String> p = new ArrayList<String>();
 		String actual;
 		int mida = prefijo.length();
 		while(it.hasNext()){
-			actual = it.next();
+			actual = it.next(); 
 			if(mida == 0){
-				System.out.println(actual);
+				p.add(actual);
 			}
 			else{
 				if(actual.length() >= mida){
 					if(prefijo.equals(actual.substring(0, mida))){
 						ArrayList<Documento> l = autortitulos.get(actual);
-						if(!l.isEmpty()) System.out.println(actual);
+						if(!l.isEmpty()) p.add(actual);
 					}
 				}
 			}
 		}
+		return p;
 	}
 	
-	public void consultarDiccionario(String s) { // Imprime por pantalla el numero de documentos en la que aparece una palabra 's'
-		System.out.println("La palabra esta contenida en " + Integer.toString(diccionario.numeroDeDocumentosCon(s)) + " documentos");
+	public int consultarDiccionario(String s) { // Imprime por pantalla el numero de documentos en la que aparece una palabra 's'
+		return diccionario.numeroDeDocumentosCon(s);
 		//System.out.println(numeroDeDocumentosCon(s));
 	}
-	public void consultarTitulos(String s) throws ParseException { // Imprime por pantalla los titulos de 'Documentos' que aparecen en una fecha 's'
-		
+	public ArrayList<String> consultarTitulos(String s) throws ParseException { // Imprime por pantalla los titulos de 'Documentos' que aparecen en una fecha 's'
+		    
+		    ArrayList<String> p = new ArrayList<String>();
 			ArrayList<Documento> l1 = mapfecha.get(s);
 			if(l1 != null) {
 				for(int y = 0; y < l1.size();++y) {
-				   System.out.print(l1.get(y).getTitulo());
-				   System.out.println(" - " + l1.get(y).getAutor());
+					p.add(l1.get(y).getTitulo());
 				}  
 			}
-			else {
-				System.out.println("No se ha encontrado ningun titulo para esta fecha");
-			}
+			return p;
 	}
 	public void consultardocumentosparecidos(String titulo, String autor, String k,
-                                             ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
-		
+            ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
+
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
 				int n = Integer.parseInt(k);
@@ -253,14 +250,14 @@ public class Documentos {
 				if(l != null) {
 					l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario,docs, mode);
 					Iterator<Documento> iter = l.iterator();
-                    System.out.println("NUMERO DE DOCUMENTOS PARECIDOS: " + l.size());
-                    while (iter.hasNext()) {
+					System.out.println("NUMERO DE DOCUMENTOS PARECIDOS: " + l.size());
+					while (iter.hasNext()) {
 						d = iter.next();
-					    System.out.println(d.getTitulo() + "   -   " + d.getAutor());
+						System.out.println(d.getTitulo() + "   -   " + d.getAutor());
 					}
 				}
 				else System.out.println("No existe similitudes con los otros documentos");
 			}
 		}
-	}
+}
 }

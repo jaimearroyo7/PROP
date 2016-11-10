@@ -1,7 +1,5 @@
-
-package PROP;
-import java.awt.event.KeyEvent;
-
+package dominio;
+//import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
@@ -11,13 +9,14 @@ public class DriverGenerico {
 	public static void main(String[] args) throws IOException, ParseException {
 		Documentos d = new Documentos();
 		Scanner sc = new Scanner(System.in);
-		Texto t;
-		int i = 0;
-		String sf,q,h,p, m;
+		Texto t = new Texto();
+		String sf,q,h,p,m;
 		String opcion,opcion2;
 		opcion = opcion2 = "0";
-        ConsultaDocumentosParecidos.TFIDF_MODE mode;
-		
+		ArrayList<String> l1 = new ArrayList<String>();
+		int v = 0;
+		Fecha f;
+		ConsultaDocumentosParecidos.TFIDF_MODE mode;
 		while(opcion != "4") {
 
 			System.out.println("INDIQUE QUE QUIERE HACER:");
@@ -38,12 +37,12 @@ public class DriverGenerico {
 						d1.setCategoria(sc.nextLine());
 						try {
 							System.out.println("Ingrese texto(acabado en punto,excepto si !/?, para acabar escriba: FIN):");
-							t = new Texto();
 							String j = sc.nextLine();
 							String total = "";
+							t = new Texto();
 							while(!j.endsWith("FIN")) { 
-									
-								    if(j.isEmpty()) {
+								    
+									if(j.isEmpty()) {
 								    	total += System.getProperty("line.separator");
 								    	total += System.getProperty("line.separator");
 								    }
@@ -59,7 +58,7 @@ public class DriverGenerico {
 						    break;
 						}
 						d1.setTexto(t);
-					    d.addDoc(d1);
+					    if(d.addDoc(d1) == -1) System.out.println("Ya existe un documento con el mismo titulo y autor.");
 					    break;
             	case "2": 
 		            	System.out.println("MODIFICACION:");
@@ -74,7 +73,7 @@ public class DriverGenerico {
 									sf = sc.nextLine();
 									System.out.println("Diga el autor del documento a borrar:");
 									h = sc.nextLine();
-									d.borrardoc(sf,h);
+									if(d.borrardoc(sf,h) == -1) System.out.println("No existe documento a borrar");
 									break;
 							case "2":
 									System.out.println("MODIFICAR DOC:");
@@ -110,7 +109,9 @@ public class DriverGenerico {
 										}
 									}
 									else p = sc.nextLine();
-									d.modificardoc(sf,h,q,p);
+									v = d.modificardoc(sf,h,q,p);
+									if(v == -1) System.out.println("No se existe el documento a modifficar");
+									else if(v == -2) System.out.println("El campo introducido no es valido");
 									break;
 							default: break;
 						}
@@ -122,7 +123,7 @@ public class DriverGenerico {
 							+ " (2) CONSULTAR LISTA DE AUTORES DE DOCUMENTOS DADO UN PREFIJO");
 					System.out.println("(3) CONSULTAR LISTA DE TITULOS DE DOCUEMNTOS DADA SU FECHA"
 							+ " (4) CONSULTAR CONTENIDO DE UN DOCUMENTO DADO SU TITULO Y SU AUTOR");
-					System.out.println("(5) CONSULTAR LISTA GENERAL DE LOS ULTIMOS DOCUMENTOS"
+					System.out.println("(5) CONSULTAR LISTA DE LOS ULTIMOS 10 DOCUMENTOS:"
 							+ " (6) NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA"
 							+ " (7) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR");
 					opcion2 = sc.nextLine();
@@ -131,24 +132,60 @@ public class DriverGenerico {
 									System.out.println("CONSULTAR TITULOS DADO UN AUTOR:");
 									System.out.println("Ingrese autor para consulta:");
 									sf = sc.nextLine();
-									d.consultarTitulosAutor(sf);
+									l1 = d.consultarTitulosAutor(sf);
+									if(!l1.isEmpty()) {
+										for(v = 0; v < l1.size(); ++v) {
+											System.out.println(l1.get(v));
+										}
+									}
+									else System.out.println("No tiene titulos de documentos");
+									
 									break;
 							 case "2":
 									System.out.println("CONSULTAR LISTA DE AUTORES DE DOCUMENTOS DADO UN PREFIJO:");
 									System.out.println("Ingrese prefijo a consultar:");
 									sf = sc.nextLine();
-									d.consultarAutoresPrefijo(sf);
+									l1 = d.consultarAutoresPrefijo(sf);
+									if(!l1.isEmpty()) {
+										for(v = 0; v < l1.size(); ++v) {
+											System.out.println(l1.get(v));
+										}
+									}
+									else System.out.println("No existen autores con este prefijo");
 									break;
 							 case "3":
 									System.out.println("CONSULTAR LISTA DE TITULOS DE DOCUEMNTOS DADA SU FECHA:");
-									System.out.println("Ingrese fecha a consultar:");
+									System.out.println("Ingrese fecha a consultar (no puede ser más grande que la fecha de hoy i tiene que ser una fecha valida):");
 									System.out.println("day:");
-									sf = sc.nextLine();
+									h = sc.nextLine();
+									sf = h;
 									System.out.println("month:");
-									sf += sc.nextLine();
+									q = sc.nextLine();
+									sf +=q;
 									System.out.println("year:");
-									sf += sc.nextLine();
-								    d.consultarTitulos(sf);
+									p = sc.nextLine();
+									sf +=p;
+									f = new Fecha();
+									int b = f.comprobar(h,q,p);
+									if(b == -1){
+										System.out.println("fecha incorrecta(fecha a consultar mayor que la actual)");
+									}
+									else if(b == -2) {
+										System.out.println("fecha incorrecta(compruebe el month)");
+									}
+									else if(b== -3){
+										System.out.println("fecha incorrecta(compruebe el day)");
+									}
+									else {
+										
+										l1 = d.consultarTitulos(sf);
+										if(!l1.isEmpty()) {
+											for(v = 0; v < l1.size(); ++v) {
+												System.out.println(l1.get(v));
+											}
+										}
+										else System.out.println("No tiene titulos de documentos");
+									}
 								    break;
 							 case "4":
 									System.out.println("CONSULTAR CONTENIDO DE UN DOCUMENTO DADO SU TITULO Y SU AUTOR:");
@@ -156,19 +193,25 @@ public class DriverGenerico {
 									sf = sc.nextLine();
 									System.out.println("Ingrese autor:");
 									q = sc.nextLine();
-									d.consultarTextoDadoTituloAutor(sf,q);
+									t = d.consultarTextoDadoTituloAutor(sf,q);
+									if(!t.equals("")) {
+										System.out.println("Contenido:");
+										System.out.println(t.getTexto());
+									}
+									else System.out.println("No contiene texto");
 									break;
 							 case "5":
-									System.out.println("CONSULTAR LISTA GENERAL DE LOS ULTIMOS DOCUMENTOS:");
-									System.out.println("Ingrese numero de documentos maximos que desea ver:");
-									sf = sc.nextLine();
-								    d.listadocs(sf);
+									System.out.println("CONSULTAR LISTA DE LOS ULTIMOS 10 DOCUMENTOS:");
+									v = d.listadocs();
+									if(v == -1)  System.out.println("No hay documentos");
 								    break;
 							 case "6":
-								 System.out.println("NUMERO DE DOCUMENTOS DONDE APARECE DADA UNA PALABRA(RELEVANTE):");
+								 System.out.println("NUMERO DE DOCUMENTOS DONDE APARECE UNA PALABRA(RELEVANTE):");
 								 sf = sc.nextLine();
-								 d.consultarDiccionario(sf);
-								 break;
+								 v = d.consultarDiccionario(sf);
+								 if(v == -1) System.out.println("La palabra no aparece en ningún documento");
+								 else System.out.println("La palabra esta contenida en " + v + " documento/s");
+								 break; 
 							 case "7":
 								 System.out.println("CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR");
 								 System.out.println("Ingrese titulo:");
@@ -182,7 +225,7 @@ public class DriverGenerico {
                                  if (m.equals("log")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
                                  else if (m.equals("bool")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.BOOLEAN;
                                  else  {
-                                     System.out.println("Modo incorrecto (por defecto se ejecutarÃ¡ logarÃ­tmico)");
+                                     System.out.println("Modo incorrecto (por defecto se ejecutará logarítmico)");
                                      mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
                                  }
                                  System.out.println("Ingrese cuantos n documentos parecidos quiere obtener:");
@@ -195,7 +238,6 @@ public class DriverGenerico {
 			    case "4": opcion= "4"; break;
 				default: break;
 			}
-			++i;
 	} 
 	sc.close();
 	System.out.println("GRACIAS POR USAR NUESTRO PROGRAMA");
