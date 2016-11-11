@@ -37,7 +37,7 @@ public class DriverGenerico {
 						System.out.println("Ingrese categoria:");
 						d1.setCategoria(sc.nextLine());
 						try {
-							System.out.println("Ingrese texto(acabado en punto,excepto si !/?, para acabar escriba: FIN):");
+							System.out.println("Ingrese texto(para acabar escriba: FIN):");
 							System.out.println("Si quiere hacer un salto de linea dar 2 veces al enter");
 							String j = sc.nextLine();
 							String total = "";
@@ -88,7 +88,7 @@ public class DriverGenerico {
 									q = sc.nextLine();
 									System.out.println("Escriba el valor o contenido del campo a modifcar");
 									if(q.equals("texto")) {
-										System.out.println("Ingrese texto(acabado en punto,excepto si !/?, para acabar escriba: FIN):");
+										System.out.println("Ingrese texto(para acabar escriba: FIN):");
 										System.out.println("Si quiere hacer un salto de linea dar 2 veces al enter");
 										try {
 											p ="";
