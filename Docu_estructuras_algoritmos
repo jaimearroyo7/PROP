@@ -7,6 +7,13 @@ Documentos:
 		
 		Map<String, ArrayList<Documento> > mapfecha contiene por cada key(fecha) un valor(ArrayList<Documento>) 
 		que representa el/los documento/s que añadieron dentro de la mmisma fecha.
+		
+Texto:
+	Estructuras de datos usadas:
+		El ArrayList<Frase> listafrases contiene el texto separado por frases.
+HistoricoDocumentos:
+	Estructuras de datos usadas: 
+		El ArrayList<Documento> historial contiene los documentos modificados más recientemente.
 
 ExpBool: 
 	Estructuras de datos usadas:
