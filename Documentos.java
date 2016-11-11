@@ -30,7 +30,7 @@ public class Documentos {
 	
 	//modificadoras
 	
-	public int addDoc(Documento d) throws ParseException, IOException { // anade el 'Documento' dentro del conjunto
+	public int addDoc(Documento d) throws ParseException, IOException { // anade el 'Documento' dentro del array docs
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(d.getAutor()) && docs.get(i).getTitulo().equals(d.getTitulo())){
@@ -44,7 +44,7 @@ public class Documentos {
 		return 0;
 	}
 	
-	public int borrardoc(String titulo, String autor) { // borra el 'Documento' dentro del conjunto
+	public int borrardoc(String titulo, String autor) { // borra el 'Documento' dentro del array docs
 		
 		int i = 0;
 		while (i < docs.size()) {
@@ -62,11 +62,12 @@ public class Documentos {
 		
 	}
 	
-	public ArrayList<Pair<String,Fecha>> listadocs() { // lista el conjunto de 'Documentos'
+	public ArrayList<Pair<String,Fecha>> listadocs() { // lista de los ultimos 10 'Documentos' más recientes por fecha
 		
 		ArrayList<Pair<String,Fecha>> lp = new ArrayList<Pair<String,Fecha>>();
+		
+		System.out.print( "     ");
 		if(docs.size() > 0) {
-			System.out.println(docs.size());
 			historial.setHistorial(docs);
 			for(int i = 0; i < historial.getHistorial().size(); ++i){
 				String tit = historial.getHistorial().get(i).getTitulo();
@@ -75,6 +76,7 @@ public class Documentos {
 				lp.add(p);
 			}
 		}
+		
 		return lp;
 	}
 	
@@ -169,7 +171,7 @@ public class Documentos {
 	
 	//consultoras
 	
-	public Texto consultarTextoDadoTituloAutor(String titulo, String autor) { // Imprime por pantalla el contenido de un 'Documento' con 'titulo' y 'autor'
+	public Texto consultarTextoDadoTituloAutor(String titulo, String autor) { // Devuelve el contenido de un 'Documento' con 'titulo' y 'autor'
 		
 		Texto t = new Texto();
 		for(int i = 0; i < docs.size(); ++i){
@@ -181,7 +183,7 @@ public class Documentos {
 		return t;
 	}
 	
-	public ArrayList<String> consultarTitulosAutor(String autor) { // Imprime por pantalla los titulos de los 'Documentos' de 'autor'
+	public ArrayList<String> consultarTitulosAutor(String autor) { // devuelve los titulos de los 'Documentos' del parametro explícito('autor')
 		String actual;
 	    Iterator<String> autores = autortitulos.keySet().iterator();
 	    ArrayList<String> p = new ArrayList<String>();
@@ -198,7 +200,7 @@ public class Documentos {
 		return p;   
 	}
 	
-	public  ArrayList<String> consultarAutoresPrefijo(String prefijo) { // Imprime por pantalla aquellos autores que empiezen o sean el 'prefijo'
+	public  ArrayList<String> consultarAutoresPrefijo(String prefijo) { // devuelve aquellos autores que empiezen o sean el parametro ímplícito('prefijo')
 		
 		Set<String> autores = autortitulos.keySet();
 		Iterator<String> it = autores.iterator();
@@ -222,11 +224,11 @@ public class Documentos {
 		return p;
 	}
 	
-	public int consultarDiccionario(String s) { // Imprime por pantalla el numero de documentos en la que aparece una palabra 's'
+	public int consultarDiccionario(String s) { // devuelve el numero de documentos en la que aparece una palabra 's'
 		return diccionario.numeroDeDocumentosCon(s);
 		//System.out.println(numeroDeDocumentosCon(s));
 	}
-	public ArrayList<String> consultarTitulos(String s) throws ParseException { // Imprime por pantalla los titulos de 'Documentos' que aparecen en una fecha 's'
+	public ArrayList<String> consultarTitulos(String s) throws ParseException { // devuelve los titulos de 'Documentos' que aparecen en una fecha 's'
 		    
 		    ArrayList<String> p = new ArrayList<String>();
 			ArrayList<Documento> l1 = mapfecha.get(s);
@@ -239,6 +241,7 @@ public class Documentos {
 	}
 	public ArrayList<Pair<String,String>> consultardocumentosparecidos(String titulo, String autor, String k,
             ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
+		//devuelve el 'titulo' y 'autor' de cada uno de los k documentos semejantes al documento deseado con 'titulo' y 'autor'
 		ArrayList<Pair<String,String>> lp = new ArrayList<Pair<String,String>>();
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
