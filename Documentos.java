@@ -30,6 +30,9 @@ public class Documentos {
 	
 	//modificadoras
 	
+	public ArrayList<Documento> getDocs(){ return docs;}
+	public HistoricoDocumentos getHistorial(){ return historial;}
+	
 	public int addDoc(Documento d) throws ParseException, IOException { // anade el 'Documento' dentro del array docs
 		
 		for(int i = 0; i < docs.size(); ++i){
@@ -41,6 +44,7 @@ public class Documentos {
 		setMapFechaDoc(d);
 		setMapAutorTitulos(d);
 		diccionario.addTextoDocumento(d);
+		historial.setHistorial(docs);
 		return 0;
 	}
 	
@@ -58,27 +62,11 @@ public class Documentos {
 			}
 			++i;
 		}
+		historial.setHistorial(docs);
 		return -1;
 		
 	}
 	
-	public ArrayList<Pair<String,Fecha>> listadocs() { // lista de los ultimos 10 'Documentos' más recientes por fecha
-		
-		ArrayList<Pair<String,Fecha>> lp = new ArrayList<Pair<String,Fecha>>();
-		
-		System.out.print( "     ");
-		if(docs.size() > 0) {
-			historial.setHistorial(docs);
-			for(int i = 0; i < historial.getHistorial().size(); ++i){
-				String tit = historial.getHistorial().get(i).getTitulo();
-				Fecha fe = historial.getHistorial().get(i).getFecha();
-				Pair<String,Fecha> p = new Pair<String,Fecha>(tit,fe); 
-				lp.add(p);
-			}
-		}
-		
-		return lp;
-	}
 	
 	public void borrarMapFechaDoc(Documento d) { // actuliza el map mapfecha a la hora de borrar 'Documento'
 		String s = d.getFechatoString();

@@ -6,14 +6,15 @@ import java.util.ArrayList;
 
 
 public class HistoricoDocumentos {
-	private ArrayList<Documento> historial = new ArrayList<>();
+	private ArrayList<Documento> historial;
 	
 	//Constructores
 	public HistoricoDocumentos(){
-		
+		historial = new ArrayList<Documento>();
 	}
 	
 	public HistoricoDocumentos(ArrayList<Documento> lista){
+		historial = new ArrayList<Documento>();
 		setHistorial(lista);
 	}
 	
@@ -23,7 +24,7 @@ public class HistoricoDocumentos {
 		Fecha f2 = d2.getFecha();
 		int suma1 = f1.getYear()*1000 + f1.getMonth()*40 + f1.getDay();
 		int suma2 = f2.getYear()*1000 + f2.getMonth()*40 + f2.getDay();
-		if(suma1>suma2){
+		if(suma1>=suma2){
 			return true;
 		}
 		else return false;
@@ -45,20 +46,24 @@ public class HistoricoDocumentos {
 		return pair;
 	}
 	
-	//A partir de una lista de documentos, coge los 10 mas recientes
+	//A partir de una lista de documentos, actualiza historial con los 10 mas recientes de la lista dada
 	public void setHistorial(ArrayList<Documento> lista){
-		//Arrays.sort(ordenado, dominio.Documento.comparador);
-		ArrayList<Documento> lista2 = lista;
-		int N = 10;
-		if(lista.size() < 10) { N = lista.size(); }
 		
-		for(int j = 0; j < N; ++j){
+		ArrayList<Documento> lista2 = new ArrayList<Documento>();
+		for(int j = 0; j < lista.size(); ++j){
+			Documento d = lista.get(j);
+			lista2.add(d);
+		}
+		
+		int n = 10;
+		if (lista.size() < 10) n= lista.size();
+		for (int i=0; i< n; ++i) {
 			Pair<Documento, Integer> pair = getMax(lista2);
-			historial.add(pair.first());
+			Documento d = new Documento();
+			d = pair.first();
+			historial.add(d);
 			int m = pair.second();
 			lista2.remove(m);
-			
-			//System.out.println("");
 		}
 		
 	}

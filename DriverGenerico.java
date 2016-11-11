@@ -206,14 +206,11 @@ public class DriverGenerico {
 							 case "5":
 									System.out.println("CONSULTAR LISTA DE LOS ULTIMOS 10 DOCUMENTOS:");
 									
-									lp = d.listadocs();
-									if(lp != null) {
-										for(int k = 0; k < lp.size(); ++k) {
-											System.out.print(lp.get(k).first() + ":  ");
-											System.out.println(lp.get(k).second().getDay() + "/" + lp.get(k).second().getMonth() + "/" + lp.get(k).second().getYear());
-										}
+									HistoricoDocumentos hist = new HistoricoDocumentos();
+									hist.setHistorial(d.getDocs());
+									for(int j = 0; j < hist.getHistorial().size(); ++j){
+										System.out.println(hist.getHistorial().get(j).getTitulo());
 									}
-									else  System.out.println("No hay documentos");
 								    break;
 							 case "6":
 								 System.out.println("NUMERO DE DOCUMENTOS DONDE APARECE UNA PALABRA(RELEVANTE):");

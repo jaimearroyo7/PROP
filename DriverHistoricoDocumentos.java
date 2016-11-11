@@ -10,7 +10,7 @@ public class DriverHistoricoDocumentos {
 		ArrayList<Documento> lista = new ArrayList<>();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Añade 10 documentos: ");
-		int N = 10;
+		int N = 11;
 		for(int i = 0; i < N; ++i){
 			Documento d1 = new Documento();
 			String campo;
