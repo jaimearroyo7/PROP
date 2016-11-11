@@ -37,8 +37,7 @@ public class DriverDocumento {
 			String result = (lista.get(i)).toString();
 			System.out.println(result);
 		}
-		
-		
+		sc.close();
 	}
 
 }
