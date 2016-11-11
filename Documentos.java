@@ -231,8 +231,11 @@ public class Documentos {
             ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
 		//devuelve el 'titulo' y 'autor' de cada uno de los k documentos semejantes al documento deseado con 'titulo' y 'autor'
 		ArrayList<Pair<String,String>> lp = new ArrayList<Pair<String,String>>();
+		
 		for(int i = 0; i < docs.size(); ++i){
+			
 			if(docs.get(i).getAutor().equals(autor) && docs.get(i).getTitulo().equals(titulo)){
+				
 				int n = Integer.parseInt(k);
 				List<Documento> l = cd.consultaDocumentosParecidos(docs.get(i), n, diccionario, docs, mode);
 				if(l != null) {
@@ -245,6 +248,7 @@ public class Documentos {
 					}
 				}
 			}
+			
 		}
 		return lp;
 	}
