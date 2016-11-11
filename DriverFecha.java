@@ -32,9 +32,9 @@ public class DriverFecha {
 		System.out.println(f2.getDay() + "/" + f2.getMonth() + "/" + f2.getYear());
 		comparar(f,f2);
 		
-		String day = "29";
-		String month = "2";
-		String year = "2015";
+		String day = "21";
+		String month = "11";
+		String year = "2016";
 		Fecha f3 = new Fecha();
 		int b = f3.comprobar(day,month, year);
 		if(b == -1){
@@ -46,10 +46,12 @@ public class DriverFecha {
 		else if(b== -3){
 			System.out.println("fecha incorrecta(compruebe el day)");
 		}
+		else if(b == -4) {
+			System.out.println("fecha incorrecta(ningun campo puede ser vacio)");
+		}
 		else {
 		if(b == 1) System.out.println(f3.getDay() + "/" + f3.getMonth() + "/" + f3.getYear());
 		}
 			
 	}
 }
-		

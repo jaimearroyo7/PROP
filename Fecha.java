@@ -30,7 +30,7 @@ public class Fecha {
 		++month;
 		year = fecha.get(Calendar.YEAR);
 	}
-	public int bisiesto(int any) { // miramos si el year es bisiesto o no
+	public int bisiesto(int any) { // miramos si el año es de traspaso o no
 		  
 		if ((any%4 == 0) && ((any%400 == 0) || (any%100 != 0)) )return 1;
 		else return -1;
@@ -48,6 +48,7 @@ public class Fecha {
 		int da = day; 
 		int mon = month;
 		int ye = year;
+		if(h.equals("") || q.equals("") || p.equals("")) return -4;
 		day = Integer.parseInt(h);
 		month = Integer.parseInt(q);
 		year = Integer.parseInt(p);
