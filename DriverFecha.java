@@ -32,7 +32,6 @@ public class DriverFecha {
 		System.out.println(f2.getDay() + "/" + f2.getMonth() + "/" + f2.getYear());
 		comparar(f,f2);
 		
-		System.out.println("fechaaaaa");
 		String day = "29";
 		String month = "2";
 		String year = "2015";

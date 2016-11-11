@@ -45,6 +45,21 @@ public class Frase {
 				frase.add(p);
 				s = "";
 			}
+			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.' || f.charAt(i) == ':'
+					|| f.charAt(i) == ',' || f.charAt(i) == '"' || f.charAt(i) == '*' || f.charAt(i) == '@' || f.charAt(i) == '#'
+					|| f.charAt(i) == '(' || f.charAt(i) == ')' || f.charAt(i) == '&' || f.charAt(i) == '%' || f.charAt(i) == '$'
+					|| f.charAt(i) == '=' || f.charAt(i) == '-' || f.charAt(i) == '_' || f.charAt(i) == '/' || f.charAt(i) == '+'
+					|| f.charAt(i) == '€' || f.charAt(i) == '>' || f.charAt(i) == '<' || f.charAt(i) == '{' || f.charAt(i) == '}'
+					|| f.charAt(i) == '[' || f.charAt(i) == ']' || f.charAt(i) == 'º' || f.charAt(i) == 'ª' || f.charAt(i) == '~') {
+				Palabra p = new Palabra(s);
+				frase.add(p);
+				s = "";
+			}
+			for (int j=0; j<frase.size(); ++j) {
+				if (frase.get(j).getPalabra().equals("")) {
+					frase.remove(j);
+				}
+			}
 		}
 	}
 	
