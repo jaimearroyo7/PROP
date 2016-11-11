@@ -158,7 +158,7 @@ public class DriverGenerico {
 									break;
 							 case "3":
 									System.out.println("CONSULTAR LISTA DE TITULOS DE DOCUEMNTOS DADA SU FECHA:");
-									System.out.println("Ingrese fecha a consultar (no puede ser más grande que la fecha de hoy i tiene que ser una fecha valida):");
+									System.out.println("Ingrese fecha a consultar (no puede ser mas grande que la fecha de hoy i tiene que ser una fecha valida):");
 									System.out.println("day:");
 									h = sc.nextLine();
 									sf = h;
@@ -216,7 +216,7 @@ public class DriverGenerico {
 								 System.out.println("NUMERO DE DOCUMENTOS DONDE APARECE UNA PALABRA(RELEVANTE):");
 								 sf = sc.nextLine();
 								 v = d.consultarDiccionario(sf);
-								 if(v == -1) System.out.println("La palabra no aparece en ningún documento");
+								 if(v == -1) System.out.println("La palabra no aparece en ningun documento");
 								 else System.out.println("La palabra esta contenida en " + v + " documento/s");
 								 break; 
 							 case "7":
@@ -232,7 +232,7 @@ public class DriverGenerico {
                                  if (m.equals("log")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
                                  else if (m.equals("bool")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.BOOLEAN;
                                  else  {
-                                     System.out.println("Modo incorrecto (por defecto se ejecutará logarítmico)");
+                                     System.out.println("Modo incorrecto (por defecto se ejecutara logaritmico)");
                                      mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
                                  }
                                  System.out.println("Ingrese cuantos n documentos parecidos quiere obtener:");

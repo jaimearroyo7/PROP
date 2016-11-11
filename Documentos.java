@@ -171,7 +171,7 @@ public class Documentos {
 		return t;
 	}
 	
-	public ArrayList<String> consultarTitulosAutor(String autor) { // devuelve los titulos de los 'Documentos' del parametro explícito('autor')
+	public ArrayList<String> consultarTitulosAutor(String autor) { // devuelve los titulos de los 'Documentos' del parametro explicito('autor')
 		String actual;
 	    Iterator<String> autores = autortitulos.keySet().iterator();
 	    ArrayList<String> p = new ArrayList<String>();
@@ -188,7 +188,7 @@ public class Documentos {
 		return p;   
 	}
 	
-	public  ArrayList<String> consultarAutoresPrefijo(String prefijo) { // devuelve aquellos autores que empiezen o sean el parametro ímplícito('prefijo')
+	public  ArrayList<String> consultarAutoresPrefijo(String prefijo) { // devuelve aquellos autores que empiezen o sean el parametro implicito('prefijo')
 		
 		Set<String> autores = autortitulos.keySet();
 		Iterator<String> it = autores.iterator();
