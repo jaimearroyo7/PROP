@@ -1,4 +1,4 @@
-package dominio;
+package prop;
 import java.util.*;
 
 
