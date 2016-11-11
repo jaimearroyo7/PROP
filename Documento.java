@@ -84,7 +84,7 @@ public class Documento {
 		ArrayList<Frase> frases = texto.getListaFrases();
 		ArrayList<String> nf = new ArrayList<String>();
 		String castellano;
-	     FileReader f2 = new FileReader("src/dominio/lista");
+	     FileReader f2 = new FileReader("dominio/lista");
 	     BufferedReader b2 = new BufferedReader(f2);
 	     try {
 			while((castellano = b2.readLine())!=null) {
