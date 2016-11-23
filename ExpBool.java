@@ -1,4 +1,3 @@
-
 package dominio;
 
 import java.util.*;
@@ -85,6 +84,11 @@ public class ExpBool {
 			}
 			else if (!dinsdeclaus && this.s.charAt(i) == '{') {
 				dinsdeclaus = true;
+				s="(";
+				Element x = new Element(s);
+				elements.add(x);
+				s="";
+				
 			}
 			else if (dinsdeclaus && this.s.charAt(i) == ' ') {
 				Element x = new Element(s);
@@ -99,6 +103,10 @@ public class ExpBool {
 				elements.add(x);
 				s = "";
 				dinsdeclaus = false;
+				s=")";
+				Element y = new Element(s);
+				elements.add(y);
+				s="";
 			}
 			
 			else if (this.s.charAt(i) == ' ' && !dinsdecomilles) {
