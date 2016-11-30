@@ -50,14 +50,49 @@ public class Pant2 extends JFrame {
 		errortit.setBounds(271, 14, 137, 15);
 		contentPane.add(errortit);
 		
+		final JLabel erroraut = new JLabel("Introduce un autor!");
+		erroraut.setVisible(false);
+		erroraut.setBounds(271, 45, 152, 15);
+		contentPane.add(erroraut);
+		
+		final JLabel errorcat = new JLabel("Introduce categoria!");
+		errorcat.setVisible(false);
+		errorcat.setBounds(271, 75, 152, 15);
+		contentPane.add(errorcat);
+		
+		final JLabel errortext = new JLabel("Introduce texto!");
+		errortext.setVisible(false);
+		errortext.setBounds(271, 106, 137, 15);
+		contentPane.add(errortext);
+		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean sigue = true;
-				if(titulo.getText() == null){
+				if(titulo.getText().isEmpty() || titulo.getText() == null){
 					errortit.setVisible(true);
 					sigue = false;
 				}
+				else errortit.setVisible(false);
+				
+				if(autor.getText().isEmpty() || autor.getText() == null){
+					erroraut.setVisible(true);
+					sigue = false;
+				}
+				else erroraut.setVisible(false);
+				
+				if(Categoria.getText().isEmpty() || Categoria.getText() == null){
+					errorcat.setVisible(true);
+					sigue = false;
+				}
+				else errorcat.setVisible(false);
+				
+				if(texto.getText().isEmpty() || texto.getText() == null){
+					errortext.setVisible(true);
+					sigue = false;
+				}
+				else errortext.setVisible(false);
+				
 				if(sigue){
 				d.setTitulo(titulo.getText());
 				d.setAutor(autor.getText());
@@ -164,6 +199,8 @@ public class Pant2 extends JFrame {
 		});
 		btnVolver.setBounds(321, 235, 117, 25);
 		contentPane.add(btnVolver);
+		
+		
 		
 		
 	}

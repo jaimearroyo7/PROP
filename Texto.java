@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Texto {
 	
 	private String texto;
-	private ArrayList<Frase> listafrases = new ArrayList<Frase>();
+	private ArrayList<Frase> listafrases = new ArrayList<>();
 	
 	//constructores
 	public Texto(){
@@ -26,15 +26,17 @@ public class Texto {
 		String separador = ".!?";
 		//char[] separador = new char[] {'.', '!', '?'};
 		int iniciofrase=0;
-		
+		if(valortexto != null && valortexto.isEmpty() == false){
 		for(int i = 0; i < texto.length(); ++i){
 			
 			if(separador.indexOf(texto.charAt(i)) != -1){
 				String fraseactual;
 				fraseactual = texto.substring(iniciofrase,i+1);
-				if(i+1 < texto.length() && texto.charAt(i+1) == 32){
+				if(i+1 < texto.length()){
+					if(texto.charAt(i+1) == 32){
 					++i;
-				}
+					}
+				} 
 				iniciofrase = i+1;
 				if((fraseactual.equals(".") == false) && (fraseactual.equals("!") == false) && (fraseactual.equals("?") == false)){
 				Frase frase = new Frase(fraseactual);
@@ -47,6 +49,8 @@ public class Texto {
 			Frase f = new Frase(ultima);
 			listafrases.add(f);
 		}
+		}
+		
 	}
 	
 	//getters
