@@ -37,14 +37,17 @@ public class Documentos {
 		
 		for(int i = 0; i < docs.size(); ++i){
 			if(docs.get(i).getAutor().equals(d.getAutor()) && docs.get(i).getTitulo().equals(d.getTitulo())){
+				System.out.println("igualeeees");
 				return -1;
-			}
+			}	
 		}
-		docs.add(d);
-		setMapFechaDoc(d);
-		setMapAutorTitulos(d);
-		diccionario.addTextoDocumento(d);
-		historial.setHistorial(docs);
+		if(d.getAutor() != null && d.getTitulo() != null && d.getTexto() != null) {
+			docs.add(d);
+			setMapFechaDoc(d);
+			setMapAutorTitulos(d);
+			diccionario.addTextoDocumento(d);
+			historial.setHistorial(docs);
+		}
 		return 0;
 	}
 	
