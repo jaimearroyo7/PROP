@@ -1,10 +1,6 @@
 package dominio;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 
 /******************************************************************************
  *  Compilation:  javac dominio.SparseArray.java
@@ -48,8 +44,5 @@ public class SparseArray<T> {
     public int size() {
         return n;
     }
-
-
-
 
 }

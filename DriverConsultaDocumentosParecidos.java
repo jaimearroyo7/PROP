@@ -72,6 +72,7 @@ public class DriverConsultaDocumentosParecidos {
             System.out.println("Título: " + documento.first() + " Autor: " + documento.second());
         }
         System.out.println("consulta terminada");
+        sc.close();
     }
 }
 
