@@ -21,7 +21,7 @@ public class Frase {
 		f = f.toLowerCase();
 		String s = new String();
 		for (int i=0; i<f.length(); ++i) {
-			//si no son separadors...
+			//Afegim totes les lletres seguides que ens trobem a la nova paraula
 			if ((f.charAt(i) >= 65 && this.f.charAt(i) <= 90) || (this.f.charAt(i) >= 97 && this.f.charAt(i) <= 122) || 
 					(f.charAt(i) == 129) || (f.charAt(i) == 130) || 
 					(f.charAt(i) == 144) || (f.charAt(i) == 181) || 
@@ -40,17 +40,20 @@ public class Frase {
 				}
 				s = s + f.charAt(i);
 			}
+			//Separadors frequents de paraules
 			else if ((f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.') && !s.equals("")) {
 				Palabra p = new Palabra(s);
 				frase.add(p);
 				s = "";
 			}
-			else if (f.charAt(i) == ' ' || f.charAt(i) == '?' || f.charAt(i) == '!' || f.charAt(i) == '.' || f.charAt(i) == ':'
-					|| f.charAt(i) == ',' || f.charAt(i) == '"' || f.charAt(i) == '*' || f.charAt(i) == '@' || f.charAt(i) == '#'
-					|| f.charAt(i) == '(' || f.charAt(i) == ')' || f.charAt(i) == '&' || f.charAt(i) == '%' || f.charAt(i) == '$'
-					|| f.charAt(i) == '=' || f.charAt(i) == '-' || f.charAt(i) == '_' || f.charAt(i) == '/' || f.charAt(i) == '+'
-					|| f.charAt(i) == '€' || f.charAt(i) == '>' || f.charAt(i) == '<' || f.charAt(i) == '{' || f.charAt(i) == '}'
-					|| f.charAt(i) == '[' || f.charAt(i) == ']' || f.charAt(i) == 'º' || f.charAt(i) == 'ª' || f.charAt(i) == '~') {
+			//Tots els separadors possibles per espanyol
+			else if (f.charAt(i) == 32 || f.charAt(i) == 33 || f.charAt(i) == 35 || f.charAt(i) == 36 || f.charAt(i) == 37
+					|| f.charAt(i) == 38 || f.charAt(i) == 34 || f.charAt(i) == 42 || f.charAt(i) == 64 || f.charAt(i) == 35
+					|| f.charAt(i) == 36 || f.charAt(i) == 37 || f.charAt(i) == 38 || f.charAt(i) == 39 || f.charAt(i) == 40
+					|| f.charAt(i) == 41 || f.charAt(i) == 43 || f.charAt(i) == 44 || f.charAt(i) == 45 || f.charAt(i) == 46
+					|| f.charAt(i) == 47 || f.charAt(i) == 58 || f.charAt(i) == 59 || f.charAt(i) == 60 || f.charAt(i) == 61
+					|| f.charAt(i) == 62 || f.charAt(i) == 63 || f.charAt(i) == 92 || f.charAt(i) == 93 || f.charAt(i) == 94
+					|| f.charAt(i) == 95 || f.charAt(i) == 123 || f.charAt(i) == 124 || f.charAt(i) == 125 || f.charAt(i) == 126) {
 				Palabra p = new Palabra(s);
 				frase.add(p);
 				s = "";
