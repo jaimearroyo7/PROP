@@ -1,8 +1,5 @@
 package dominio;
 
-/**
- * Created by mhitz on 27/10/16.
- */
 public class PalabraPeso {
     private String text;
     private double peso;

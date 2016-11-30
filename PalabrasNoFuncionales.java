@@ -1,4 +1,4 @@
-package PROP;
+package dominio;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class PalabrasNoFuncionales {
 
-		private ArrayList<String> lista = new ArrayList<>();
+		private ArrayList<String> lista = new ArrayList<String>();
 		
 		public PalabrasNoFuncionales() throws IOException{
 		String castellano;

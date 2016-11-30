@@ -1,6 +1,6 @@
-package prop;
+package dominio;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
+//import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.IOException;
 import java.text.ParseException;

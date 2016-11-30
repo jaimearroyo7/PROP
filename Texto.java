@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Texto {
 	
 	private String texto;
-	private ArrayList<Frase> listafrases = new ArrayList<>();
+	private ArrayList<Frase> listafrases = new ArrayList<Frase>();
 	
 	//constructores
 	public Texto(){

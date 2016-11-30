@@ -6,7 +6,7 @@ public class Palabra{
 	// atributos
 	
 	private String pal = ""; //representa la palabra
-	private int freq = 0; // representa el numero de aparaciones de palabra
+	//private int freq = 0; // representa el numero de aparaciones de palabra
 	
 	//constructoras
 	
@@ -14,17 +14,17 @@ public class Palabra{
 	
 	public Palabra(String palabra){ // constructora por defecto con palabra
 		pal=palabra;
-		freq = 1;
+	//	freq = 1;
 	}
 	
 	//modificadoras
 	
 	public void setPalabra(String valorpalabra) { // modifica la palabra y inicializa con frecuencia 1;
 		pal = valorpalabra;
-		freq = 1;
+	//	freq = 1;
 	}
 	
-	public void sumfreq() { // augmenta la frecuencia en uno
+	/*public void sumfreq() { // augmenta la frecuencia en uno
 		if(!pal.isEmpty()) ++freq;
 	}
 	
@@ -38,7 +38,7 @@ public class Palabra{
 	public int freq() { //devuelve la frecuencia de la palabra en forma de entero
 		return freq;
 	}
-	
+	*/
 	public String getPalabra() { //devuelve la palabra en forma de String
 		return pal;
 	}
