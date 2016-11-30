@@ -53,4 +53,13 @@ public class Element {
 	public boolean isaNot() {
 		return e.equals("not");
 	}
+	public boolean isAnd() {
+		return e.equals("and");
+	}
+	public boolean isOr() {
+		return e.equals("or");
+	}
+	public boolean isPalabra() {
+		return (!e.contains(" ") && !isParenthesis() && !isOperador() && !isKey());
+	}
 }

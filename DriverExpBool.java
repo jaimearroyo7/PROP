@@ -17,21 +17,21 @@ public class DriverExpBool {
 				System.out.print("\n");
 			}
 			System.out.print("Recorrido preorden: "); //llamada a getPreorden
-			ArrayList<String> pre = exp.getPreorden();
+			ArrayList<Element> pre = exp.getPreorden();
 			for (int i = 0; i<pre.size(); ++i) {
-				System.out.print(pre.get(i));
+				System.out.print(pre.get(i).getElement());
 				System.out.print("\n");
 			}
 			System.out.print("Recorrido inorden: "); //llamada a getInorden
-			ArrayList<String> in = exp.getInorden();
+			ArrayList<Element> in = exp.getInorden();
 			for (int i = 0; i<in.size(); ++i) {
-				System.out.print(in.get(i));
+				System.out.print(in.get(i).getElement());
 				System.out.print("\n");
 			}
 			System.out.print("Recorrido postorden: "); //llamada a getPostorden
-			ArrayList<String> post = exp.getPostorden();
+			ArrayList<Element> post = exp.getPostorden();
 			for (int i = 0; i<post.size(); ++i) {
-				System.out.print(post.get(i));
+				System.out.print(post.get(i).getElement());
 				System.out.print("\n");
 			}
 		}

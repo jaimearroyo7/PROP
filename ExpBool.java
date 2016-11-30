@@ -8,15 +8,21 @@ public class ExpBool {
 	private ArrayList<Element> post = new ArrayList<Element>();
 	private Nodo raiz = new Nodo();
 	// estos tres vectores guardan los tres recorridos posibles del arbol de expresion:
-	private ArrayList<String> recorrido_pre = new ArrayList<String>();	
-	private ArrayList<String> recorrido_post = new ArrayList<String>();
-	private ArrayList<String> recorrido_in = new ArrayList<String>();
+	private ArrayList<Element> recorrido_pre = new ArrayList<Element>();	
+	private ArrayList<Element> recorrido_post = new ArrayList<Element>();
+	private ArrayList<Element> recorrido_in = new ArrayList<Element>();
 	
 	//constructora
 	public ExpBool() {
 	}
 	
 	//getters
+	public ArrayList<Element> getPost() {
+		return post;
+	}
+	public Element get(int i) {
+		return elements.get(i);
+	}
 	public String getExpresio() {
 		return this.s;
 	}
@@ -26,13 +32,13 @@ public class ExpBool {
 	public Nodo getTree() {
 		return raiz;
 	}
-	public ArrayList<String> getPreorden() {
+	public ArrayList<Element> getPreorden() {
 		return recorrido_pre;
 	}
-	public ArrayList<String> getPostorden() {
+	public ArrayList<Element> getPostorden() {
 		return recorrido_post;
 	}
-	public ArrayList<String> getInorden() {
+	public ArrayList<Element> getInorden() {
 		return recorrido_in;
 	}
 	
@@ -252,30 +258,30 @@ public class ExpBool {
 		else return false;
 	}
 	
-	//imprime el recorrido en preorden dado un Nodo de un arbol
+	//guarda el recorrido en preorden dado un Nodo de un arbol
 	private void preorden(Nodo a) {
 		if (a != null) {
-			recorrido_pre.add(a.getInfo().getElement());
+			recorrido_pre.add(a.getInfo());
 			preorden(a.getfe());
 			preorden(a.getfd());
 		}
 	}
 	
-	//devuelve el recorrido en inorden dado un Nodo de un arbol
+	//guarda el recorrido en inorden dado un Nodo de un arbol
 	private void inorden(Nodo a) {
 		if (a != null) {
 			inorden(a.getfe());
-			recorrido_in.add(a.getInfo().getElement());
+			recorrido_in.add(a.getInfo());
 			inorden(a.getfd());
 		}
 	}
 	
-	//imprime el recorrido en postorden dado un Nodo de un arbol
+	//guarda el recorrido en postorden dado un Nodo de un arbol
 	private void postorden(Nodo a) {
 		if (a != null) {
 			postorden(a.getfe());
 			postorden(a.getfd());
-			recorrido_post.add(a.getInfo().getElement());
+			recorrido_post.add(a.getInfo());
 		}
 	}
 	

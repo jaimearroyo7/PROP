@@ -15,6 +15,30 @@ public class Frase {
 		separarPalabras();
 	}
 	
+	//retorna true si la frase contiene la palabra pasada como parametro
+	public boolean contiene (Palabra p) {
+		boolean trobat = false;
+		int i = 0;
+		while (!trobat && i<frase.size()) {
+			if (frase.get(i).equals(p)) trobat = true;
+			++i;
+		}
+		return trobat;
+	}
+	
+	//retorna true si la frase contiene el elemento pasado como parametro
+	public boolean contiene (Element e) {
+		boolean trobat = false;
+		int i = 0;
+		while (!trobat && i<frase.size()) {
+			Palabra p1 = new Palabra();
+			p1.setPalabra(e.getElement());
+			if (frase.get(i).equals(e)) trobat = true;
+			++i;
+		}
+		return trobat;
+	}
+	
 	// separa el string en palabras y las guarda en un ArrayList de palabras
 	private void separarPalabras() {
 		String f = this.f;
