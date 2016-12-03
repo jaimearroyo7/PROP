@@ -15,6 +15,11 @@ public class Frase {
 		separarPalabras();
 	}
 	
+	public void setFrase(String s) {
+		f = s;
+		separarPalabras();
+	}
+	
 	//retorna true si la frase contiene la palabra pasada como parametro
 	public boolean contiene (Palabra p) {
 		boolean trobat = false;
