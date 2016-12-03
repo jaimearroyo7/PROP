@@ -5,7 +5,7 @@ import java.util.*;
 public class ExpBool {
 	private String s = null;
 	private ArrayList<Element> elements = new ArrayList<Element>();
-	private ArrayList<Element> post = new ArrayList<Element>();
+	private ArrayList<Element> post = new ArrayList<Element>(); //post guarda la expresion en notacion postfija (sin parentesis)
 	private Nodo raiz = new Nodo();
 	// estos tres vectores guardan los tres recorridos posibles del arbol de expresion:
 	private ArrayList<Element> recorrido_pre = new ArrayList<Element>();	
@@ -57,6 +57,10 @@ public class ExpBool {
 			return 0;
 		}
 		else return -1;
+	}
+	
+	public int size() {
+		return post.size();
 	}
 	
 	//Crea un arrayList de Elementos a partir de un String expresion booleana

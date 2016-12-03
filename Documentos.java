@@ -28,6 +28,10 @@ public class Documentos {
 		historial = new HistoricoDocumentos();
 	}
 	
+	public Diccionario getDiccionario() {
+		return diccionario;
+	}
+	
 	//modificadoras
 	
 	public ArrayList<Documento> getDocs(){ return docs;}
@@ -217,8 +221,9 @@ public class Documentos {
 	
 	public int consultarDiccionario(String s) { // devuelve el numero de documentos en la que aparece una palabra 's'
 		return diccionario.numeroDeDocumentosCon(s);
-		//System.out.println(numeroDeDocumentosCon(s));
 	}
+	
+	
 	public ArrayList<String> consultarTitulos(String s) throws ParseException { // devuelve los titulos de 'Documentos' que aparecen en una fecha 's'
 		    
 		    ArrayList<String> p = new ArrayList<String>();
