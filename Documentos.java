@@ -260,4 +260,18 @@ public class Documentos {
 		}
 		return lp;
 	}
+
+
+	public ArrayList<Pair<String,String>> consultardocumentosparecidosconquery(String query, String k,
+																	   ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
+		//devuelve el 'titulo' y 'autor' de cada uno de los k documentos semejantes a la query
+		ArrayList<Pair<String,String>> lp = new ArrayList<Pair<String,String>>();
+        int n = Integer.parseInt(k);
+        List<Documento> l = cd.consultaDocumentosParecidosAQuery(query, n, diccionario, docs, mode);
+        for (Documento d: l) {
+            Pair<String,String> p = new Pair<String,String>(d.getTitulo(),d.getAutor());
+            lp.add(p);
+        }
+		return lp;
+	}
 }

@@ -10,7 +10,7 @@ public class DriverGenerico {
 		Scanner sc = new Scanner(System.in);
 		Texto t = new Texto();
 		String sf,q,h,p,m;
-		String opcion,opcion2;
+		String opcion,opcion2, query;
 		opcion = opcion2 = "0";
 		ArrayList<String> l1 = new ArrayList<String>();
 		ArrayList<Pair<String,Fecha>> lp = new ArrayList<Pair<String,Fecha>>();
@@ -128,7 +128,8 @@ public class DriverGenerico {
 							+ " (4) CONSULTAR CONTENIDO DE UN DOCUMENTO DADO SU TITULO Y SU AUTOR");
 					System.out.println("(5) CONSULTAR LISTA DE LOS ULTIMOS 10 DOCUMENTOS:"
 							+ " (6) NUMERO DE APARICIONES EN DOCUMENTOS DADA UNA PALABRA"
-							+ " (7) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR");
+							+ " (7) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN TITULO Y AUTOR"
+							+ " (8) CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UN QUERY");
 					opcion2 = sc.nextLine();
 					switch(opcion2) {
 							 case "1":
@@ -248,7 +249,25 @@ public class DriverGenerico {
 								 
 								 break;
 							 default: break;
-					}
+
+						case "8":
+							System.out.println("CONSULTA LOS K DOCUMENTOS MAS PARECIDOS DADO UNA QUERY");
+							System.out.println("Ingrese una query");
+							query = sc.nextLine();
+							System.out.println("Ingrese metodo para calcular tfidf\n"
+									+ "log\n"
+									+ "bool");
+							m = sc.nextLine();
+							if (m.equals("log")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
+							else if (m.equals("bool")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.BOOLEAN;
+							else  {
+								System.out.println("Modo incorrecto (por defecto se ejecutara logaritmico)");
+								mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
+							}
+							System.out.println("Ingrese numero maximo de documentos");
+                            ArrayList<Pair<String,String>> resultado = d.consultardocumentosparecidosconquery(query, sc.nextLine(),mode);
+                            for (Pair<String,String> res:resultado) System.out.println(res.first() + " - " + res.second());
+                    }
 					break;
 			    case "4": opcion= "4"; break;
 				default: break;

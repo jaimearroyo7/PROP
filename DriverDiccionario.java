@@ -23,6 +23,7 @@ public class DriverDiccionario {
         Diccionario dic = new Diccionario();
         dic.addTextoDocumento(d1);
         dic.addTextoDocumento(d2);
+        dic.addTextoDocumento(d3);
 
         System.out.println("Estos son tus documentos por defecto:\n"
                 + "Documento 1:\n"
@@ -68,7 +69,7 @@ public class DriverDiccionario {
                 case "3":
                     System.out.println("introduce palabra p: ");
                     n = dic.indicePalabra(sc.nextLine());
-                    System.out.println("numero de documentos con esta palabra: " + n);
+                    System.out.println("la palabra tiene indice: " + n);
                     break;
                 case "4":
                     opcion = "4";

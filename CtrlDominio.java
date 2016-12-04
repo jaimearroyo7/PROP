@@ -15,9 +15,9 @@ public class CtrlDominio {
 	public CtrlDominio() throws IOException, ParseException{
 		CP = new CtrlPersistencia();
 		d = new Documentos();
-		ArrayList<String> docs = CP.datos("/home/jaime/workspace/PROP/src/persistencia/datos");
+		ArrayList<String> docs = CP.datos("/home/jaime/workspace/dominio/src/persistencia/datos");
 		for(int i = 0; i < docs.size(); ++i){
-			String direccion = "/home/jaime/workspace/PROP/src/persistencia/datos/" + docs.get(i); 
+			String direccion = "/home/jaime/workspace/dominio/src/persistencia/datos/" + docs.get(i);
 			FileReader f = new FileReader(direccion);
 	        BufferedReader b = new BufferedReader(f);
 	        Documento d1 = new Documento();

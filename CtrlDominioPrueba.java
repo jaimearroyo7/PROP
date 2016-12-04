@@ -45,7 +45,7 @@ public class CtrlDominioPrueba {
 		doc.addDoc(d3);
 		
 		c.acabar();
-	//	File fichero = new File("/home/jaime/workspace/PROP/src/persistencia/datos/documento1.txt");
+	//	File fichero = new File("/home/jaime/workspace/dominio/src/persistencia/datos/documento1.txt");
 	//	fichero.delete();
 	}
 

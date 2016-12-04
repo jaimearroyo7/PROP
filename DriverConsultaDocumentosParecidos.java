@@ -40,39 +40,7 @@ public class DriverConsultaDocumentosParecidos {
                 + "  Categoria: " + d3.getCategoria() + "\n"
                 + "  Texto: " + d3.getTexto().getTexto() + "\n");
 
-        System.out.println("Seleccione que documento (d1, d2 o d3) quiere utilizar para buscar " +
-                "los documentos más parecidos a este");
-        d = sc.nextLine();
-        if (d.equals("d1")) d4 = d1;
-        else if (d.equals("d2")) d4 = d2;
-        else if (d.equals("d3")) d4 = d3;
-        else {
-            System.out.println("Documento incorrecto (por defecto se ejecutara d1)");
-            d4 = d1;
-        }
 
-
-        System.out.println("Ingrese metodo para calcular tfidf:\n"
-                + "  log\n"
-                + "  bool");
-        m = sc.nextLine();
-        if (m.equals("log")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
-        else if (m.equals("bool")) mode = ConsultaDocumentosParecidos.TFIDF_MODE.BOOLEAN;
-        else {
-            System.out.println("Modo incorrecto (por defecto se ejecutara logaritmico)");
-            mode = ConsultaDocumentosParecidos.TFIDF_MODE.LOG;
-        }
-
-        System.out.println("Ingrese cuantos n documentos parecidos quiere obtener:");
-        n = sc.nextLine();
-
-        List<Pair<String, String>> lista;
-        lista = docs.consultardocumentosparecidos(d4.getTitulo(), d4.getAutor(), n, mode);
-        for (Pair<String, String> documento: lista) {
-            System.out.println("Título: " + documento.first() + " Autor: " + documento.second());
-        }
-        System.out.println("consulta terminada");
-        sc.close();
     }
 }
 

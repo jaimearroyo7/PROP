@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.TreeMap;
 
 /**
- * Created by mhitz on 3/11/16. feat rvillalba :)
+ * Created by mhitz on 3/11/16.
  */
 public class Diccionario {
     private static class ContenidoDiccionario {

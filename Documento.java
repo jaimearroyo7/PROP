@@ -110,10 +110,10 @@ public class Documento {
                     }
 
                     if(found == 0){
-                    Pair<String, Integer> pair = new Pair<String, Integer>();
-                    pair.setFirst(actual);
-                    pair.setSecond(1);
-                    palabras.add(pair);
+						Pair<String, Integer> pair = new Pair<String, Integer>();
+						pair.setFirst(actual);
+						pair.setSecond(1);
+						palabras.add(pair);
                     }
 			    }
 			}
@@ -142,6 +142,6 @@ public class Documento {
 		return s;
 				
 	}
-	
-	
+
+
 }

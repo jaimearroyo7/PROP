@@ -1,4 +1,5 @@
 package dominio;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -13,17 +14,16 @@ ConsultaDocumentosParecidos {
     public enum TFIDF_MODE {
         LOG, BOOLEAN
     }
+
         //dado un documento d, el diccionario de palabras y la lista entera de documentos, consulta todos los
         // documentos y devuelve los n documentos mas parecidos a d utilizando el modelo de calculo de espacio
         // vectorial
-    public List<Documento> consultaDocumentosParecidos(Documento d1, int n, Diccionario diccionario,
-                                                       ArrayList<Documento> documentos, TFIDF_MODE mode) {
-        this.diccionario = diccionario;
-        this.documentos = documentos;
+    private List<Documento> obtenerDocumentosParecidos(SparseArray<PalabraPeso> d1, int n, TFIDF_MODE mode) {
+
         ArrayList<Pair<Documento, Double>> cosinesDoc = new ArrayList<>();
 
         for (Documento d2: documentos) {
-            cosinesDoc.add(new Pair<>(d2, cosineSimilarity(d1, d2, mode)));
+            cosinesDoc.add(new Pair<>(d2, cosineSimilarity(d1, getArrayPesosDe(d2, mode), mode)));
         }
 
         Collections.sort(cosinesDoc, new Comparator<Pair<Documento, Double>>() {
@@ -39,13 +39,34 @@ ConsultaDocumentosParecidos {
         int m = 0;
 
         for (Pair<Documento,Double> pairDoc: cosinesDoc) {
-            if (pairDoc.first()!=d1) {
                 resultado.add(pairDoc.first());
                 if (++m == n) break;
-            }
         }
          return resultado;
     }
+
+    public List<Documento> consultaDocumentosParecidos(Documento d1, int n, Diccionario diccionario,
+                                                        ArrayList<Documento> documentos, TFIDF_MODE mode) {
+        this.diccionario = diccionario;
+        this.documentos = documentos;
+        List<Documento> resultado = obtenerDocumentosParecidos(getArrayPesosDe(d1, mode), n, mode);
+        if (resultado.contains(d1)) resultado.remove(d1);
+        return resultado;
+    }
+
+    public List<Documento> consultaDocumentosParecidosAQuery(String query, int n, Diccionario diccionario,
+                                                       ArrayList<Documento> documentos, TFIDF_MODE mode) {
+        this.diccionario = diccionario;
+        this.documentos = documentos;
+        try {
+            Documento queryDoc = new Documento("","","", query);
+            return obtenerDocumentosParecidos(getArrayPesosDe(queryDoc, mode), n, mode);
+        } catch (IOException exception) {
+            System.err.println("No se ha podido leer el fichero");
+        }
+        return null;
+    }
+
 
         //devuelve el valor tfidf de una palabra
     private double tfidf(String palabra, Documento documento, TFIDF_MODE mode) {
@@ -74,6 +95,7 @@ ConsultaDocumentosParecidos {
         return Math.log((double)documentos.size()/diccionario.numeroDeDocumentosCon(palabra));
     }
 
+    
         //devuelve el array de las palabras de un documento con sus pesos calculados a partir de tfidf
     private SparseArray<PalabraPeso> getArrayPesosDe(Documento documento, TFIDF_MODE mode) {
         SparseArray<PalabraPeso> arrayPesos = new SparseArray<>(diccionario.getNumeroDePalabras());
@@ -84,11 +106,10 @@ ConsultaDocumentosParecidos {
         }
         return arrayPesos;
     }
+
         // calcula la similitud de dos documentos a partir de su array de pesos donde se determina su semejanza a partir
         // de un coseno obtenido por un metodo de calculo de espacio vectorial
-    private double cosineSimilarity(Documento d1, Documento d2, TFIDF_MODE mode) {
-        SparseArray<PalabraPeso> tf1 = getArrayPesosDe(d1, mode);
-        SparseArray<PalabraPeso> tf2 = getArrayPesosDe(d2, mode);
+    private double cosineSimilarity(SparseArray<PalabraPeso> tf1, SparseArray<PalabraPeso> tf2, TFIDF_MODE mode) {
         double dotProduct = 0.0;
         double normA = 0.0;
         double normB = 0.0;
