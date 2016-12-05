@@ -4,43 +4,44 @@ import java.text.ParseException;
 import java.util.*;
 
 public class ConsultaBooleana {
-	private ArrayList<Documento> llista = new ArrayList<Documento>(); //llista conté tots els documents que compleixen lexpressio exp.
+	Documentos docs = new Documentos();
 	private ExpBool exp = new ExpBool();
 	
 	//constructores
-	public ConsultaBooleana() {
-		
-	}
+	public ConsultaBooleana() {}
 	
 	public ConsultaBooleana(Documentos docs, String  s) throws ParseException, IOException {
 		exp.setExpresio(s);
-		consulta(docs);
+		this.docs = docs;
+		consulta();
 	}
 	
 	//publics
 	//getter
+	//retorna el resultat de la consulta booleana en forma de llista de documents
 	public ArrayList<Documento> getResult() {
-		return llista;
+		return exp.getTree().getAcumulat();
 	}
 	
 	//setter
 	public void setExpresio (Documentos docs, String s) throws ParseException, IOException {
+		this.docs = docs;
 		exp.setExpresio(s);
-		consulta(docs);
+		consulta();
 	}
 	
 	//privats
 	
-	//fa el NOT de un array: el resultat es un array amb tots els elements de complet que no estan en a.
-	private ArrayList<Documento> notDocs(ArrayList<Documento> a, ArrayList<Documento> complet) {
-		ArrayList<Documento> res = new ArrayList<Documento>();
-		for (int i=0; i<a.size(); ++i) {
-			if (!a.contains(complet.get(i))) res.add(complet.get(i));
+	//fa el NOT dun array: el resultat es un array amb tots els elements de "complet" que no estan en "a".
+	private ArrayList<Documento> notDocs(ArrayList<Documento> a) {
+		ArrayList<Documento> res = docs.getDocs();
+		for (int i=0; i<res.size(); ++i) {
+			if (a.contains(res.get(i))) res.remove(res.get(i));
 		}
 		return res;
 	}
 	
-	//fa la AND de dos arrays: retorna un array amb els elements que estan en a i en b a la vegada.
+	//fa la AND de dos arrays: retorna un array amb els elements que estan en "a" i en "b" a la vegada.
 	private ArrayList<Documento> andDocs (ArrayList<Documento> a, ArrayList<Documento> b) {
 		ArrayList<Documento> res = new ArrayList<Documento>();
 		for (int i = 0; i<a.size(); ++i) {
@@ -49,7 +50,7 @@ public class ConsultaBooleana {
 		return res;
 	}
 	
-	// fa la OR de dos arrays: el resultat es un array amb els elements de a i b que estan en a o que estan en b
+	// fa la OR de dos arrays: el resultat es un array amb els elements de "a" i "b" que estan en "a" o que estan en "b"
 	private ArrayList<Documento> orDocs (ArrayList<Documento> a, ArrayList<Documento> b) {
 		ArrayList<Documento> res = a;
 		for (int i = 0; i<b.size(); ++i) {
@@ -99,48 +100,39 @@ public class ConsultaBooleana {
 	}*/
 	
 	//retorna la llista de documents que contenen la paraula "e"
-	private ArrayList<Documento> filtra(ArrayList<Documento> ld, Element e) throws ParseException, IOException {
-		Documentos conj = new Documentos();
-		for (int i = 0; i<ld.size(); ++i) {
-			conj.addDoc(ld.get(i));
-		}
+	private ArrayList<Documento> filtra(Element e) throws ParseException, IOException {
 		String p = e.getElement();
-		ArrayList<Documento> res = conj.getDiccionario().getDocumentosConPalabra(p);
+		ArrayList<Documento> res = docs.getDiccionario().getDocumentosConPalabra(p);
 		return res;
 	}
 	
-	//omple latribut "llista" amb els documents que compleixen lexpressio booleana "exp".
-	private void consulta(Documentos docs) throws ParseException, IOException {
-		ArrayList<Documento> ld = docs.getDocs();
-		ArrayList<Documento> act = ld;
-		ArrayList<Documento> aux = new ArrayList<Documento>();
-		ArrayList<Element> post = exp.getPost();
-		boolean primer = true;
-		
-		for (int i = 0; i<exp.size(); ++i) {
-			if (post.get(i).isPalabra()) {
-				if (primer) {
-					act = filtra(act, exp.get(0));
+	//avalua larbre dexpressio "exp"
+	private void consulta() throws ParseException, IOException {
+		Nodo raiz = exp.getTree();
+		if (raiz != null) avalua(raiz);
+	}
+	
+	private void avalua(Nodo n) throws ParseException, IOException {
+		if (n != null) {
+			avalua(n.getfe());
+			avalua(n.getfd());
+			if (n.getInfo().isPalabra()) { //si estic en una fulla de tipus paraula
+				n.setAcumulat(filtra(n.getInfo()));
+			}
+			else if (n.getInfo().isOperador()) { //si NO estic en una fulla
+				if (n.getInfo().isAnd()) {
+					n.setAcumulat(andDocs(n.getfe().getAcumulat(), n.getfd().getAcumulat()));
 				}
-				else {
-					aux = filtra(act, exp.get(0));
+				else if (n.getInfo().isOr()) {
+					n.setAcumulat(orDocs(n.getfe().getAcumulat(), n.getfd().getAcumulat()));
+				}
+				else if (n.getInfo().isaNot()) {
+					n.setAcumulat(notDocs(n.getfe().getAcumulat()));
 				}
 			}
-			else {
-				primer = false;
-				if (post.get(i).isAnd()) { //AND --> guarda el resultat a act
-					act = andDocs(act, aux);
-				}
-				else if (post.get(i).isOr()) { //OR --> guarda el resultat a act
-					act = orDocs(act, aux);
-				}
-				else { //NOT --> guarda el resultat a act
-					act = notDocs(act, docs.getDocs());
-				}
+			else { //node fulla de tipus frase
+				
 			}
-		}
-		for (int j =  0; j<act.size(); ++j) {
-			llista.add(act.get(j));
 		}
 	}
 }

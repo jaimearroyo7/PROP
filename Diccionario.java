@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.TreeMap;
 
 /**
- * Created by mhitz on 3/11/16.
+ * Created by mhitz on 3/11/16. feat rvillalba :)
  */
 public class Diccionario {
     private static class ContenidoDiccionario {
@@ -102,9 +102,11 @@ public class Diccionario {
     }
 
     public ArrayList<Documento> getDocumentosConPalabra(String palabra) {
-        ArrayList<Documento> lista = new ArrayList<>();
-        for (Documento documento: diccionario.get(palabra).documentos) {
-            lista.add(documento);
+        ArrayList<Documento> lista = new ArrayList<Documento>();
+        if (diccionario.get(palabra) != null) {
+        	for (Documento documento: diccionario.get(palabra).documentos) {
+        		lista.add(documento);
+        	}
         }
         return lista;
     }

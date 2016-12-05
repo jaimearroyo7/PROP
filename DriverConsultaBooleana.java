@@ -9,7 +9,7 @@ public class DriverConsultaBooleana {
 	public static void main(String[] args) throws IOException, ParseException {
 		Documentos docs = new Documentos();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Tendra que introducir 3 documentos");
+		System.out.println("Entre 3 documentos");
 		int i = 0;
 		while (i<3) {
 			Documento d = new Documento();
@@ -20,22 +20,32 @@ public class DriverConsultaBooleana {
 			System.out.println("Ingrese categoria:");
 			d.setCategoria(sc.nextLine());
 			Texto t = new Texto();
-			System.out.println("Ingrese el texto:");
+			System.out.println("Ingrese texto:");
 			t.setTexto(sc.nextLine());
 			d.setTexto(t);
 			docs.addDoc(d);
 			++i;
 		}
-		System.out.println("Ingrese la expresion booleana: ");
-		String expresio = sc.nextLine();
-		consultaBooleana c = new consultaBooleana(docs, expresio);
-		System.out.println(c.getResult().size());
-		for (int j = 0; j<c.getResult().size(); ++j) {
-			System.out.println(c.getResult().get(j).getTitulo());
-			System.out.println(c.getResult().get(j).getAutor());
-			System.out.println();
+		System.out.println("Conjunto de documentos: ");
+		ArrayList<Documento> llista = docs.getDocs();
+		for (int k = 0; k<llista.size(); ++k) {
+			System.out.println(llista.get(k).getTitulo());
+			System.out.println(llista.get(k).getAutor());
+		}
+		System.out.println("Escriba 'FIN' para terminar");
+		boolean acaba = false;
+		while (!acaba) {
+			if (sc.nextLine() == "FIN") acaba = true;
+			System.out.println("Ingrese la expresion booleana: ");
+			String expresio = sc.nextLine();
+			ConsultaBooleana c = new ConsultaBooleana(docs, expresio);
+			System.out.println(c.getResult().size());
+			for (int j = 0; j<c.getResult().size(); ++j) {
+				System.out.println(c.getResult().get(j).getTitulo());
+				System.out.println(c.getResult().get(j).getAutor());
+				System.out.println();
+			}
 		}
 		sc.close();
 	}
-
 }
