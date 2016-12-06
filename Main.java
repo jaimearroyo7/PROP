@@ -1,4 +1,4 @@
-package interfaz;
+package interficie;
 
 import java.io.IOException;
 
