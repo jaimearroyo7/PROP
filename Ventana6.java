@@ -45,7 +45,8 @@ public class Ventana6 extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
+		this.setLocationRelativeTo(null);
 		JLabel lblPrefijo = new JLabel("Prefijo:");
 		lblPrefijo.setBounds(67, 23, 70, 15);
 		contentPane.add(lblPrefijo);

@@ -12,13 +12,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Point;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private boolean volver;
 
+	
 	public Principal(final CtrlPresentacio c) {
+		setLocation(new Point(0, 0));
 		volver = false;
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,6 +32,8 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setLocationRelativeTo(null);
 		
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.addActionListener(new ActionListener() {
@@ -85,8 +92,8 @@ public class Principal extends JFrame {
 		btnModificar.setBounds(56, 123, 369, 25);
 		contentPane.add(btnModificar);
 		
+		
 	}
-	public Principal() {}
 	public boolean getVolver() {
 		return volver;
 	}

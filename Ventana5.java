@@ -35,14 +35,7 @@ public class Ventana5 extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
 	
-
-	/**
-	 * Create the frame.
-	 */
 	public Ventana5(final CtrlPresentacio c) {
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +44,8 @@ public class Ventana5 extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
+		this.setLocationRelativeTo(null);
 		textField = new JTextField();
 		textField.setBounds(138, 27, 119, 19);
 		contentPane.add(textField);

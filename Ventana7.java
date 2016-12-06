@@ -51,7 +51,8 @@ public class Ventana7 extends JFrame {
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
-			
+
+			this.setLocationRelativeTo(null);
 			JLabel lblCampoAModificar = new JLabel("Campo a modificar:");
 			lblCampoAModificar.setBounds(37, 12, 151, 15);
 			contentPane.add(lblCampoAModificar);

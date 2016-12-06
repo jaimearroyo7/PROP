@@ -41,7 +41,8 @@ public class Ventana2 extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
+		this.setLocationRelativeTo(null);
 		final Documento d = new Documento();
 		
 		final JLabel errortit = new JLabel("Introduce un título!");

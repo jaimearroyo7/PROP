@@ -37,7 +37,8 @@ public class Ventana8 extends JFrame {
 		buscar.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(buscar);
 		buscar.setLayout(null);
-		
+
+		this.setLocationRelativeTo(null);
 		titulo = new JTextField();
 		titulo.setBounds(104, 12, 311, 19);
 		buscar.add(titulo);
