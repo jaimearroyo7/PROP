@@ -39,10 +39,10 @@ public class DriverConsultaBooleana {
 			System.out.println("Ingrese la expresion booleana: ");
 			String expresio = sc.nextLine();
 			ConsultaBooleana c = new ConsultaBooleana(docs, expresio);
-			System.out.println(c.getResult().size());
-			for (int j = 0; j<c.getResult().size(); ++j) {
-				System.out.println(c.getResult().get(j).getTitulo());
-				System.out.println(c.getResult().get(j).getAutor());
+			
+			for (int j = 0; j<c.getDocs().size(); ++j) {
+				System.out.println(c.getDocs().get(j).first().getTitulo());
+				System.out.println(c.getDocs().get(j).first().getAutor());
 				System.out.println();
 			}
 		}

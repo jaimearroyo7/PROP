@@ -1,4 +1,5 @@
 package dominio;
+
 import java.util.*;
 
 public class Nodo {
@@ -7,7 +8,10 @@ public class Nodo {
 	private boolean operando;
 	private Nodo esq = null;	
 	private Nodo dret = null;
-	private ArrayList<Documento> d = new ArrayList<Documento>();
+	// el arraylist "d" guarda una lista de los documentos con sus identificadores de cada frase que cumplen la expresion booleana
+	//del nodo actual y su subarbol
+	private ArrayList<Pair<Documento, ArrayList<Integer>>> d = new ArrayList<Pair<Documento, ArrayList<Integer>>>();
+
 
 	//constructoras
 	public Nodo(Element info) {
@@ -46,7 +50,7 @@ public class Nodo {
 	public Nodo getfd() {
 		return this.dret;
 	}
-	public ArrayList<Documento> getAcumulat() {
+	public ArrayList<Pair<Documento, ArrayList<Integer>>> getAcumulat() {
 		return d;
 	}
 
@@ -69,7 +73,7 @@ public class Nodo {
 		esq = null;
 		dret = null;
 	}
-	public void setAcumulat(ArrayList<Documento> llista) {
+	public void setAcumulat(ArrayList<Pair<Documento, ArrayList<Integer>>> llista) {
 		d = llista;
 	}
 

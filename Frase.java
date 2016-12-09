@@ -25,7 +25,7 @@ public class Frase {
 		boolean trobat = false;
 		int i = 0;
 		while (!trobat && i<frase.size()) {
-			if (frase.get(i).equals(p)) trobat = true;
+			if (frase.get(i).getPalabra().equals(p.getPalabra())) trobat = true;
 			++i;
 		}
 		return trobat;
@@ -36,9 +36,7 @@ public class Frase {
 		boolean trobat = false;
 		int i = 0;
 		while (!trobat && i<frase.size()) {
-			Palabra p1 = new Palabra();
-			p1.setPalabra(e.getElement());
-			if (frase.get(i).equals(e)) trobat = true;
+			if (frase.get(i).getPalabra().equals(e.getElement())) trobat = true;
 			++i;
 		}
 		return trobat;
