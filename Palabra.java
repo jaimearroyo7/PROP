@@ -1,6 +1,9 @@
 
 package dominio;
-public class Palabra{ 
+
+import java.io.Serializable;
+
+public class Palabra implements Serializable{ 
 
 	
 	// atributos
@@ -41,6 +44,11 @@ public class Palabra{
 	*/
 	public String getPalabra() { //devuelve la palabra en forma de String
 		return pal;
+	}
+	
+	public Element toElement() {
+		Element e = new Element(pal);
+		return e;
 	}
 	
 }
