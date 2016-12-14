@@ -4,12 +4,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import dominio.Documento;
 import dominio.Documentos;
 
-public class CtrlPersistencia {
+public class CtrlPersistencia implements Serializable{
 
 	public CtrlPersistencia(){
 		
@@ -17,7 +18,7 @@ public class CtrlPersistencia {
 	
 	public ArrayList<String> datos(String direccion){
 		ArrayList<String> d = new ArrayList<String>();
-		//File f = new File("/home/jaime/workspace/dominio/src/persistencia/datos");
+		//File f = new File("/home/jaime/workspace/PROP/src/persistencia/datos");
 		File f = new File(direccion);
 		File[] ficheros = f.listFiles();
 		for (int i = 0; i < ficheros.length ; i++){
@@ -30,7 +31,7 @@ public class CtrlPersistencia {
 	}
 	
 	public void acabar(ArrayList<Documento> d) throws IOException{
-		String direccion = "/home/jaime/workspace/dominio/src/persistencia/datos";
+		String direccion = "/home/jaime/workspace/PROP/src/persistencia/datos";
 		File f = new File(direccion);
 		File[] ficheros = f.listFiles();
 		for (int i = 0; i < ficheros.length ; i++){
@@ -39,7 +40,7 @@ public class CtrlPersistencia {
 		File[] files = new File[d.size()];
 		BufferedWriter[] bw = new BufferedWriter[d.size()];
 		for(int j = 0; j < d.size(); ++j){
-			direccion = "/home/jaime/workspace/dominio/src/persistencia/datos/documento" + j + ".txt";
+			direccion = "/home/jaime/workspace/PROP/src/persistencia/datos/documento" + j + ".txt";
 			files[j] = new File(direccion);
 			bw[j] = new BufferedWriter(new FileWriter(files[j]));
 			bw[j].write(d.get(j).getTitulo() + "\n");

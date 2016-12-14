@@ -1,47 +1,69 @@
-package interficie;
+package interfaz;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.text.ParseException;
 
 import dominio.CtrlDominio;
+import dominio.Frase;
 
-public class CtrlPresentacio {
+public class CtrlPresentacio implements Serializable{
 	
-	private CtrlDominio cd;
+	private CtrlDominio cd = null;
+	private static final long serialVersionUID = 4272754599287642639L;
 	
-	private Principal p1;
-	private Ventana2 p2;
-	private Ventana3 p3;
-	private Ventana4 p4;
-	private Ventana5 p5;
-	private Ventana6 p6;
-	private Ventana7 p7;
-	private Ventana8 p8;
-	private Ventana9 p9;
+	private Pant1 p1 = null;
+	private Pant2 p2 = null;
+	private Pant3 p3 = null;
+	private Pant4 p4 = null;
+	private Pant5 p5 = null;
 	
 	public CtrlPresentacio(){
 		
+	}
+	
+	public void empezar(){
 		try {
 			cd = new CtrlDominio();
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		p1 = new Principal(this);
-		
+		p1 = new Pant1(this);
 	}
+	
 	public CtrlDominio cd(){ return cd;}
 	
-	public void llamarp1(){ p1 = new Principal(this); }
-	public boolean getvolver() { return p1.getVolver(); }
-	public void llamarp2(){ p2 = new Ventana2(this); }
-	public void llamarp3(){ p3 = new Ventana3(this); }
-	public String gettitulo() { return p3.gettitulo(); }
-	public String getautor() { return p3.getautor(); }
-	public void llamarp4(){ p4 = new Ventana4(this); }
-	public void llamarp5(){ p5 = new Ventana5(this); }
-	public void llamarp6(){ p6 = new Ventana6(this); }
-	public void llamarp7(){ p7 = new Ventana7(this); }
-	public void llamarp8(){ p8 = new Ventana8(this); }
-	public void llamarp9(){ p9 = new Ventana9(this); }
+	public void llamarp1(){ p1 = new Pant1(this); }
+	public void llamarp2(){ p2 = new Pant2(this); }
+	public void llamarp3(){ p3 = new Pant3(this); }
+	public void llamarp4(){ p4 = new Pant4(this); }
+	public void llamarp5(){ p5 = new Pant5(this); }
+	
+	public void writeToFile() throws FileNotFoundException, IOException{
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data.bin"));
+		oos.writeObject(this);
+	}
+	
+	public CtrlPresentacio readFile() throws FileNotFoundException, IOException, ClassNotFoundException{
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.bin"));
+		CtrlPresentacio cp = (CtrlPresentacio) ois.readObject();
+		return cp;
+	}
+	
+	public void acabar() throws IOException{
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("/home/jaime/workspace/PROP/src/persistencia/datos/data.bin"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		oos.writeObject(cd.conjunto());
+	}
 }
