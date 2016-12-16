@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.*;
 // Representa un conjunto de Documentos
 
-public class Documentos {
+public class Documentos implements Serializable{
 	
 	//atributos
 	
@@ -15,6 +15,7 @@ public class Documentos {
 	private Diccionario diccionario;
 	private ConsultaDocumentosParecidos cd;
 	private HistoricoDocumentos historial;
+	
 	
 	//constructora
 	
@@ -109,23 +110,27 @@ public class Documentos {
 				trobat = true;
 			}
 		}
+		Documento d1 = new Documento();
+		d1.setTitulo(nuevo.getTitulo());
+		d1.setAutor(nuevo.getAutor());
+		d1.setCategoria(nuevo.getCategoria());
+		d1.setTexto(nuevo.getTexto());
 		if (trobat) {
-			
-				if(campo.equals("autor")){
-					nuevo.setAutor(value);
+			if(campo.equals("autor")){
+					d1.setAutor(value);
 				}
 				else if(campo.equals("titulo")){
-					nuevo.setTitulo(value);
+					d1.setTitulo(value);
 				}
 				else if(campo.equals("categoria")){
-					nuevo.setCategoria(value);
+					d1.setCategoria(value);
 				}
 				else if(campo.equals("texto")){
 					Texto actualizado = new Texto(value);
-					nuevo.setTexto(actualizado);
+					d1.setTexto(actualizado);
 				}
 				if(borrardoc(titulo,autor) == 1) {
-					addDoc(nuevo);
+					addDoc(d1);
 					return 1;
 				}
 				else return -2;	
@@ -234,6 +239,33 @@ public class Documentos {
 				}  
 			}
 			return p;
+	}
+public ArrayList<Pair<String,String>> consultarCategoria(String cat) {
+		
+		ArrayList<Pair<String,String>> lp = new ArrayList<Pair<String,String>>();
+		Pair<String,String> p = new Pair<String,String>();
+	    for(int i = 0; i < docs.size();++i) {
+	    	if(docs.get(i).getCategoria() == cat) {
+	    		p.setFirst(docs.get(i).getTitulo());
+				p.setSecond(" - " + docs.get(i).getAutor());
+				lp.add(p);
+	    	}
+	    }
+		return lp;  
+	}
+	public ArrayList<Pair<String,String>> consultarAutoryTituloDadoFecha(String s) throws ParseException { //de aquellos documentos que esten dentro de una fecha
+		 
+		    ArrayList<Pair<String,String>> lp = new ArrayList<Pair<String,String>>();
+			ArrayList<Documento> l1 = mapfecha.get(s);
+			Pair<String,String> p = new Pair<String,String>();
+			if(l1 != null) {
+				for(int y = 0; y < l1.size();++y) {
+				   p.setFirst(l1.get(y).getTitulo());
+				   p.setSecond(" - " + l1.get(y).getAutor());
+				   lp.add(p);
+				}  
+			}
+			return lp;
 	}
 	public ArrayList<Pair<String,String>> consultardocumentosparecidos(String titulo, String autor, String k,
             ConsultaDocumentosParecidos.TFIDF_MODE mode) throws IOException {
