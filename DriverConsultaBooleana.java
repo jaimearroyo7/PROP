@@ -1,10 +1,11 @@
 package dominio;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.*;
 
-public class DriverConsultaBooleana {
+public class DriverConsultaBooleana implements Serializable{
 
 	public static void main(String[] args) throws IOException, ParseException {
 		Documentos docs = new Documentos();
@@ -40,9 +41,9 @@ public class DriverConsultaBooleana {
 			String expresio = sc.nextLine();
 			ConsultaBooleana c = new ConsultaBooleana(docs, expresio);
 			
-			for (int j = 0; j<c.getDocs().size(); ++j) {
-				System.out.println(c.getDocs().get(j).first().getTitulo());
-				System.out.println(c.getDocs().get(j).first().getAutor());
+			for (int j = 0; j<c.getResult().size(); ++j) {
+				System.out.println(c.getResult().get(j).getTitulo());
+				System.out.println(c.getResult().get(j).getAutor());
 				System.out.println();
 			}
 		}

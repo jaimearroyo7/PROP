@@ -3,15 +3,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.*;
 
-public class ConsultaBooleana {
+public class ConsultaBooleana implements Serializable{
 	private Documentos docs = new Documentos();
 	private ExpBool exp = new ExpBool(); //L'arbre de "exp" guarda el resultat de la consulta
 	private ArrayList<Pair<Documento, ArrayList<Integer>>> cmp = new ArrayList<Pair<Documento, ArrayList<Integer>>>();
 	private ArrayList<String> nf = new ArrayList<String>();//llista de paraules no funcionals
-	
+	private ArrayList<Documento> result = new ArrayList<Documento>();
 	//constructores
 	public ConsultaBooleana() throws FileNotFoundException {
 		cargaNF();
@@ -23,13 +24,20 @@ public class ConsultaBooleana {
 		cargaNF();
 		creaAcumulatComplet();
 		consulta();
+		for (int i=0; i<exp.getTree().getAcumulat().size(); ++i) {
+			result.add(exp.getTree().getAcumulat().get(i).first());
+		}
+	}
+	
+	public ExpBool getExpBool(){
+		return exp;
 	}
 	
 	//publics
 	//getter
-	//retorna una llista de documents que compleixen la expresio "exp" (en el conjunt de tot el document)
-	public ArrayList<Pair<Documento, ArrayList<Integer>>> getDocs() {
-		return exp.getTree().getAcumulat();
+	
+	public ArrayList<Documento> getResult() {
+		return result;
 	}
 
 	//setter
@@ -38,12 +46,15 @@ public class ConsultaBooleana {
 		exp.setExpresio(s);
 		creaAcumulatComplet();
 		consulta();
+		for (int i=0; i<exp.getTree().getAcumulat().size(); ++i) {
+			result.add(exp.getTree().getAcumulat().get(i).first());
+		}
 	}
 	
 	//privats
 	private void cargaNF() throws FileNotFoundException {
 		String s;
-	    FileReader f2 = new FileReader("/Users/Laura/workspace/ProjecteProgramacio/src/dominio/lista");
+	    FileReader f2 = new FileReader("src/dominio/lista");
 	    BufferedReader b2 = new BufferedReader(f2);
 	    try {
 			while((s = b2.readLine())!=null) {
@@ -65,6 +76,7 @@ public class ConsultaBooleana {
 		return res;
 	}
 	
+	//omple latribut cmp, que es una llista amb tots els documents i els identificadors de cada una de les seves frases
 	private void creaAcumulatComplet() {
 		for (int i=0; i<docs.getDocs().size(); ++i) {
 			Pair<Documento, ArrayList<Integer>> aux = new Pair<Documento, ArrayList<Integer>>();
@@ -76,28 +88,28 @@ public class ConsultaBooleana {
 	
 	//fa el NOT dun array: el resultat es un array amb tots els elements de "complet" que no estan en "a".
 	// als docs de a, faig el not a les frases
-	// afegeixo tots els docs amb totes les frases 
+	// afegeixo tots els docs que no hi son, amb totes les frases
 	private ArrayList<Pair<Documento, ArrayList<Integer>>> notDocs(ArrayList<Pair<Documento, ArrayList<Integer>>> a) {
 		ArrayList<Pair<Documento, ArrayList<Integer>>> res  = new ArrayList<Pair<Documento, ArrayList<Integer>>>();
-		//ArrayList<Documento> documents = docs.getDocs();
-		for (int k=0; k<cmp.size(); ++k) {
+		for (int k=0; k<cmp.size(); ++k) { //recorro tots els docs
 			int contains = containsDoc(a, cmp.get(k).first()); 
-			if (contains > 0) {
+			if (contains >= 0) {
 				
 				Pair<Documento, ArrayList<Integer>> aux = new Pair<Documento, ArrayList<Integer>>();
 				aux.setFirst(cmp.get(k).first());
 				aux.setSecond(notFrases(cmp.get(k).second(), a.get(contains).second()));
+				if (aux.second().size() > 0) res.add(aux); 
 			}
 			else res.add(cmp.get(k));
 		}
 		return res;
 	}
 	
-	//retorna un array amb els elements de "a" que no estan en "b"
+	//retorna un array amb els elements de "a"-"b"
 	private ArrayList<Integer> notFrases(ArrayList<Integer> a, ArrayList<Integer> b) {
 		ArrayList<Integer> res = a;
-		for (int i=0; i<a.size(); ++i) {
-			if (b.contains(a.get(i))) res.remove(i);
+		for (int i=0; i<b.size(); ++i) {
+			if (a.contains(b.get(i))) res.remove(i);
 		}
 		return res;
 	}
@@ -132,23 +144,22 @@ public class ConsultaBooleana {
 		return res;
 	}
 	
-	// fa la OR de dos arrays: el resultat es un array amb els elements de "a" i "b" que estan en "a" o que estan en "b"
+	// fa la OR de dos arrays: el resultat es un array amb els elements de "a" i "b" que estan en "a" o que estan en "b" o en "a" i "b"
 	private ArrayList<Pair<Documento, ArrayList<Integer>>> orDocs(ArrayList<Pair<Documento, ArrayList<Integer>>> a, ArrayList<Pair<Documento, ArrayList<Integer>>> b) {
-		ArrayList<Pair<Documento, ArrayList<Integer>>> res = a;
+		ArrayList<Pair<Documento, ArrayList<Integer>>> res = b;
 		for (int i=0; i<a.size(); ++i) {
-			for (int j=0; j<b.size(); ++j) {
-				if (b.get(j).first() == res.get(i).first()) { //b[j] ja esta a "res"
-					res.get(i).setSecond(orFrases(b.get(j).second(), res.get(i).second())); //faig or de les frases
-				}
-				else { //b[j] no esta a "res"
-					Pair<Documento, ArrayList<Integer>> paux = b.get(j); //afegeixo el doc al resultat, amb les frases corresponents
-					res.add(paux);
-				}
+			int contiene = containsDoc(b, a.get(i).first());
+			if (contiene >=0) {
+				res.get(i).setSecond(orFrases(b.get(contiene).second(), a.get(i).second()));
+			}
+			else {
+				res.add(a.get(i));
 			}
 		}
 		return res;
 	}
 	
+	//retorna un arraylist amb "a" + "b"
 	private ArrayList<Integer> orFrases(ArrayList<Integer> a, ArrayList<Integer> b) {
 		ArrayList<Integer> res = a;
 		for (int i = 0; i<b.size(); ++i) {
@@ -157,21 +168,21 @@ public class ConsultaBooleana {
 		return res;
 	}
 	
+	// retorna -1 si larray no conte el document "d" i retorna la posicio en cas que larray contingui d
 	private int containsDoc(ArrayList<Pair<Documento, ArrayList<Integer>>> b, Documento d) {
 		int contiene = -1;
 		int i=0;
 		while (contiene<0 && i<b.size()) {
-			if (b.get(i).first() == d) contiene = i;
-			else ++i;
+			if (b.get(i).first().equals(d)) contiene = i;
+			++i;
 		}
 		return contiene;
 	}
 	
 	//retorna la llista de documents que contenen la paraula "e" i en quina o quines frases la contenen cada un
 	private ArrayList<Pair<Documento, ArrayList<Integer>>> filtra(Element e) throws ParseException, IOException {
-		String p = e.getElement();
 		ArrayList<Pair<Documento, ArrayList<Integer>>> res = new ArrayList<Pair<Documento, ArrayList<Integer>>>();
-		ArrayList<Documento> aux = docs.getDiccionario().getDocumentosConPalabra(p);
+		ArrayList<Documento> aux = docs.getDiccionario().getDocumentosConPalabra(e.getElement());
 		for (int i=0; i<aux.size(); ++i) {
 			Pair<Documento, ArrayList<Integer>> pair = new Pair<Documento, ArrayList<Integer>>();
 			pair.setFirst(aux.get(i));
