@@ -110,4 +110,6 @@ public class Diccionario {
         }
         return lista;
     }
+
+    public boolean contiene(String palabra) {return diccionario.containsKey(palabra);}
 }

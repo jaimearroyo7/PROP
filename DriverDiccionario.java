@@ -68,8 +68,12 @@ public class DriverDiccionario {
                     break;
                 case "3":
                     System.out.println("introduce palabra p: ");
-                    n = dic.indicePalabra(sc.nextLine());
-                    System.out.println("la palabra tiene indice: " + n);
+                    try {
+                        n = dic.indicePalabra(sc.nextLine());
+                        System.out.println("la palabra tiene indice: " + n);
+                    } catch (Exception e) {
+                        System.out.println("El diccionario no contiene la palabra.");
+                    }
                     break;
                 case "4":
                     opcion = "4";

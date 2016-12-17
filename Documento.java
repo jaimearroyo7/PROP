@@ -15,11 +15,12 @@ public class Documento {
 	private Fecha fecha;
 	//private ArrayList<dominio.Pair<String, Integer>> palabras = new ArrayList<>();
 	private ArrayList<Pair<String, Integer>> palabras = new ArrayList<Pair<String, Integer>>();
+	private int maxFreq;
 	
 	//Constructores, vacio y pasandole los parametros
 	
 	public Documento(){
-		
+		maxFreq = 1;
 	}
 	
 	public Documento(String valortitulo, String valorautor, String valorcategoria, String valorTexto) throws IOException{
@@ -100,8 +101,10 @@ public class Documento {
 				String actual = listapalabras.get(j).getPalabra();
 				
 				Integer found = 0;
+				int index = 0;
 				if(esfuncional(actual, nf)){
                     for(int k = 0; k < palabras.size() && found == 0; ++k){
+						index = k;
                         if(actual.equals(palabras.get(k).first())){
                             palabras.get(k).setSecond(palabras.get(k).second() + 1);
                             found = 1;
@@ -114,7 +117,10 @@ public class Documento {
 						pair.setFirst(actual);
 						pair.setSecond(1);
 						palabras.add(pair);
+						index = palabras.indexOf(pair);
                     }
+                    if (!palabras.isEmpty())
+                    	maxFreq = Math.max(maxFreq, palabras.get(index).second());
 			    }
 			}
 		}
@@ -143,5 +149,7 @@ public class Documento {
 				
 	}
 
-
+	public int getMaxFreq() {
+		return maxFreq;
+	}
 }

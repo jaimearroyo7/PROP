@@ -58,33 +58,25 @@ ConsultaDocumentosParecidos {
                                                        ArrayList<Documento> documentos, TFIDF_MODE mode) {
         this.diccionario = diccionario;
         this.documentos = documentos;
-        try {
-            Documento queryDoc = new Documento("","","", query);
-            return obtenerDocumentosParecidos(getArrayPesosDe(queryDoc, mode), n, mode);
-        } catch (IOException exception) {
-            System.err.println("No se ha podido leer el fichero");
-        }
-        return null;
+        ArrayList<String> querySplit = (ArrayList<String>)Arrays.asList(query.split("\\s+"));
+        return obtenerDocumentosParecidos(getArrayPesosDe(querySplit), n, mode);
     }
 
 
         //devuelve el valor tfidf de una palabra
-    private double tfidf(String palabra, Documento documento, TFIDF_MODE mode) {
-        return tf(palabra, documento, mode)*idf(palabra, documentos);
+    private double tfidf(String palabra, int freq, Documento documento, TFIDF_MODE mode) {
+        return tf(palabra, freq, documento, mode)*idf(palabra, documentos);
     }
         //devuelve el valor tf de una palabra (el valor se puede calcular utilizando la version logaritmica de tf
         //o la version booleana)
-    private double tf(String palabra, Documento documento, TFIDF_MODE mode) {
+    private double tf(String palabra, int freq, Documento documento, TFIDF_MODE mode) {
         if (mode == TFIDF_MODE.LOG) {
-            int freq = 0;
-            int freqMax = 0;
-            for (Pair<String, Integer> aparicion : documento.getPalabras()) {
-                if (aparicion.first().equals(palabra)) freq = aparicion.second();
-                freqMax = Math.max(freqMax, aparicion.second());
-            }
+            int freqMax = documento.getMaxFreq();
             return (double) freq / freqMax; //COMPROVAR QUE HACE DIVISION DOUBLE Y NO ENTERA
         }
         else if (mode == TFIDF_MODE.BOOLEAN){
+            //puede ser que en el caso de uso que damos a esta funcion se tuviese que devolver siempre 1, pero
+            //para poder usar la funcion de forma generalizada en el futuro hacemos la comprobacion
             if (diccionario.getDocumentosConPalabra(palabra).contains(documento)) return 1;
             else return 0;
         }
@@ -95,16 +87,48 @@ ConsultaDocumentosParecidos {
         return Math.log((double)documentos.size()/diccionario.numeroDeDocumentosCon(palabra));
     }
 
-    
+
         //devuelve el array de las palabras de un documento con sus pesos calculados a partir de tfidf
     private SparseArray<PalabraPeso> getArrayPesosDe(Documento documento, TFIDF_MODE mode) {
         SparseArray<PalabraPeso> arrayPesos = new SparseArray<>(diccionario.getNumeroDePalabras());
         ArrayList<Pair<String, Integer>> palabras = documento.getPalabras();
         for (Pair<String, Integer> palabra: palabras) {
-            PalabraPeso palabraPeso = new PalabraPeso(palabra.first(), tfidf(palabra.first(), documento, mode));
+            PalabraPeso palabraPeso = new PalabraPeso(palabra.first(),
+                    tfidf(palabra.first(), palabra.second(), documento, mode));
             arrayPesos.put(diccionario.indicePalabra(palabra.first()), palabraPeso);
         }
         return arrayPesos;
+    }
+
+
+    private SparseArray<PalabraPeso> getArrayPesosDe(ArrayList<String> query) {
+        SparseArray<PalabraPeso> arrayPesos = new SparseArray<>(diccionario.getNumeroDePalabras());
+        TreeMap<String, Integer> queryFreqs = new TreeMap<>();
+        int maxFreq = 1;
+        for (String palabra: query) {
+            if (queryFreqs.containsKey(palabra)) queryFreqs.put(palabra, queryFreqs.get(palabra) + 1);
+            else queryFreqs.put(palabra, 1);
+            maxFreq = Math.max(maxFreq, queryFreqs.get(palabra));
+        }
+        for (Map.Entry<String, Integer> palabra: queryFreqs.entrySet()) {
+            if (diccionario.contiene(palabra.getKey())) {
+                PalabraPeso palabraPeso = new PalabraPeso(palabra.getKey(),
+                        tfidf(palabra.getKey(), palabra.getValue(), maxFreq, queryFreqs));
+                arrayPesos.put(diccionario.indicePalabra(palabra.getKey()), palabraPeso);
+            }
+        }
+        return arrayPesos;
+    }
+    private double tfidf(String palabra, int freq, int maxFreq, Map<String, Integer> queryFreqs) {
+        return tf(freq, maxFreq)*idf(palabra);
+    }
+
+    private double tf(int freq, int maxFreq) {
+        return 0.5 + 0.5*((double)freq/maxFreq);
+    }
+
+    private double idf(String palabra) {
+        return idf(palabra, documentos);
     }
 
         // calcula la similitud de dos documentos a partir de su array de pesos donde se determina su semejanza a partir
