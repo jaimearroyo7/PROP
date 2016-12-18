@@ -58,8 +58,8 @@ ConsultaDocumentosParecidos {
                                                        ArrayList<Documento> documentos, TFIDF_MODE mode) {
         this.diccionario = diccionario;
         this.documentos = documentos;
-        ArrayList<String> querySplit = (ArrayList<String>)Arrays.asList(query.split("\\s+"));
-        return obtenerDocumentosParecidos(getArrayPesosDe(querySplit), n, mode);
+        List<String> querySplit = Arrays.asList(query.split("\\s+"));
+        return obtenerDocumentosParecidos(getArrayPesosDe(new ArrayList<>(querySplit)), n, mode);
     }
 
 
