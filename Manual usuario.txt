@@ -1,0 +1,45 @@
+MANUAL DE USUARIO GESTOR DE DOCUMENTOS
+
+Para iniciar el gestor basta con dar doble click en el icono de nombre "Ejecutable".
+
+Nota: en cualquier punto del gestor puede volver atrás con el botón "Volver", salir del gestor con el botón
+"Exit" o volver al menú principal con el botón "...".
+Los cambios efectuados se guardan automáticamente al cerrar la aplicación o haciendo click en el botón
+"Guardar", que se muestra en el menú principal.
+
+- Si desea añadir documentos para poder realizar tareas con ellos, debe hacer click en el
+  botón "Añadir" del menú principal del programa. Puede añadir un documento existente o 
+  varios documentos a la vez si éstos se encuentran en un mismo directorio con el botón 
+  "Importar desde Carpeta". Seguidamente deberá indicar la ruta de los archivos que desea 
+  importar haciendo click en el botón "Examinar" y deberá completar la acción pulsando 
+  en "Importar". Se añadirán todos los documentos de texto que el sistema encuentre en la dirección especificada.
+  Si quiere crear un documento nuevo seleccione la opción "Añadir Documento Nuevo", en la pantalla "Añadir". Entonces
+  tendrá que rellenar los campos del nuevo documento que se indican, a excepción del campo "Categoria" y "Texto",
+  que se podrán dejar vacíos.
+- Si quiere realizar consultas sobre los documentos que contiene el gestor hasta el momento, se ha de seleccionar
+  el botón "Consultar", en el Menú Principal.
+    - Si desea saber todos los documentos de un autor, seleccione "Lista de títulos de un autor". Deberá introducir
+    un autor en el campo que se indica y hacer click en "Buscar". Si selecciona uno de los títulos que se muestran
+    podrá modificar el documento, buscar sus parecidos o borrarlo con el botón "Modificar doc".
+    - Si desea ver todos los autores que empiezan por un prefijo, seleccione "Lista de autores dado un prefijo". Ahora
+    tendrá que introducir el prefijo y hacer click en "Buscar". Si selecciona un autor de la lista, puede ver todos sus
+    títulos haciendo click en "Mostrar títulos".
+    - Para ver el contenido de un documento seleccione "Contenido de un Documento". Deberá indicar ahora el título y su autor
+    y entonces podrá modificarlo, borrarlo o buscar sus parecidos con los botones que corresponden ("Modificar", "Borrar" y
+    "Buscar Parecidos").
+    - Si quiere examinar qué documentos se parecen a otro o a una query, haga click en "Documentos Parecidos". Aquí deberá
+    seleccionar a partir de qué quiere buscar los parecidos. Si selecciona "A partir de un documento" deberá identificarlo con su título y autor.
+    Si selecciona "A partir de una query" tendrá que introducir la query con el formato que se indica en el siguiente ejemplo: {palabra1 palabra2}.
+    Puede poner tantas palabras como quiera sin comas ni otros símbolos y separadas con un espacio.
+    Ambos métodos ofrecen dos tipos de búsqueda de parecidos: para hacer una comparación de semejanza logarítmica tendrá que seleccionar 
+    "log" y para hacer una comparación booleana deberá seleccionar "bool". En "Número de documentos" marque el número máximo de 
+    documentos que desea que se muestren.
+    Podrá ver el documento que seleccione de la lista (con el botón "Ver") para modificarlo, borrarlo o buscar sus parecidos.
+    - Puede realizar una búsqueda booleana. Se mostrarán todos los documentos que cumplan la expresión en una misma frase.
+    Si selecciona "Expresión booleana" tendrá que introducir la expresión con la siguiente sintaxi: los operadores permitidos son
+    "and", "or" y "not". Se admiten paréntesis para indicar el orden de las operaciones booleanas a realizar y se permite también
+    introducir querys encerradas en corchetes ({), con el numero que se quiera de palabras dentro, separadas por un espacio.
+    Se pueden usar frases en la expresión: tendrán que ir entre comillas dobles ("). Un ejemplo de expresión con todos los tipos
+    que se permiten sería: serpiente or (casa and "el perro verde") and not {sapo murciélago}.
+    Si selecciona uno de los documentos mostrados podrá verlo para modificarlo, borrarlo o buscar sus parecidos con el botón "Ver".
+    
